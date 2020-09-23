@@ -1,11 +1,4 @@
 <?php
-/**
- * Shortcodes class
- *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
- * @version 3.0.0
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

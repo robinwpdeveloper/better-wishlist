@@ -71,11 +71,21 @@ class Addtowishlist {
         $currrent_product_id = $current_product->get_id();
         $current_product_parent = $current_product->get_parent_id();
         $product_type = $current_product->get_type();
+        
 
 
         add_action('wishlist_addtowishlist_button', [$this, 'button']);
 
-        wishlist_get_template('addtowishlist.php');
+        $atts = [
+            'product_id'    => $currrent_product_id,
+            'parent_product_id' => $current_product_parent,
+            'product_type'  => $product_type,
+            'container_classes'   => ''
+        ];
+
+        echo $currrent_product_id;
+
+        wishlist_get_template('addtowishlist.php', $atts);
     }
 
     public function button($echo = true) {
