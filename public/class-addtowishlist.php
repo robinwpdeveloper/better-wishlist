@@ -71,21 +71,33 @@ class Addtowishlist {
         $currrent_product_id = $current_product->get_id();
         $current_product_parent = $current_product->get_parent_id();
         $product_type = $current_product->get_type();
-        
+        $browse_wishlist = __( 'Browse Wishlist', 'wishlist' );
+        $already_in_wishlist = __( 'This product is only in wishlist', 'wishlist' );
+        $product_added = __( 'Product Added', 'wishlist' );
+        $label = __( 'Add to Wishlist', 'wishlist' );
+        $icon = '';
+        $added_icon = '';
+        $classes = apply_filters('wishlist_button_classes', ['add_to_wishlist', 'wishlist_button']);
 
+        // TODO: Add mechanism for if product is already in wishlist.
+
+        // TODO: Wishlist URL
 
         add_action('wishlist_addtowishlist_button', [$this, 'button']);
 
         $atts = [
+            'base_url'  => Helper::wishlist_get_current_url(),
             'product_id'    => $currrent_product_id,
             'parent_product_id' => $current_product_parent,
             'product_type'  => $product_type,
             'container_classes'   => ''
         ];
 
+        // echo '<pre>', print_r($atts, 1), '</pre>';
+
         echo $currrent_product_id;
 
-        wishlist_get_template('addtowishlist.php', $atts);
+        Helper::wishlist_get_template('addtowishlist.php', $atts);
     }
 
     public function button($echo = true) {
