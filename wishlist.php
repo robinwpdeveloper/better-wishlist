@@ -27,6 +27,7 @@ define('Wishlist_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
 define('Wishlist_PLUGIN_VERSION', '1.0.0');
 
 require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-install.php';
+
 register_activation_hook(__FILE__, function () {
 	if( class_exists( 'WooCommerce') ) {
 		Wishlist_Install()->init();
@@ -39,14 +40,13 @@ if( ! class_exists( 'Wishlist' ) ) {
 
 		public function __construct()
 		{
+
+			$this->includes();
+			$this->wishlist_frontend = Wishlist_Frontend();
+
 			add_action( 'woocommerce_after_shop_loop_item', ['Helper', 'view_addto_htmlloop'], 9 );
 			add_action( 'woocommerce_single_product_summary', ['Helper', 'view_addto_htmlout'], 29 );
 			add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);
-		}
-	
-		public function init()
-		{
-			$this->includes();
 		}
 	
         public function add_display_status_on_page($states, $post)
@@ -74,6 +74,7 @@ if( ! class_exists( 'Wishlist' ) ) {
 		{
 			require_once Wishlist_PLUGIN_PATH . 'public/class-addtowishlist.php';
 			require_once Wishlist_PLUGIN_PATH . 'classes/Helper.php';
+			require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-frontend.php';
 		}
 	}
 
@@ -85,7 +86,6 @@ if( ! class_exists( 'Wishlist' ) ) {
 	 */
 	function run_wishlist() {
 		$wishlist = new Wishlist();
-		$wishlist->init();
 	}
 	add_action('plugins_loaded', 'run_wishlist');
 }
