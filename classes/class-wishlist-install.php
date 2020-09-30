@@ -120,7 +120,8 @@ if (!class_exists('Wishlist_Install')) {
                     dateadded timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     expiration timestamp NULL DEFAULT NULL,
                     PRIMARY KEY  ( ID ),
-                    KEY wishlist_slug ( wishlist_slug )
+                    KEY wishlist_slug ( wishlist_slug ),
+                    KEY user_id ( user_id )
                 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
             }
 

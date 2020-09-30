@@ -28,7 +28,13 @@ define('Wishlist_PLUGIN_VERSION', '1.0.0');
 
 require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-install.php';
 
-register_activation_hook(__FILE__, function () {
+// register_activation_hook(__FILE__, function () {
+// 	if( class_exists( 'WooCommerce') ) {
+// 		Wishlist_Install()->init();
+// 	}
+// });
+
+add_action('init', function() {
 	if( class_exists( 'WooCommerce') ) {
 		Wishlist_Install()->init();
 	}
@@ -75,6 +81,8 @@ if( ! class_exists( 'Wishlist' ) ) {
 			require_once Wishlist_PLUGIN_PATH . 'public/class-addtowishlist.php';
 			require_once Wishlist_PLUGIN_PATH . 'classes/Helper.php';
 			require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-frontend.php';
+			require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-form-handler.php';
+			require_once Wishlist_PLUGIN_PATH . 'classes/class-user-wishlist.php';
 		}
 	}
 

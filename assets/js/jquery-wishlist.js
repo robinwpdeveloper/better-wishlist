@@ -2,8 +2,7 @@
 
     $(document).ready(function() {
         $(document).on('click', '.add_to_wishlist_button', function(e) {
-            e.preventDefault();
-
+            
             var $this = $(this),
                 product_id = $this.attr( 'data-product-id' ),
                 product_wrap = $('.add-to-wishlist' + product_id),
@@ -17,7 +16,19 @@
                     fragments: retrieve_fragments( product_id )
                 };
 
-            console.log(data);
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: WISHLIST_SCRIPTS.ajax_url,
+                    data: data,
+                    success: function( response ) {
+                        console.log(response);
+                    },
+                    error: function( response ) {
+                        console.log(response);
+                    }
+                });
             
 
 
@@ -72,7 +83,7 @@
 
         fragments.each( function(){
             var t = $(this),
-                id = t.attr( 'class' ).split( ' ' ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( yith_wcwl_l10n.fragments_index_glue );
+                id = t.attr( 'class' ).split( ' ' ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( WISHLIST_SCRIPTS.fragments_index_glue );
 
             options[ id ] = t.data('fragment-options');
         } );
