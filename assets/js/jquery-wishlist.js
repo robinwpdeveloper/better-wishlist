@@ -5,15 +5,14 @@
             
             var $this = $(this),
                 product_id = $this.attr( 'data-product-id' ),
-                product_wrap = $('.add-to-wishlist' + product_id),
-                filtered_data = null,
+                product_wrap = $('.add-to-wishlist-' + product_id),
                 data = {
                     action: WISHLIST_SCRIPTS.actions.add_to_wishlist_action,
                     context: 'frontend',
                     add_to_wishlist: product_id,
                     product_type: $this.data('product-type'),
                     wishlist_id: $this.data('wishlist-id' ),
-                    fragments: retrieve_fragments( product_id )
+                    fragments: product_wrap.data('fragment-options')
                 };
 
                 e.preventDefault();
@@ -29,6 +28,7 @@
                         console.log(response);
                     }
                 });
+                
             
 
 

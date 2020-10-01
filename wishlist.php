@@ -83,6 +83,7 @@ if( ! class_exists( 'Wishlist' ) ) {
 			require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-frontend.php';
 			require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-form-handler.php';
 			require_once Wishlist_PLUGIN_PATH . 'classes/class-user-wishlist.php';
+			require_once Wishlist_PLUGIN_PATH . 'classes/class-wishlist-item.php';
 		}
 	}
 

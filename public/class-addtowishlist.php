@@ -134,10 +134,6 @@ class Addtowishlist {
 
         $atts['fragment_options'] = Helper::format_fragment_options( $atts, 'wishlist' );
 
-        // echo '<pre>', print_r($atts['fragment_options'], 1), '</pre>';
-        // echo $currrent_product_id;
-
-
         $template = Helper::wishlist_get_template('addtowishlist.php', $atts, true);
         echo apply_filters( 'wishlist_add_to_wishlist_button_html', $template, $wishlist_url, $product_type, $exists );
     }

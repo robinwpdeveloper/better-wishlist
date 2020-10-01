@@ -23,7 +23,7 @@ if (!class_exists('Wishlist_Form_Handler')) {
         {
             $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : false;
 
-            if ($user_agent && apply_filters('yith_wcwl_block_user_agent', preg_match('/bot|crawl|slurp|spider|wordpress/i', $user_agent), $user_agent)) {
+            if ($user_agent && apply_filters('wishlist_wcwl_block_user_agent', preg_match('/bot|crawl|slurp|spider|wordpress/i', $user_agent), $user_agent)) {
                 return false;
             }
 
@@ -32,7 +32,9 @@ if (!class_exists('Wishlist_Form_Handler')) {
 
         public static function add_to_wishlist()
         {
-            User_Wishlist()->create();
+
+            $wishlist_id = User_Wishlist()->get_current_user_wishlist() ? User_Wishlist()->get_current_user_wishlist() : User_Wishlist()->create();
+            $added_to_wishlist = Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
 
             die();
         }

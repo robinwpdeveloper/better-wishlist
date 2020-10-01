@@ -35,6 +35,7 @@ if (!class_exists('User_Wishlist')) {
 
         public function __construct()
         {
+            $this->user_id = get_current_user_id();
         }
 
         public function create()
@@ -62,7 +63,7 @@ if (!class_exists('User_Wishlist')) {
                 $values[] = $this->generate_session_id();
             } else {
                 $columns['user_id'] = '%d';
-                $values[] = get_current_user_id();
+                $values[] = $this->user_id;
             }
 
             $columns['dateadded'] = 'FROM_UNIXTIME( %d )';
@@ -83,25 +84,22 @@ if (!class_exists('User_Wishlist')) {
 
 
             if ($res) {
-                $id = apply_filters('wishlist_successfully_created', intval($wpdb->insert_id));
+                return apply_filters('wishlist_successfully_created', intval($wpdb->insert_id));
             }
 
-            
+            return false;
         }
 
-        /**
-         * Get variable for default share key
-         *
-         * @return string
-         */
-        function generate_wishlist_token()
+        public function get_current_user_wishlist()
         {
-            return filter_input(INPUT_COOKIE, 'tinv_wishlistkey', FILTER_VALIDATE_REGEXP, array(
-                'options' => array(
-                    'regexp'  => '/^[A-Fa-f0-9]{6}$/',
-                    'default' => $this->token,
-                ),
-            ));
+            global $wpdb;
+            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$this->user_id}");
+
+            if ($wishlist_id) {
+                return $wishlist_id;
+            }
+
+            return false;
         }
 
         public static function generate_session_id()
