@@ -20,6 +20,21 @@ if ( !class_exists( 'Wishlist_Item' ) ) {
             return self::$instance;
         }
 
+        public function get_product_price( $product ) {
+
+			if ( ! $product ) {
+				return 0;
+			}
+
+			switch ( $product->get_type() ) {
+				case 'variable':
+					return $product->get_variation_price( 'min' );
+				default:
+					$sale_price = $product->get_sale_price();
+					return $sale_price ? $sale_price : $product->get_price();
+			}
+		}
+
         public function add($item, $wishlist_id)
         {
             global $wpdb;
@@ -40,13 +55,15 @@ if ( !class_exists( 'Wishlist_Item' ) ) {
             ];
 
             $product = wc_get_product( $item['product_id'] );
+            $product_price = $this->get_product_price( $product );
+
 
             $values = [
                 $item['product_id'],
                 1,
                 $wishlist_id,
                 0,
-                $product->get_sale_price(),
+                $product_price,
                 get_woocommerce_currency(),
                 $product->is_on_sale(),
                 get_current_user_id()
@@ -63,9 +80,9 @@ if ( !class_exists( 'Wishlist_Item' ) ) {
             $res = $wpdb->query($wpdb->prepare($query, $values));
 
             if( $res ) {
-                return $wpdb->insert_id;
+                return apply_filters( 'wishlist_item_added_successfully', $wpdb->insert_id );
             }
-            
+
             return false;
         }
     }
