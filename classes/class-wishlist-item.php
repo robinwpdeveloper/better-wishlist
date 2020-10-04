@@ -44,7 +44,7 @@ if ( !class_exists( 'Wishlist_Item' ) ) {
             }
 
             $columns = [
-                'prod_id' => '%d',
+                'product_id' => '%d',
                 'quantity' => '%d',
                 'wishlist_id' => '%d',
                 'position' => '%d',
@@ -74,7 +74,7 @@ if ( !class_exists( 'Wishlist_Item' ) ) {
 
             $query_columns = implode(', ', array_map('esc_sql', array_keys($columns)));
             $query_values = implode(', ', array_values($columns));
-            
+        
             $query = "INSERT INTO {$wpdb->ea_wishlist_items} ( {$query_columns} ) VALUES ( {$query_values} ) ";
 
             $res = $wpdb->query($wpdb->prepare($query, $values));
@@ -87,11 +87,31 @@ if ( !class_exists( 'Wishlist_Item' ) ) {
         }
 
         public function get_items($wishlist_id) {
+            if( empty($wishlist_id) ) {
+                return;
+            }
+
             global $wpdb;
             $query = "SELECT * FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
             $res = $wpdb->get_results($query, OBJECT);
-            
+
             return $res;
+        }
+
+        public function remove($product_id)
+        {
+            if( empty($product_id) ){
+                return false;
+            }
+
+            global $wpdb;
+
+            // var_dump($wpdb->ea_wishlist_items);
+
+            $res = $wpdb->delete($wpdb->ea_wishlist_items, ['product_id' => $product_id], ['%d']);
+
+            // error_log(print_r($res, 1));
+
         }
     }
 }

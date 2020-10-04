@@ -4,7 +4,7 @@
  * Install file
  *
  * @since             1.0.0
- * @package           Wishlist\Wishlist_Install
+ * @package           Better_Wishlist\Better_Wishlist_Install
  */
 
 // If this file is called directly, abort.
@@ -12,20 +12,20 @@ if (!defined('ABSPATH')) {
     die;
 }
 
-if (!class_exists('Wishlist_Install')) {
+if (!class_exists('Better_Wishlist_Install')) {
 
     /**
      * Creating plugin table and wishlist page.
      * 
      * @since 1.0.0
      */
-    class Wishlist_Install
+    class Better_Wishlist_Install
     {
 
         /**
          * Single instance of the class
          *
-         * @var \Wishlist_Install
+         * @var \Better_Wishlist_Install
          * @since 1.0.0
          */
         protected static $instance;
@@ -51,7 +51,7 @@ if (!class_exists('Wishlist_Install')) {
         /**
          * Returns single instance of the class
          *
-         * @return \Wishlist_Install
+         * @return \Better_Wishlist_Install
          * @since 1.0.0
          */
         public static function get_instance()
@@ -64,7 +64,7 @@ if (!class_exists('Wishlist_Install')) {
         }
 
         /**
-         * \Wishlist_Install Constructor
+         * \Better_Wishlist_Install Constructor
          * 
          * @since 1.0.0
          */
@@ -77,10 +77,6 @@ if (!class_exists('Wishlist_Install')) {
 
             $wpdb->ea_wishlist_items = $this->items_table;
             $wpdb->ea_wishlist_lists = $this->wishlist_wishlists_table;
-
-            // define constant to use in entire the application.
-            define( 'WISHLIST_ITEMS_TABLE', $this->items_table );
-            define( 'WISHLIST_WISHLISTS_TABLE', $this->wishlist_wishlists_table );
 
         }
 
@@ -128,7 +124,7 @@ if (!class_exists('Wishlist_Install')) {
             if( $wpdb->get_var("SHOW TABLES LIKE '$this->items_table'") != $this->items_table ) {
                 dbDelta("CREATE TABLE {$this->items_table} (
                     ID BIGINT( 20 ) NOT NULL AUTO_INCREMENT,
-                    prod_id BIGINT( 20 ) NOT NULL,
+                    product_id BIGINT( 20 ) NOT NULL,
                     quantity INT( 11 ) NOT NULL,
                     user_id BIGINT( 20 ) NULL DEFAULT NULL,
                     wishlist_id BIGINT( 20 ) NULL,
@@ -138,7 +134,7 @@ if (!class_exists('Wishlist_Install')) {
                     dateadded timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     on_sale tinyint NOT NULL DEFAULT 0,
                     PRIMARY KEY  ( ID ),
-                    KEY prod_id ( prod_id )
+                    KEY product_id ( product_id )
                 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
             }
         }
@@ -179,12 +175,12 @@ if (!class_exists('Wishlist_Install')) {
 }
 
 /**
- * Onetime access to instance of Wishlist_Install class
+ * Onetime access to instance of Better_Wishlist_Install class
  *
- * @return \Wishlist_Install
+ * @return \Better_Wishlist_Install
  * @since 1.0.0
  */
-function Wishlist_Install()
+function Better_Wishlist_Install()
 {
-    return Wishlist_Install::get_instance();
+    return Better_Wishlist_Install::get_instance();
 }

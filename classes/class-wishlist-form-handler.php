@@ -15,8 +15,9 @@ if (!class_exists('Wishlist_Form_Handler')) {
                 return;
             }
 
-            add_action('wp_ajax_add_to_wishlist', array('Wishlist_Form_Handler', 'add_to_wishlist'));
-            add_action('wp_ajax_nopriv_add_to_wishlist', array('Wishlist_Form_Handler', 'add_to_wishlist'));
+            add_action('wp_ajax_add_to_wishlist', ['Wishlist_Form_Handler', 'add_to_wishlist']);
+            add_action('wp_ajax_nopriv_add_to_wishlist', ['Wishlist_Form_Handler', 'add_to_wishlist']);
+            add_action('init', ['Wishlist_Form_Handler', 'remove_from_wishlist']);
         }
 
         public static function process_form_handling()
@@ -39,6 +40,14 @@ if (!class_exists('Wishlist_Form_Handler')) {
             die();
         }
 
+        public static function remove_from_wishlist()
+        {
+            if (isset($_GET['remove_from_wishlist'])) {
+                $product_id = absint($_GET['remove_from_wishlist']);
+
+                Wishlist_Item()->remove($product_id);
+            }
+        }
     }
 }
 

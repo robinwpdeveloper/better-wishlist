@@ -56,9 +56,60 @@ if (!class_exists('Wishlist_Shortcode')) {
             extract($atts);
 
             $items = Wishlist_Item()->get_items(User_Wishlist()->get_current_user_wishlist());
-            
 
+            if( empty($items) ) return _e( 'No Records Found', 'better-wishlist' );
 
+            ob_start();
+
+            ?>
+            <table class="shop_table cart wishlist_table wishlist_view traditional responsive   " data-pagination="no" data-per-page="5" data-page="1" data-id="3">
+                <thead>
+                    <tr>
+                        <th class="product-remove">
+                            <span class="nobr"></span>
+                        </th>
+                        <th class="product-thumbnail"></th>
+                        <th class="product-name">
+                            <span class="nobr"><?php _e('Product name', 'wishlist'); ?></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="wishlist-items-wrapper">
+
+                    <?php //echo '<pre>', print_r($items, 1), '</pre>'; ?>
+
+                    <?php
+                        foreach($items as $item) :
+
+                        $product = wc_get_product($item->product_id);
+
+                        // echo '<pre>', print_r($product, 1), '</pre>';
+
+                        if($product) {
+                            
+                    ?>
+                        <tr id="wishlist-row-<?php echo $product->get_id(); ?>" data-row-id="<?php echo $product->get_id(); ?>">
+                            <td class="product-remove">
+                                <div>
+                                <a href="/ea_wishlist/?remove_from_wishlist=<?php echo $product->get_id(); ?>" class="remove remove_from_wishlist" title="<?php _e('Remove this product', 'better-wishlist'); ?>">×</a>
+                                </div>
+                            </td>
+                            <td class="product-thumbnail">
+                                <a href="<?php echo esc_url(get_permalink( $product->get_id() )); ?>"><img width="300" height="300" src="<?php echo esc_url(get_the_post_thumbnail_url($product->get_id())); ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"></a>
+                            </td>
+                            <td class="product-name">
+                                <a href="<?php echo esc_url(get_permalink( $product->get_id() )); ?>"><?php echo $product->get_title(); ?></a>
+                            </td>
+                        </tr>
+                        <?php 
+                        }
+                    endforeach;
+                ?>    
+                </tbody>
+                </table>
+            <?php
+
+            return ob_get_clean();
         }
     }
 }

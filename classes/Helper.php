@@ -6,13 +6,6 @@ if (!defined('ABSPATH')) {
 
 class Helper
 {
-    public static function wishlist_get_current_url()
-    {
-        global $wp;
-
-        return apply_filters('wishlist_current_url', '', add_query_arg($wp->query_vars, home_url($wp->request)));
-    }
-
     /**
      * The function overwrites the method output templates woocommerce
      *
@@ -20,12 +13,12 @@ class Helper
      * @param array $args Array variable in template.
      * @param string $template_path Customization path.
      */
-    public static function wishlist_locate_template($path, $var = null)
+    public static function better_wishlist_locate_template($path, $var = null)
     {
         $woocommerce_base = WC()->template_path();
         $template_woocommerce_path = $woocommerce_base . $path;
         $template_path = '/' . $path;
-        $plugin_path = Wishlist_PLUGIN_PATH . 'templates/' . $path;
+        $plugin_path = BETTER_WISHLIST_PLUGIN_PATH . 'templates/' . $path;
 
         $located = locate_template(
             array(
@@ -41,9 +34,9 @@ class Helper
         return apply_filters('wishlist_locate_template', $located, $path);
     }
 
-    public static function wishlist_get_template($path, $var = null, $return = false)
+    public static function better_wishlist_get_template($path, $var = null, $return = false)
     {
-        $located = self::wishlist_locate_template($path, $var);
+        $located = self::better_wishlist_locate_template($path, $var);
 
         if ($var && is_array($var)) {
             $atts = $var;
@@ -59,25 +52,6 @@ class Helper
         if ($return) {
             return ob_get_clean();
         }
-    }
-
-    /**
-     * Show button Add to Wishlsit, in loop
-     */
-    public static function view_addto_htmlloop()
-    {
-        $class = Addtowishlist::instance();
-        $class->htmloutput_loop();
-    }
-
-    /**
-     * Show button Add to Wishlsit, if product is not purchasable
-     */
-    public static function view_addto_htmlout()
-    {
-        $class = Addtowishlist::instance();
-        $class->htmloutput_out();
-        echo '<h1>Hello World</h1>';
     }
 
     /**
