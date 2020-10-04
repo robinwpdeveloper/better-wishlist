@@ -85,6 +85,14 @@ if ( !class_exists( 'Wishlist_Item' ) ) {
 
             return false;
         }
+
+        public function get_items($wishlist_id) {
+            global $wpdb;
+            $query = "SELECT * FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
+            $res = $wpdb->get_results($query, OBJECT);
+            
+            return $res;
+        }
     }
 }
 
