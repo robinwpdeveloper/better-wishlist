@@ -68,6 +68,7 @@ if (!class_exists('User_Wishlist')) {
             $this->user_id = get_current_user_id();
             $this->token = uniqid();
             $this->name = __('Wishlist', 'wishlist');
+            $this->session_id = $this->generate_session_id();
         }
 
         public function create()
@@ -86,13 +87,15 @@ if (!class_exists('User_Wishlist')) {
                 0,
                 __('Wishlist', 'wishlist'),
                 '',
-                uniqid(),
+                $this->token,
                 0
             ];
 
             if (!is_user_logged_in()) {
                 $columns['session_id'] = '%s';
-                $values[] = $this->generate_session_id();
+                $values[] = $this->session_id;
+
+                setcookie('wishlist_session_id', $this->session_id, time() + 86400, "/");
             } else {
                 $columns['user_id'] = '%d';
                 $values[] = $this->user_id;
@@ -114,7 +117,6 @@ if (!class_exists('User_Wishlist')) {
             $res = $wpdb->query($wpdb->prepare($query, $values));
 
 
-
             if ($res) {
                 return apply_filters('wishlist_successfully_created', intval($wpdb->insert_id));
             }
@@ -125,7 +127,11 @@ if (!class_exists('User_Wishlist')) {
         public function get_current_user_wishlist()
         {
             global $wpdb;
-            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$this->user_id}");
+            if( is_user_logged_in() ) {
+                $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$this->user_id}");
+            }else {
+                $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE session_id = '{$this->session_id}'");
+            }
 
             if ($wishlist_id) {
                 return $wishlist_id;
@@ -140,6 +146,10 @@ if (!class_exists('User_Wishlist')) {
 
             if (is_user_logged_in()) {
                 return false;
+            }
+
+            if( isset($_COOKIE['wishlist_session_id']) && ! empty($_COOKIE['wishlist_session_id']) ) {
+                return $_COOKIE['wishlist_session_id'];
             }
 
             require_once ABSPATH . 'wp-includes/class-phpass.php';

@@ -75,10 +75,9 @@ class Addtowishlist
         $template_part = $exists && 'add' != 'view' ? 'browse' : 'button';
         $template_part = isset($atts['added_to_wishlist']) ? ($atts['added_to_wishlist'] ? 'added' : 'browse') : $template_part;
 
-        // TODO: Trim fat from $extra_atts
-
-
         add_action('wishlist_addtowishlist_button', [$this, 'button']);
+
+        $wishlist_id = User_Wishlist()->get_current_user_wishlist();
 
         $atts = [
             'wishlist_url'  => get_page_link($wishlist_url),
@@ -87,8 +86,7 @@ class Addtowishlist
             'container_classes'   => '',
             'is_single' => $is_single,
             'show_exists' => false,
-            'found_in_list' => Wishlist_Item()->is_already_in_wishlist($currrent_product_id),
-            // found item
+            'found_in_list' => Wishlist_Item()->is_already_in_wishlist($currrent_product_id, $wishlist_id),
             'product_id'    => $currrent_product_id,
             'parent_product_id' => $current_product_parent ? $current_product_parent : $currrent_product_id,
             'product_type'  => $product_type,

@@ -76,14 +76,10 @@ if (!class_exists('Wishlist_Shortcode')) {
                 </thead>
                 <tbody class="wishlist-items-wrapper">
 
-                    <?php //echo '<pre>', print_r($items, 1), '</pre>'; ?>
-
                     <?php
                         foreach($items as $item) :
 
                         $product = wc_get_product($item->product_id);
-
-                        // echo '<pre>', print_r($product, 1), '</pre>';
 
                         if($product) {
                             

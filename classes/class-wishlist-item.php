@@ -102,7 +102,6 @@ if (!class_exists('Wishlist_Item')) {
 
         public function remove($product_id)
         {
-            error_log($product_id);
             
             if (empty($product_id)) {
                 return false;
@@ -113,16 +112,22 @@ if (!class_exists('Wishlist_Item')) {
             $res = $wpdb->delete($wpdb->ea_wishlist_items, ['product_id' => sanitize_text_field($product_id)], ['%d']);
         }
 
-        public function is_already_in_wishlist($product_id)
+        public function is_already_in_wishlist($product_id, $wishlist_id = null)
         {
             global $wpdb;
+
             if (empty($product_id)) {
                 return false;
             }
 
             $product_id = sanitize_text_field($product_id);
 
-            $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE product_id = {$product_id}");
+            if( is_user_logged_in() ) {
+                $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE product_id = {$product_id}");
+            }else {
+                $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = '{$wishlist_id}' and product_id = {$product_id}");
+            }
+
             return !empty($result) ? true : false;
         }
     }

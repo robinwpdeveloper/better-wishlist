@@ -37,8 +37,10 @@ if (!class_exists('Wishlist_Form_Handler')) {
             $wishlist_id = User_Wishlist()->get_current_user_wishlist() ? User_Wishlist()->get_current_user_wishlist() : User_Wishlist()->create();
 
             $product_id = self::get_proudct_id($_REQUEST['fragments']);
-            $is_already_in_wishlist = Wishlist_Item()->is_already_in_wishlist($product_id);
+            
+            $is_already_in_wishlist = Wishlist_Item()->is_already_in_wishlist($product_id, $wishlist_id);
 
+            
             if(!$is_already_in_wishlist) {
                 $added_to_wishlist = Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
                 wp_send_json_success($added_to_wishlist, 200);
@@ -47,10 +49,6 @@ if (!class_exists('Wishlist_Form_Handler')) {
             }
 
             die();
-        }
-
-        public static function browse_wishlist_html() {
-            echo '<h1>bal chal</h1>';
         }
 
         public static function get_proudct_id($fragments) 
