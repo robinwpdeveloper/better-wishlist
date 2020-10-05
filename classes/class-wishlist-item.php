@@ -58,6 +58,8 @@ if (!class_exists('Wishlist_Item')) {
             $product = wc_get_product($item['product_id']);
             $product_price = $this->get_product_price($product);
 
+            // error_log(get_current_user_id());
+
             $values = [
                 $item['product_id'],
                 1,
@@ -123,7 +125,8 @@ if (!class_exists('Wishlist_Item')) {
             $product_id = sanitize_text_field($product_id);
 
             if( is_user_logged_in() ) {
-                $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE product_id = {$product_id}");
+                $user_id = get_current_user_id();
+                $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE user_id = {$user_id} AND product_id = {$product_id}");
             }else {
                 $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = '{$wishlist_id}' and product_id = {$product_id}");
             }

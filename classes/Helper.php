@@ -61,7 +61,7 @@ class Helper
      */
     public static function get_wishlist_page_id()
     {
-        $wishlist_page_id = get_option('ea_wishlist_page_id');
+        $wishlist_page_id = get_option('better_wishlist_page_id');
 
         return apply_filters('wishlist_page_id', $wishlist_page_id);
     }

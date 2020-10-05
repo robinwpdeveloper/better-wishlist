@@ -40,12 +40,14 @@ if (!class_exists('Wishlist_Shortcode')) {
 
         public function __construct()
         {
-            add_shortcode('wishlist_shortcode', [$this, 'wishlist']);
+            add_shortcode('better_wishlist_shortcode', [$this, 'wishlist']);
         }
 
 
         public function wishlist($atts, $content = null)
         {
+            global $wpdb;
+
             $atts = shortcode_atts([
                 'per_page'  => 5,
                 'current_page'  => 1,

@@ -37,6 +37,8 @@ if (!class_exists('Better_Wishlist')) {
 			add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);
 
 			add_filter('body_class', [$this, 'add_body_class']);
+
+			add_action('wp_login', [$this, 'update_db_and_cookie_in_login'], 10, 2);
 		}
 
 		public function define()
@@ -48,6 +50,23 @@ if (!class_exists('Better_Wishlist')) {
 			define('BETTER_WISHLIST_PLUGIN_VERSION', '1.0.0');
 		}
 
+        public function update_db_and_cookie_in_login($user_login, WP_User $user)
+		{
+			global $wpdb;
+
+			$session_id = $_COOKIE['wishlist_session_id'];
+
+            if( !empty( $session_id ) ) {
+                $query = $wpdb->query("UPDATE {$wpdb->ea_wishlist_lists} SET user_id = {$user->ID}, expiration = null, session_id = null WHERE session_id = '{$session_id}'");
+
+                if($query) {
+                    unset($_COOKIE['wishlist_session_id']);
+                }
+            }
+		}
+
+		
+
 		public function better_wishlist_install()
 		{
 			if (class_exists('WooCommerce')) {
@@ -58,7 +77,7 @@ if (!class_exists('Better_Wishlist')) {
 
 		public function add_display_status_on_page($states, $post)
 		{
-			if (get_option('ea_wishlist_page_id') == $post->ID) {
+			if (get_option('better_wishlist_page_id') == $post->ID) {
 				$post_status_object = get_post_status_object($post->post_status);
 
 				/* Checks if the label exists */
@@ -74,7 +93,7 @@ if (!class_exists('Better_Wishlist')) {
 
 		public function add_body_class($classes)
 		{
-			if (is_page() && get_the_ID() == get_option('ea_wishlist_page_id')) {
+			if (is_page() && get_the_ID() == get_option('better_wishlist_page_id')) {
 				return array_merge($classes, ['woocommerce']);
 			}
 			return $classes;

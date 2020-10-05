@@ -151,8 +151,8 @@ if (!class_exists('Better_Wishlist_Install')) {
             }
 
             wc_create_page(
-                sanitize_title_with_dashes(_x('ea_wishlist', 'page_slug', 'ea-woocommerce-wishlist')),
-                'ea_wishlist_page_id',
+                sanitize_title_with_dashes(_x('better_wishlist', 'page_slug', 'ea-woocommerce-wishlist')),
+                'better_wishlist_page_id',
                 __('Wishlist', 'wishlist')
             );
         }

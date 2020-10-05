@@ -127,11 +127,17 @@ if (!class_exists('User_Wishlist')) {
         public function get_current_user_wishlist()
         {
             global $wpdb;
+            
             if( is_user_logged_in() ) {
+                error_log(get_current_user_id());
                 $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$this->user_id}");
             }else {
                 $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE session_id = '{$this->session_id}'");
             }
+
+            // error_log("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$this->user_id}");
+            // error_log($wishlist_id);
+            
 
             if ($wishlist_id) {
                 return $wishlist_id;
