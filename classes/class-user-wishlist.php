@@ -8,8 +8,20 @@ if (!defined('ABSPATH')) {
 if (!class_exists('User_Wishlist')) {
     class User_Wishlist
     {
+        /**
+         * Single instance of the class
+         *
+         * @var \User_Wishlist
+         * @since 1.0.0
+         */
         protected static $instance;
 
+        /**
+         * Returns single instance of the class
+         *
+         * @return \User_Wishlist
+         * @since 1.0.0
+         */
         public static function get_instance()
         {
             if (is_null(self::$instance)) {
@@ -19,23 +31,43 @@ if (!class_exists('User_Wishlist')) {
             return self::$instance;
         }
 
-        public $user_id;
+        /**
+         * Current user id
+         * 
+         * @var integar
+         * @since 1.0.0
+         */
+        private $user_id;
 
+        /**
+         * Generated token for wishlist.
+         * 
+         * @var string
+         * @since 1.0.0
+         */
         private $token;
 
-        private $default_name;
+        /**
+         * Wishlist Name.
+         * 
+         * @var string
+         * @since 1.0.0
+         */
+        private $name;
 
-        private $default_privacy;
-
+        /**
+         * User session id.
+         * 
+         * @var string
+         * @since 1.0.0
+         */
         private $session_id;
-
-        private $is_default;
-
-        private $slug;
 
         public function __construct()
         {
             $this->user_id = get_current_user_id();
+            $this->token = uniqid();
+            $this->name = __('Wishlist', 'wishlist');
         }
 
         public function create()

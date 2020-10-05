@@ -35,9 +35,20 @@ if (!class_exists('Wishlist_Form_Handler')) {
         {
 
             $wishlist_id = User_Wishlist()->get_current_user_wishlist() ? User_Wishlist()->get_current_user_wishlist() : User_Wishlist()->create();
-            $added_to_wishlist = Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
+
+            $product_id = self::get_proudct_id($_REQUEST['fragments']);
+            $is_already_in_wishlist = Wishlist_Item()->is_already_in_wishlist($product_id);
+
+            if(!$is_already_in_wishlist) {
+                $added_to_wishlist = Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
+            }
 
             die();
+        }
+
+        public static function get_proudct_id($fragments) 
+        {
+            return isset( $fragments['product_id']) ? $fragments['product_id'] : false;
         }
 
         public static function remove_from_wishlist()

@@ -60,7 +60,7 @@ class Addtowishlist
         $label_text = __('Add to Wishlist', 'wishlist');
         $browse_wishlist_text = __('Browse Wishlist', 'wishlist');
 
-
+        
         $product_type = $current_product->get_type();
         $already_in_wishlist = __('This product is only in wishlist', 'wishlist');
         $product_added = __('Product Added', 'wishlist');
