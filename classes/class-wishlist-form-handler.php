@@ -17,7 +17,7 @@ if (!class_exists('Wishlist_Form_Handler')) {
 
             add_action('wp_ajax_add_to_wishlist', ['Wishlist_Form_Handler', 'add_to_wishlist']);
             add_action('wp_ajax_nopriv_add_to_wishlist', ['Wishlist_Form_Handler', 'add_to_wishlist']);
-            add_action('init', ['Wishlist_Form_Handler', 'remove_from_wishlist']);
+            add_action('init', ['Wishlist_Form_Handler', 'remove_from_wishlist'], 20);
         }
 
         public static function process_form_handling()
@@ -41,9 +41,16 @@ if (!class_exists('Wishlist_Form_Handler')) {
 
             if(!$is_already_in_wishlist) {
                 $added_to_wishlist = Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
+                wp_send_json_success($added_to_wishlist, 200);
+            }else {
+                wp_send_json_error(['message' => __( 'Already in wishlist', 'better-wishlist')]);
             }
 
             die();
+        }
+
+        public static function browse_wishlist_html() {
+            echo '<h1>bal chal</h1>';
         }
 
         public static function get_proudct_id($fragments) 

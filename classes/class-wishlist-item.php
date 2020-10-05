@@ -102,6 +102,8 @@ if (!class_exists('Wishlist_Item')) {
 
         public function remove($product_id)
         {
+            error_log($product_id);
+            
             if (empty($product_id)) {
                 return false;
             }
@@ -121,7 +123,7 @@ if (!class_exists('Wishlist_Item')) {
             $product_id = sanitize_text_field($product_id);
 
             $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE product_id = {$product_id}");
-            return !empty($result) ? $result : false;
+            return !empty($result) ? true : false;
         }
     }
 }

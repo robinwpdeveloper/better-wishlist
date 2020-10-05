@@ -15,6 +15,8 @@
                     fragments: product_wrap.data('fragment-options')
                 };
 
+                console.log(data.fragments);
+
                 e.preventDefault();
 
                 $.ajax({
@@ -22,7 +24,9 @@
                     url: WISHLIST_SCRIPTS.ajax_url,
                     data: data,
                     success: function( response ) {
-                        console.log(response);
+                        if(response.success) {
+                            $this.replaceWith(data.fragments.already_in_wishlist_text + ' <a href="'+data.fragments.wishlist_url+'">'+data.fragments.browse_wishlist_text+'</a>');
+                        }
                     },
                     error: function( response ) {
                         console.log(response);

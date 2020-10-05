@@ -75,20 +75,19 @@ class Addtowishlist
         $template_part = $exists && 'add' != 'view' ? 'browse' : 'button';
         $template_part = isset($atts['added_to_wishlist']) ? ($atts['added_to_wishlist'] ? 'added' : 'browse') : $template_part;
 
-        // TODO: Add mechanism for if product is already in wishlist.
         // TODO: Trim fat from $extra_atts
 
 
         add_action('wishlist_addtowishlist_button', [$this, 'button']);
 
         $atts = [
-            'wishlist_url'  => $wishlist_url,
+            'wishlist_url'  => get_page_link($wishlist_url),
             'in_default_wishlist'   => false,
             'exists'    => $exists,
             'container_classes'   => '',
             'is_single' => $is_single,
             'show_exists' => false,
-            // found in list
+            'found_in_list' => Wishlist_Item()->is_already_in_wishlist($currrent_product_id),
             // found item
             'product_id'    => $currrent_product_id,
             'parent_product_id' => $current_product_parent ? $current_product_parent : $currrent_product_id,
