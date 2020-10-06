@@ -12,8 +12,8 @@ if (!defined('ABSPATH')) {
     die;
 }
 
-if (!class_exists('Wishlist_Shortcode')) {
-    class Wishlist_Shortcode
+if (!class_exists('Better_Wishlist_Shortcode')) {
+    class Better_Wishlist_Shortcode
     {
 
         /**
@@ -57,7 +57,7 @@ if (!class_exists('Wishlist_Shortcode')) {
 
             extract($atts);
 
-            $items = Wishlist_Item()->get_items(User_Wishlist()->get_current_user_wishlist());
+            $items = Better_Wishlist_Item()->get_items(User_Wishlist()->get_current_user_wishlist());
 
             if( empty($items) ) return _e( 'No Records Found', 'better-wishlist' );
 
@@ -112,4 +112,4 @@ if (!class_exists('Wishlist_Shortcode')) {
     }
 }
 
-Wishlist_Shortcode::get_instance();
+Better_Wishlist_Shortcode::get_instance();

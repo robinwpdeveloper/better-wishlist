@@ -21,7 +21,7 @@ global $product;
 	<div class="wishlist-add-button">
 		<?php
 		if ($atts['found_in_list'] != true) {
-			do_action('wishlist_addtowishlist_button', ['product_id' => $product_id, 'product_type' => $product_type]);
+			do_action('better_wishlist_addtowishlist_button', ['product_id' => $product_id, 'product_type' => $product_type]);
 		} else {
 			printf('%s <a href="%s">%s</a>', $atts['already_in_wishlist_text'], $atts['wishlist_url'], $atts['browse_wishlist_text']);
 		}

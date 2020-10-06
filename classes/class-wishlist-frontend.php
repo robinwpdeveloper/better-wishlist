@@ -4,7 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
 
-// TODO: Later improve the localize script section.
 
 if (!class_exists('Better_Wishlist_Frontend')) {
 
@@ -43,8 +42,8 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 		{
 			$localize_scripts = $this->get_localize();
 
-			wp_register_script('jquery-wishlist-main', BETTER_WISHLIST_PLUGIN_URL . 'assets/js/' . 'jquery-wishlist.js', ['jquery'], '1.0.0', true);
-			wp_localize_script('jquery-wishlist-main', 'WISHLIST_SCRIPTS', $localize_scripts);
+			wp_register_script('jquery-wishlist-main', BETTER_WISHLIST_PLUGIN_URL . 'assets/js/' . 'jquery-better-wishlist.js', ['jquery'], '1.0.0', true);
+			wp_localize_script('jquery-wishlist-main', 'BETTER_WISHLIST_SCRIPTS', $localize_scripts);
 
 			wp_enqueue_script('jquery-wishlist-main');
 		}
@@ -57,13 +56,10 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 		 */
 		public function get_localize()
 		{
-			return apply_filters('wishlist_wcwl_localize_script', [
+			return apply_filters('better_wishlist_localize_script', [
 				'ajax_url' => admin_url('admin-ajax.php', 'relative'),
-				// 'redirect_to_cart' => get_option( 'wishlist_wcwl_redirect_cart' ),
-				'multi_wishlist' => false,
 				'labels' => [
-					'cookie_disabled' => __('We are sorry, but this feature is available only if cookies on your browser are enabled.', 'wishlist'),
-					'added_to_cart_message' => sprintf('<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters('wishlist_added_to_cart_message', __('Product added to cart successfully', 'wishlist')))
+					'cookie_disabled' => __('We are sorry, but this feature is available only if cookies on your browser are enabled.', 'wishlist')
 				],
 				'actions' => [
 					'add_to_wishlist_action' => 'add_to_wishlist',

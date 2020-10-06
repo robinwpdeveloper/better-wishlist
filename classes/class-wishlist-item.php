@@ -4,9 +4,9 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-if (!class_exists('Wishlist_Item')) {
+if (!class_exists('Better_Wishlist_Item')) {
 
-    class Wishlist_Item
+    class Better_Wishlist_Item
     {
 
         protected static $instance;
@@ -80,7 +80,7 @@ if (!class_exists('Wishlist_Item')) {
             $res = $wpdb->query($wpdb->prepare($query, $values));
 
             if ($res) {
-                return apply_filters('wishlist_item_added_successfully', $wpdb->insert_id);
+                return apply_filters('better_wishlist_item_added_successfully', $wpdb->insert_id);
             }
 
             return false;
@@ -135,7 +135,7 @@ if (!class_exists('Wishlist_Item')) {
     }
 }
 
-function Wishlist_Item()
+function Better_Wishlist_Item()
 {
-    return Wishlist_Item::get_instance();
+    return Better_Wishlist_Item::get_instance();
 }

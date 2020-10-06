@@ -95,7 +95,7 @@ if (!class_exists('User_Wishlist')) {
                 $columns['session_id'] = '%s';
                 $values[] = $this->session_id;
 
-                setcookie('wishlist_session_id', $this->session_id, time() + 86400, "/");
+                setcookie('better_wishlist_session_id', $this->session_id, time() + 86400, "/");
             } else {
                 $columns['user_id'] = '%d';
                 $values[] = $this->user_id;
@@ -120,7 +120,7 @@ if (!class_exists('User_Wishlist')) {
 
 
             if ($res) {
-                return apply_filters('wishlist_successfully_created', intval($wpdb->insert_id));
+                return apply_filters('better_wishlist_successfully_created', intval($wpdb->insert_id));
             }
 
             return false;
@@ -151,8 +151,8 @@ if (!class_exists('User_Wishlist')) {
                 return false;
             }
 
-            if( isset($_COOKIE['wishlist_session_id']) && ! empty($_COOKIE['wishlist_session_id']) ) {
-                return $_COOKIE['wishlist_session_id'];
+            if( isset($_COOKIE['better_wishlist_session_id']) && ! empty($_COOKIE['better_wishlist_session_id']) ) {
+                return $_COOKIE['better_wishlist_session_id'];
             }
 
             require_once ABSPATH . 'wp-includes/class-phpass.php';

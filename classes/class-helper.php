@@ -26,10 +26,10 @@ class Better_Wishlist_Helper {
         );
 
         if (!$located && file_exists($plugin_path)) {
-            return apply_filters('wishlist_locate_template', $plugin_path, $path);
+            return apply_filters('better_wishlist_locate_template', $plugin_path, $path);
         }
 
-        return apply_filters('wishlist_locate_template', $located, $path);
+        return apply_filters('better_wishlist_locate_template', $located, $path);
     }
 
     public static function better_wishlist_get_template ($path, $var = null, $return = false) {
@@ -59,7 +59,7 @@ class Better_Wishlist_Helper {
     public static function get_wishlist_page_id () {
         $wishlist_page_id = get_option('better_wishlist_page_id');
 
-        return apply_filters('wishlist_page_id', $wishlist_page_id);
+        return apply_filters('better_wishlist_page_id', $wishlist_page_id);
     }
 
     /**
@@ -70,7 +70,7 @@ class Better_Wishlist_Helper {
      * @since 3.0.0
      */
     public static function wishlist_is_single () {
-        return apply_filters('wishlist_is_single', is_product() && !in_array(wc_get_loop_prop('name'),
+        return apply_filters('better_wishlist_is_single', is_product() && !in_array(wc_get_loop_prop('name'),
                 array('related', 'up-sells')) && !wc_get_loop_prop('is_shortcode'));
     }
 
@@ -145,11 +145,11 @@ class Better_Wishlist_Helper {
         return $found;
     }
 
-    private static function update_db_and_cookie_in_login($user_login, WP_User $user)
+    public static function update_db_and_cookie_in_login($user_login, WP_User $user)
     {
         global $wpdb;
 
-        $session_id = sanitize_text_field($_COOKIE['wishlist_session_id']);
+        $session_id = sanitize_text_field($_COOKIE['better_wishlist_session_id']);
 
         if (!empty($session_id)) {
 
@@ -173,12 +173,12 @@ class Better_Wishlist_Helper {
             }
 
             if ($query) {
-                setcookie('wishlist_session_id', '', 1, "/");
+                setcookie('better_wishlist_session_id', '', 1, "/");
             }
         }
     }
 
-    private static function delete_expired_wishlist()
+    public static function delete_expired_wishlist()
     {
         global $wpdb;
         $count = $wpdb->get_var("SELECT count(ID) FROM {$wpdb->ea_wishlist_lists} WHERE CURTIME() >= expiration AND user_id IS NULL");

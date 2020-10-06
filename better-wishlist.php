@@ -38,7 +38,7 @@ if (!class_exists('Better_Wishlist')) {
 
 			add_filter('body_class', [$this, 'add_body_class']);
 
-			add_action('wp_login', ['Better_Wishlist_HelperBetter_Wishlist_Helper', 'update_db_and_cookie_in_login'], 10, 2);
+			add_action('wp_login', ['Better_Wishlist_Helper', 'update_db_and_cookie_in_login'], 10, 2);
 			add_action('better_wishlist_delete_expired_wishlist_cron_hook', ['Better_Wishlist_Helper','delete_expired_wishlist']);
 			$this->scheduled_remove_wishlist();
 
@@ -48,8 +48,8 @@ if (!class_exists('Better_Wishlist')) {
 		public function define_table(){
             global $wpdb;
 
-            $wpdb->ea_wishlist_items = $wpdb->prefix . 'wishlist_item';
-            $wpdb->ea_wishlist_lists = $wpdb->prefix . 'wishlist_item_lists';
+            $wpdb->ea_wishlist_items = $wpdb->prefix . 'better_wishlist_item';
+            $wpdb->ea_wishlist_lists = $wpdb->prefix . 'better_wishlist_item_lists';
         }
 
 		/**
@@ -105,7 +105,7 @@ if (!class_exists('Better_Wishlist')) {
 		{
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-install.php';
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-addtowishlist.php';
-			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/Helper.php';
+			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-helper.php';
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-frontend.php';
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-form-handler.php';
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-user-wishlist.php';

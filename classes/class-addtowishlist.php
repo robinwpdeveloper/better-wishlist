@@ -65,8 +65,8 @@ class Addtowishlist
         $already_in_wishlist = __('This product is only in wishlist', 'wishlist');
         $product_added = __('Product Added', 'wishlist');
 
-        $label = apply_filters('wishlist_button_text', $label_text);
-        $classes = apply_filters('wishlist_button_classes', ['add_to_wishlist', 'wishlist_button']);
+        $label = apply_filters('better_wishlist_button_text', $label_text);
+        $classes = apply_filters('better_wishlist_button_classes', ['add_to_wishlist', 'wishlist_button']);
 
         $is_single = isset($atts['is_single']) ? $atts['is_single'] : Better_Wishlist_Helper::wishlist_is_single();
         $icon = '';
@@ -75,7 +75,7 @@ class Addtowishlist
         $template_part = $exists && 'add' != 'view' ? 'browse' : 'button';
         $template_part = isset($atts['added_to_wishlist']) ? ($atts['added_to_wishlist'] ? 'added' : 'browse') : $template_part;
 
-        add_action('wishlist_addtowishlist_button', [$this, 'button']);
+        add_action('better_wishlist_addtowishlist_button', [$this, 'button']);
 
         $wishlist_id = User_Wishlist()->get_current_user_wishlist();
 
@@ -86,15 +86,15 @@ class Addtowishlist
             'container_classes'   => '',
             'is_single' => $is_single,
             'show_exists' => false,
-            'found_in_list' => Wishlist_Item()->is_already_in_wishlist($currrent_product_id, $wishlist_id),
+            'found_in_list' => Better_Wishlist_Item()->is_already_in_wishlist($currrent_product_id, $wishlist_id),
             'product_id'    => $currrent_product_id,
             'parent_product_id' => $current_product_parent ? $current_product_parent : $currrent_product_id,
             'product_type'  => $product_type,
             'label' => $label,
             'show_view' => Better_Wishlist_Helper::wishlist_is_single(),
-            'browse_wishlist_text'  => apply_filters('wishlist_browse_wishlist_label', $browse_wishlist_text),
-            'already_in_wishlist_text'  => apply_filters('wishlist_already_in_wishlist_text_button', $already_in_wishlist),
-            'product_added_text'    => apply_filters('wishlist_product_added_wishlist_message_button', $product_added),
+            'browse_wishlist_text'  => apply_filters('better_wishlist_browse_wishlist_label', $browse_wishlist_text),
+            'already_in_wishlist_text'  => apply_filters('better_wishlist_already_in_wishlist_text_button', $already_in_wishlist),
+            'product_added_text'    => apply_filters('better_wishlist_product_added_wishlist_message_button', $product_added),
             'icon'  => $icon,
             'heading_icon'  => $icon,
             'link_classes'  => $classes,
@@ -105,16 +105,16 @@ class Addtowishlist
             'template_part' => $template_part
         ];
 
-        $atts = apply_filters('wishlist_add_to_wishlist_params', $atts);
+        $atts = apply_filters('better_wishlist_add_to_wishlist_params', $atts);
 
         $template = Better_Wishlist_Helper::better_wishlist_get_template('addtowishlist.php', $atts, true);
-        echo apply_filters('wishlist_add_to_wishlist_button_html', $template, $wishlist_url, $product_type, $exists);
+        echo apply_filters('better_wishlist_add_to_wishlist_button_html', $template, $wishlist_url, $product_type, $exists);
     }
 
     public function button($atts)
     {
-        $content = apply_filters('wishlist_button_before', '');
-        $button_text = apply_filters('wishlist_addtowishlist_text_loop', __('Add to Wishlist', 'wishlist'));
+        $content = apply_filters('better_wishlist_button_before', '');
+        $button_text = apply_filters('better_wishlist_addtowishlist_text_loop', __('Add to Wishlist', 'wishlist'));
         $text = $button_text;
 
         if (empty($text)) {
@@ -123,14 +123,14 @@ class Addtowishlist
             $content .= '<div class="wishlist-clear"></div>';
             $content .= sprintf('<a href="/better_wishlist/?add_to_wishlist" role="button" aria-label="%s" class="add_to_wishlist_button" data-product-id="%s" data-wishlist-action="add">%s</a>', $button_text, $atts['product_id'], $text);
 
-            $content .= apply_filters('wishlist_button_after', '');
+            $content .= apply_filters('better_wishlist_button_after', '');
         }
 
         if (!empty($text)) {
             $content .= '<div class="wishlist-clear"></div>';
         }
 
-        echo apply_filters('wishlist_button', $content);
+        echo apply_filters('better_wishlist_button', $content);
     }
 
     public function htmloutput_out()
