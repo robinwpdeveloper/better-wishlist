@@ -106,7 +106,9 @@ if (!class_exists('User_Wishlist')) {
 
             if (!is_user_logged_in()) {
                 $columns['expiration'] = 'FROM_UNIXTIME( %d )';
-                $values[] = current_time('timestamp');
+                $timestamp = strtotime('+1 day', current_time('timestamp'));
+
+                $values[] = $timestamp;
             }
 
             $query_columns = implode(', ', array_map('esc_sql', array_keys($columns)));
