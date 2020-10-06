@@ -29,9 +29,9 @@ if (!class_exists('Better_Wishlist')) {
 		{
 
 			$this->define();
+            $this->define_table();
 			$this->includes();
 
-			add_action('init', [$this, 'better_wishlist_install'], 11);
 			add_action('woocommerce_after_shop_loop_item', [$this, 'view_addto_htmlloop'], 9);
 			add_action('woocommerce_single_product_summary', [$this, 'view_addto_htmlout'], 29);
 			add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);
@@ -41,7 +41,16 @@ if (!class_exists('Better_Wishlist')) {
 			add_action('wp_login', [$this, 'update_db_and_cookie_in_login'], 10, 2);
 			add_action('delete_expired_wishlist_cron_hook', [$this,'delete_expired_wishlist']);
 			$this->scheduled_remove_wishlist();
+
+			$this->active_plugin();
 		}
+
+		public function define_table(){
+            global $wpdb;
+
+            $wpdb->ea_wishlist_items = $wpdb->prefix . 'wishlist_item';
+            $wpdb->ea_wishlist_lists = $wpdb->prefix . 'wishlist_item_lists';
+        }
 
 		/**
 		 * Check if there is a hook in the cron
@@ -106,14 +115,6 @@ if (!class_exists('Better_Wishlist')) {
 			}
 		}
 
-		public function better_wishlist_install()
-		{
-			if (class_exists('WooCommerce')) {
-				Better_Wishlist_Install()->init();
-			}
-		}
-
-
 		public function add_display_status_on_page($states, $post)
 		{
 			if (get_option('better_wishlist_page_id') == $post->ID) {
@@ -172,7 +173,14 @@ if (!class_exists('Better_Wishlist')) {
 			$class = Addtowishlist::get_instance();
 			$class->htmloutput_out();
 		}
+
+		public function active_plugin(){
+            register_activation_hook( __FILE__, array( 'Better_Wishlist_Install','install' ) );
+        }
+
 	}
+
+
 }
 
 /**
@@ -184,4 +192,7 @@ function run_better_wishlist()
 {
 	$wishlist = new Better_Wishlist();
 }
-add_action('init', 'run_better_wishlist');
+
+run_better_wishlist();
+
+

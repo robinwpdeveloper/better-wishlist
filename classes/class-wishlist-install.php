@@ -16,95 +16,34 @@ if (!class_exists('Better_Wishlist_Install')) {
 
     /**
      * Creating plugin table and wishlist page.
-     * 
+     *
      * @since 1.0.0
      */
-    class Better_Wishlist_Install
-    {
-
-        /**
-         * Single instance of the class
-         *
-         * @var \Better_Wishlist_Install
-         * @since 1.0.0
-         */
-        protected static $instance;
-
-        /**
-         * Wishlist Items table name.
-         * 
-         * @var string
-         * @access private
-         * @since 1.0.0
-         */
-        private $items_table;
-
-        /**
-         * Wishlist table name.
-         * 
-         * @var string
-         * @access private
-         * @since   1.0.0
-         */
-        private $wishlist_wishlists_table;
-
-        /**
-         * Returns single instance of the class
-         *
-         * @return \Better_Wishlist_Install
-         * @since 1.0.0
-         */
-        public static function get_instance()
-        {
-            if (is_null(self::$instance)) {
-                self::$instance = new self();
-            }
-
-            return self::$instance;
-        }
-
-        /**
-         * \Better_Wishlist_Install Constructor
-         * 
-         * @since 1.0.0
-         */
-        public function __construct()
-        {
-            global $wpdb;
-
-            $this->items_table = $wpdb->prefix . 'wishlist_item';
-            $this->wishlist_wishlists_table = $wpdb->prefix . 'wishlist_item_lists';
-
-            $wpdb->ea_wishlist_items = $this->items_table;
-            $wpdb->ea_wishlist_lists = $this->wishlist_wishlists_table;
-
-        }
+    class Better_Wishlist_Install {
 
         /**
          * Initializing plugin installation.
-         * 
+         *
          * @since 1.0.0
          */
-        public function init()
-        {
-            $this->create_tables();
-            $this->create_page();
+        public static function install () {
+            self::create_tables();
+            self::create_page();
         }
 
         /**
          * Add tables for first installation.
-         * 
+         *
          * @return void
          * @access private
-         * @since 1.0.0
+         * @since  1.0.0
          */
-        private function create_tables()
-        {
+        private static function create_tables () {
             global $wpdb;
-            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+            require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 
-            if($wpdb->get_var("SHOW TABLES LIKE '$this->wishlist_wishlists_table'") != $this->wishlist_wishlists_table) {
-                dbDelta("CREATE TABLE {$this->wishlist_wishlists_table} (
+            if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ea_wishlist_lists'") != $wpdb->ea_wishlist_lists) {
+                dbDelta("CREATE TABLE {$wpdb->ea_wishlist_lists} (
                     ID BIGINT( 20 ) NOT NULL AUTO_INCREMENT,
                     user_id BIGINT( 20 ) NULL DEFAULT NULL,
                     session_id VARCHAR( 255 ) DEFAULT NULL,
@@ -121,8 +60,8 @@ if (!class_exists('Better_Wishlist_Install')) {
                 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
             }
 
-            if( $wpdb->get_var("SHOW TABLES LIKE '$this->items_table'") != $this->items_table ) {
-                dbDelta("CREATE TABLE {$this->items_table} (
+            if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ea_wishlist_items'") != $wpdb->ea_wishlist_items) {
+                dbDelta("CREATE TABLE {$wpdb->ea_wishlist_items} (
                     ID BIGINT( 20 ) NOT NULL AUTO_INCREMENT,
                     product_id BIGINT( 20 ) NOT NULL,
                     quantity INT( 11 ) NOT NULL,
@@ -141,46 +80,16 @@ if (!class_exists('Better_Wishlist_Install')) {
 
         /**
          * Add a page "Wishlist" on the database.
-         * 
+         *
          * @since 1.0.0
          */
-        private function create_page()
-        {
-            if (!function_exists('wc_create_page')) {
-                require_once ABSPATH . 'wp-content/plugins/woocommerce/includes/admin/wc-admin-functions.php';
-            }
-
-            wc_create_page(
+        public static function create_page () {
+            Helper::better_wishlist_create_page(
                 sanitize_title_with_dashes(_x('better_wishlist', 'page_slug', 'ea-woocommerce-wishlist')),
                 'better_wishlist_page_id',
-                __('Wishlist', 'wishlist')
+                __('Wishlist', 'wishlist'),
+                '[better_wishlist_shortcode]'
             );
         }
-
-        /**
-         * Check if the table of the plugin is already exists.
-         * 
-         * @return bool
-         * @since 1.0.0
-         */
-        public function is_installed()
-        {
-            global $wpdb;
-            $number_of_tables = $wpdb->query( $wpdb->prepare( 'SHOW TABLES LIKE %s', "{$this->items_table}" ) );
-            
-            return (bool) ( 2 == $number_of_tables );
-        }
-
     }
-}
-
-/**
- * Onetime access to instance of Better_Wishlist_Install class
- *
- * @return \Better_Wishlist_Install
- * @since 1.0.0
- */
-function Better_Wishlist_Install()
-{
-    return Better_Wishlist_Install::get_instance();
 }
