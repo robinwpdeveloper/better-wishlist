@@ -94,7 +94,7 @@ if (!class_exists('Wishlist_Item')) {
 
             global $wpdb;
             $wishlist_id = sanitize_text_field($wishlist_id);
-            $query = "SELECT DISTINCT product_id,user_id,id FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
+            $query = "SELECT DISTINCT product_id,user_id,id,quantity,wishlist_id,position,original_price,original_currency,dateadded,on_sale FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
             $res = $wpdb->get_results($query, OBJECT);
 
             return $res;
