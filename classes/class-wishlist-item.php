@@ -58,8 +58,6 @@ if (!class_exists('Wishlist_Item')) {
             $product = wc_get_product($item['product_id']);
             $product_price = $this->get_product_price($product);
 
-            // error_log(get_current_user_id());
-
             $values = [
                 $item['product_id'],
                 1,
