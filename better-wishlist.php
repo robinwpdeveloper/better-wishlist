@@ -82,7 +82,7 @@ if (!class_exists('Better_Wishlist')) {
 					return $states;
 				}
 
-				$states[$post_status_object->name] = __('Wishlist Page', 'wishlist');
+				$states[$post_status_object->name] = __('Wishlist Page', 'better-wishlist');
 			}
 
 			return $states;

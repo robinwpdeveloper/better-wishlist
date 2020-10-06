@@ -67,7 +67,7 @@ if (!class_exists('User_Wishlist')) {
         {
             $this->user_id = get_current_user_id();
             $this->token = uniqid();
-            $this->name = __('Wishlist', 'wishlist');
+            $this->name = __('Wishlist', 'better-wishlist');
             $this->session_id = $this->generate_session_id();
         }
 
@@ -85,7 +85,7 @@ if (!class_exists('User_Wishlist')) {
 
             $values = [
                 0,
-                __('Wishlist', 'wishlist'),
+                __('Wishlist', 'better-wishlist'),
                 '',
                 $this->token,
                 0

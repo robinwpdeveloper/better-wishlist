@@ -58,9 +58,6 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 		{
 			return apply_filters('better_wishlist_localize_script', [
 				'ajax_url' => admin_url('admin-ajax.php', 'relative'),
-				'labels' => [
-					'cookie_disabled' => __('We are sorry, but this feature is available only if cookies on your browser are enabled.', 'wishlist')
-				],
 				'actions' => [
 					'add_to_wishlist_action' => 'add_to_wishlist',
 					'remove_from_wishlist_action' => 'remove_from_wishlist',

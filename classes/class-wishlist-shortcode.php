@@ -72,7 +72,7 @@ if (!class_exists('Better_Wishlist_Shortcode')) {
                         </th>
                         <th class="product-thumbnail"></th>
                         <th class="product-name">
-                            <span class="nobr"><?php _e('Product name', 'wishlist'); ?></span>
+                            <span class="nobr"><?php _e('Product name', 'better-wishlist'); ?></span>
                         </th>
                     </tr>
                 </thead>
