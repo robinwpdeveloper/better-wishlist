@@ -54,7 +54,7 @@ class Addtowishlist
 
         $currrent_product_id = $current_product->get_id();
         $current_product_parent = $current_product->get_parent_id();
-        $wishlist_url = Helper::get_wishlist_page_id();
+        $wishlist_url = Better_Wishlist_Helper::get_wishlist_page_id();
 
         // labels & icons settings.
         $label_text = __('Add to Wishlist', 'wishlist');
@@ -68,7 +68,7 @@ class Addtowishlist
         $label = apply_filters('wishlist_button_text', $label_text);
         $classes = apply_filters('wishlist_button_classes', ['add_to_wishlist', 'wishlist_button']);
 
-        $is_single = isset($atts['is_single']) ? $atts['is_single'] : Helper::wishlist_is_single();
+        $is_single = isset($atts['is_single']) ? $atts['is_single'] : Better_Wishlist_Helper::wishlist_is_single();
         $icon = '';
         $exists = false;
 
@@ -91,7 +91,7 @@ class Addtowishlist
             'parent_product_id' => $current_product_parent ? $current_product_parent : $currrent_product_id,
             'product_type'  => $product_type,
             'label' => $label,
-            'show_view' => Helper::wishlist_is_single(),
+            'show_view' => Better_Wishlist_Helper::wishlist_is_single(),
             'browse_wishlist_text'  => apply_filters('wishlist_browse_wishlist_label', $browse_wishlist_text),
             'already_in_wishlist_text'  => apply_filters('wishlist_already_in_wishlist_text_button', $already_in_wishlist),
             'product_added_text'    => apply_filters('wishlist_product_added_wishlist_message_button', $product_added),
@@ -106,9 +106,8 @@ class Addtowishlist
         ];
 
         $atts = apply_filters('wishlist_add_to_wishlist_params', $atts);
-        $atts['fragment_options'] = Helper::format_fragment_options($atts, 'wishlist');
 
-        $template = Helper::better_wishlist_get_template('addtowishlist.php', $atts, true);
+        $template = Better_Wishlist_Helper::better_wishlist_get_template('addtowishlist.php', $atts, true);
         echo apply_filters('wishlist_add_to_wishlist_button_html', $template, $wishlist_url, $product_type, $exists);
     }
 

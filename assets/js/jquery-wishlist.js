@@ -15,8 +15,6 @@
                     fragments: product_wrap.data('fragment-options')
                 };
 
-                console.log(data.fragments);
-
                 e.preventDefault();
 
                 $.ajax({

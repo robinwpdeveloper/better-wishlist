@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-class Helper {
+class Better_Wishlist_Helper {
     /**
      * The function overwrites the method output templates woocommerce
      *
@@ -72,43 +72,6 @@ class Helper {
     public static function wishlist_is_single () {
         return apply_filters('wishlist_is_single', is_product() && !in_array(wc_get_loop_prop('name'),
                 array('related', 'up-sells')) && !wc_get_loop_prop('is_shortcode'));
-    }
-
-    public static function format_fragment_options ($options, $context = '') {
-        // removes unusable values, and changes options common for all fragments
-        if (!empty($options)) {
-            foreach ($options as $id => $value) {
-                if (is_object($value) || is_array($value)) {
-                    // remove item if type is not supported
-                    unset($options[$id]);
-                } elseif ('ajax_loading' == $id) {
-                    $options['ajax_loading'] = false;
-                }
-            }
-        }
-
-        // applies context specific changes
-        if (!empty($context)) {
-            $options['item'] = $context;
-
-            switch ($context) {
-                case 'add_to_wishlist':
-                    unset($options['template_part']);
-                    unset($options['label']);
-                    unset($options['exists']);
-                    unset($options['icon']);
-                    unset($options['link_classes']);
-                    unset($options['link_popup_classes']);
-                    unset($options['container_classes']);
-                    unset($options['found_in_list']);
-                    unset($options['found_item']);
-                    unset($options['popup_title']);
-                    unset($options['wishlist_url']);
-                    break;
-            }
-        }
-
-        return $options;
     }
 
     public static function better_wishlist_create_page ($slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0) {
@@ -181,4 +144,48 @@ class Helper {
         }
         return $found;
     }
+
+    private static function update_db_and_cookie_in_login($user_login, WP_User $user)
+    {
+        global $wpdb;
+
+        $session_id = sanitize_text_field($_COOKIE['wishlist_session_id']);
+
+        if (!empty($session_id)) {
+
+            $check_login_user_wishlist = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$user->ID}");
+
+
+            $wishlist = $wpdb->get_row("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE session_id = '{$session_id}'");
+
+            if (empty($check_login_user_wishlist)) {
+                $query = $wpdb->query("UPDATE {$wpdb->ea_wishlist_lists} SET user_id = {$user->ID}, expiration = null, session_id = null WHERE session_id = '{$session_id}'");
+
+                $query = $wpdb->query("UPDATE {$wpdb->ea_wishlist_items} SET user_id = {$user->ID} WHERE wishlist_id = {$wishlist->ID}");
+            } else {
+                
+                if ($wishlist->ID > 0) {
+
+                    $query = $wpdb->query("UPDATE {$wpdb->ea_wishlist_items} SET user_id = {$user->ID}, wishlist_id = {$check_login_user_wishlist->ID} WHERE wishlist_id = {$wishlist->ID}");
+
+                    $wpdb->query("DELETE FROM {$wpdb->ea_wishlist_lists} WHERE session_id = '{$session_id}'");
+                }
+            }
+
+            if ($query) {
+                setcookie('wishlist_session_id', '', 1, "/");
+            }
+        }
+    }
+
+    private static function delete_expired_wishlist()
+    {
+        global $wpdb;
+        $count = $wpdb->get_var("SELECT count(ID) FROM {$wpdb->ea_wishlist_lists} WHERE CURTIME() >= expiration AND user_id IS NULL");
+        
+        if( $count > 0 ) {
+            $wpdb->query("DELETE T1,T2 FROM {$wpdb->ea_wishlist_lists} T1 INNER JOIN {$wpdb->ea_wishlist_items} T2 on T1.ID = T2.wishlist_id WHERE CURTIME() >= expiration AND T1.user_id IS NULL");
+        }
+    }
+
 }

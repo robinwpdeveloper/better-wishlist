@@ -16,7 +16,7 @@ global $product;
 
 ?>
 
-<div class="wishlist-add-to-wishlist add-to-wishlist-<?php echo esc_attr($product_id); ?> <?php echo esc_attr($container_classes); ?> wishlist-fragment on-first-load" data-fragment-ref="<?php echo esc_attr($product_id); ?>" data-fragment-options="<?php echo esc_attr(json_encode($fragment_options)); ?>">
+<div class="wishlist-add-to-wishlist add-to-wishlist-<?php echo esc_attr($product_id); ?> <?php echo esc_attr($container_classes); ?> wishlist-fragment on-first-load" data-fragment-ref="<?php echo esc_attr($product_id); ?>" data-fragment-options="<?php echo esc_attr(json_encode($atts)); ?>">
 
 	<div class="wishlist-add-button">
 		<?php

@@ -84,7 +84,7 @@ if (!class_exists('Better_Wishlist_Install')) {
          * @since 1.0.0
          */
         public static function create_page () {
-            Helper::better_wishlist_create_page(
+            Better_Wishlist_Helper::better_wishlist_create_page(
                 sanitize_title_with_dashes(_x('better_wishlist', 'page_slug', 'ea-woocommerce-wishlist')),
                 'better_wishlist_page_id',
                 __('Wishlist', 'wishlist'),
