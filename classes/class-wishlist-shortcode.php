@@ -89,7 +89,7 @@ if (!class_exists('Wishlist_Shortcode')) {
                         <tr id="wishlist-row-<?php echo $product->get_id(); ?>" data-row-id="<?php echo $product->get_id(); ?>">
                             <td class="product-remove">
                                 <div>
-                                <a href="/ea_wishlist/?remove_from_wishlist=<?php echo $product->get_id(); ?>" class="remove remove_from_wishlist" title="<?php _e('Remove this product', 'better-wishlist'); ?>">×</a>
+                                <a href="/better_wishlist/?remove_from_wishlist=<?php echo $product->get_id(); ?>" class="remove remove_from_wishlist" title="<?php _e('Remove this product', 'better-wishlist'); ?>">×</a>
                                 </div>
                             </td>
                             <td class="product-thumbnail">
