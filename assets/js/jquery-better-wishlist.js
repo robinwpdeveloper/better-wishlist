@@ -1,6 +1,7 @@
 (function($) {
 
     $(document).ready(function() {
+
         $(document).on('click', '.add_to_wishlist_button', function(e) {
             
             var $this = $(this),
@@ -30,11 +31,31 @@
                         console.log(response);
                     }
                 });
-                
-            
+        });
 
+        $(document).on('click', '.bw-multiple-products-add-to-carts', function(e) {
+            e.preventDefault();
+
+            var $product_ids = $(this).data('product-ids'),
+                $product_ids = $product_ids.split(":");
+
+                $.ajax({
+                    type: 'POST',
+                    url: BETTER_WISHLIST_SCRIPTS.ajax_url,
+                    data: {
+                        action: BETTER_WISHLIST_SCRIPTS.actions.multiple_product_add_to_cart_action,
+                        product_ids: $product_ids
+                    },
+                    success: function( response ) {
+                        console.log(response);
+                    },
+                    error: function( response ) {
+                        console.log(response);
+                    }
+                });
 
         });
+
     });
     
 })(jQuery);

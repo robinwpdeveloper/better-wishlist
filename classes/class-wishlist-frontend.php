@@ -51,9 +51,14 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 			$localize_scripts = $this->get_localize();
 
 			wp_register_script('jquery-wishlist-main', BETTER_WISHLIST_PLUGIN_URL . 'assets/js/' . 'jquery-better-wishlist.js', ['jquery'], '1.0.0', true);
+
+			wp_register_style('wishlist-main-style', BETTER_WISHLIST_PLUGIN_URL . 'assets/css/' . 'better-wishlist.css', null, '1.0.0', 'all');
+
 			wp_localize_script('jquery-wishlist-main', 'BETTER_WISHLIST_SCRIPTS', $localize_scripts);
 
 			wp_enqueue_script('jquery-wishlist-main');
+
+			wp_enqueue_style('wishlist-main-style');
 		}
 
 		/**
@@ -69,6 +74,7 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 				'actions' => [
 					'add_to_wishlist_action' => 'add_to_wishlist',
 					'remove_from_wishlist_action' => 'remove_from_wishlist',
+					'multiple_product_add_to_cart_action'	=> 'mutiple_product_to_cart'
 				]
 			]);
 		}

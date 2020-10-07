@@ -67,7 +67,7 @@ if (!class_exists('Better_Wishlist_Install')) {
                     quantity INT( 11 ) NOT NULL,
                     user_id BIGINT( 20 ) NULL DEFAULT NULL,
                     wishlist_id BIGINT( 20 ) NULL,
-                    position INT( 11 ) DEFAULT 0,
+                    stock_status VARCHAR( 64 ) DEFAULT NULL,
                     original_price DECIMAL( 9,3 ) NULL DEFAULT NULL,
                     original_currency CHAR( 3 ) NULL DEFAULT NULL,
                     dateadded timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

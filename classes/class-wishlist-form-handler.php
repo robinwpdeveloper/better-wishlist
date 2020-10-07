@@ -17,6 +17,11 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
             add_action('wp_ajax_add_to_wishlist', ['Better_Wishlist_Form_Handler', 'add_to_wishlist']);
             add_action('wp_ajax_nopriv_add_to_wishlist', ['Better_Wishlist_Form_Handler', 'add_to_wishlist']);
+
+            add_action('wp_ajax_mutiple_product_to_cart', ['Better_Wishlist_Form_Handler', 'mutiple_product_to_cart']);
+            add_action('wp_ajax_nopriv_mutiple_product_to_cart', ['Better_Wishlist_Form_Handler', 'mutiple_product_to_cart']);
+
+
             add_action('init', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist'], 20);
         }
 
@@ -63,6 +68,11 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
                 Better_Wishlist_Item()->remove($product_id);
             }
+        }
+
+        public static function mutiple_product_to_cart()
+        {
+            var_dump($_REQUEST);
         }
     }
 }

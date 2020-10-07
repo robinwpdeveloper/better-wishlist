@@ -1,0 +1,6 @@
+p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_to_cart_button + a {
+    display: block;
+    text-align: center;
+    margin: 0px !important;
+    max-width: 95%;
+}
