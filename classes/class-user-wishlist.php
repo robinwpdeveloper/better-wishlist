@@ -114,7 +114,7 @@ if (!class_exists('User_Wishlist')) {
             $query_columns = implode(', ', array_map('esc_sql', array_keys($columns)));
             $query_values = implode(', ', array_values($columns));
 
-            $query = "INSERT INTO {$wpdb->ea_wishlist_lists} ( {$query_columns} ) VALUES ( {$query_values} ) ";
+            $query = "INSERT INTO {$wpdb->better_wishlist_lists} ( {$query_columns} ) VALUES ( {$query_values} ) ";
 
             $res = $wpdb->query($wpdb->prepare($query, $values));
 
@@ -131,9 +131,9 @@ if (!class_exists('User_Wishlist')) {
             global $wpdb;
             
             if( is_user_logged_in() ) {
-                $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$this->user_id}");
+                $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->better_wishlist_lists} WHERE user_id = {$this->user_id}");
             }else {
-                $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE session_id = '{$this->session_id}'");
+                $wishlist_id = $wpdb->get_var("SELECT ID FROM {$wpdb->better_wishlist_lists} WHERE session_id = '{$this->session_id}'");
             }
             
             if ($wishlist_id) {

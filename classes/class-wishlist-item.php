@@ -75,7 +75,7 @@ if (!class_exists('Better_Wishlist_Item')) {
             $query_columns = implode(', ', array_map('esc_sql', array_keys($columns)));
             $query_values = implode(', ', array_values($columns));
 
-            $query = "INSERT INTO {$wpdb->ea_wishlist_items} ( {$query_columns} ) VALUES ( {$query_values} ) ";
+            $query = "INSERT INTO {$wpdb->better_wishlist_items} ( {$query_columns} ) VALUES ( {$query_values} ) ";
 
             $res = $wpdb->query($wpdb->prepare($query, $values));
 
@@ -94,7 +94,7 @@ if (!class_exists('Better_Wishlist_Item')) {
 
             global $wpdb;
             $wishlist_id = sanitize_text_field($wishlist_id);
-            $query = "SELECT DISTINCT product_id,user_id,wishlist_id FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
+            $query = "SELECT DISTINCT product_id,user_id,wishlist_id FROM {$wpdb->better_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
 
             $res = $wpdb->get_results($query, OBJECT);
 
@@ -110,7 +110,7 @@ if (!class_exists('Better_Wishlist_Item')) {
 
             global $wpdb;
 
-            $res = $wpdb->delete($wpdb->ea_wishlist_items, ['product_id' => sanitize_text_field($product_id)], ['%d']);
+            $res = $wpdb->delete($wpdb->better_wishlist_items, ['product_id' => sanitize_text_field($product_id)], ['%d']);
         }
 
         public function is_already_in_wishlist($product_id, $wishlist_id = null)
@@ -125,9 +125,9 @@ if (!class_exists('Better_Wishlist_Item')) {
 
             if( is_user_logged_in() ) {
                 $user_id = get_current_user_id();
-                $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE user_id = {$user_id} AND product_id = {$product_id}");
+                $result = $wpdb->get_row("SELECT * FROM {$wpdb->better_wishlist_items} WHERE user_id = {$user_id} AND product_id = {$product_id}");
             }else {
-                $result = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_items} WHERE wishlist_id = '{$wishlist_id}' and product_id = {$product_id}");
+                $result = $wpdb->get_row("SELECT * FROM {$wpdb->better_wishlist_items} WHERE wishlist_id = '{$wishlist_id}' and product_id = {$product_id}");
             }
 
             return !empty($result) ? true : false;

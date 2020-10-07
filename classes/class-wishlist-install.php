@@ -42,8 +42,8 @@ if (!class_exists('Better_Wishlist_Install')) {
             global $wpdb;
             require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 
-            if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ea_wishlist_lists'") != $wpdb->ea_wishlist_lists) {
-                dbDelta("CREATE TABLE {$wpdb->ea_wishlist_lists} (
+            if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->better_wishlist_lists'") != $wpdb->better_wishlist_lists) {
+                dbDelta("CREATE TABLE {$wpdb->better_wishlist_lists} (
                     ID BIGINT( 20 ) NOT NULL AUTO_INCREMENT,
                     user_id BIGINT( 20 ) NULL DEFAULT NULL,
                     session_id VARCHAR( 255 ) DEFAULT NULL,
@@ -60,8 +60,8 @@ if (!class_exists('Better_Wishlist_Install')) {
                 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
             }
 
-            if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->ea_wishlist_items'") != $wpdb->ea_wishlist_items) {
-                dbDelta("CREATE TABLE {$wpdb->ea_wishlist_items} (
+            if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->better_wishlist_items'") != $wpdb->better_wishlist_items) {
+                dbDelta("CREATE TABLE {$wpdb->better_wishlist_items} (
                     ID BIGINT( 20 ) NOT NULL AUTO_INCREMENT,
                     product_id BIGINT( 20 ) NOT NULL,
                     quantity INT( 11 ) NOT NULL,

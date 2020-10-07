@@ -120,14 +120,14 @@ class Addtowishlist
         if (empty($text)) {
             $icon_class = ' no-txt';
         } else {
-            $content .= '<div class="wishlist-clear"></div>';
+            $content .= '<div class="better-wishlist-clear"></div>';
             $content .= sprintf('<a href="/better_wishlist/?add_to_wishlist" role="button" aria-label="%s" class="add_to_wishlist_button" data-product-id="%s" data-wishlist-action="add">%s</a>', $button_text, $atts['product_id'], $text);
 
             $content .= apply_filters('better_wishlist_button_after', '');
         }
 
         if (!empty($text)) {
-            $content .= '<div class="wishlist-clear"></div>';
+            $content .= '<div class="better-wishlist-clear"></div>';
         }
 
         echo apply_filters('better_wishlist_button', $content);

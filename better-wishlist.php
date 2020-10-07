@@ -48,8 +48,8 @@ if (!class_exists('Better_Wishlist')) {
 		public function define_table(){
             global $wpdb;
 
-            $wpdb->ea_wishlist_items = $wpdb->prefix . 'better_wishlist_item';
-            $wpdb->ea_wishlist_lists = $wpdb->prefix . 'better_wishlist_item_lists';
+            $wpdb->better_wishlist_items = $wpdb->prefix . 'better_wishlist_item';
+            $wpdb->better_wishlist_lists = $wpdb->prefix . 'better_wishlist_item_lists';
         }
 
 		/**

@@ -153,22 +153,22 @@ class Better_Wishlist_Helper {
 
         if (!empty($session_id)) {
 
-            $check_login_user_wishlist = $wpdb->get_row("SELECT * FROM {$wpdb->ea_wishlist_lists} WHERE user_id = {$user->ID}");
+            $check_login_user_wishlist = $wpdb->get_row("SELECT * FROM {$wpdb->better_wishlist_lists} WHERE user_id = {$user->ID}");
 
 
-            $wishlist = $wpdb->get_row("SELECT ID FROM {$wpdb->ea_wishlist_lists} WHERE session_id = '{$session_id}'");
+            $wishlist = $wpdb->get_row("SELECT ID FROM {$wpdb->better_wishlist_lists} WHERE session_id = '{$session_id}'");
 
             if (empty($check_login_user_wishlist)) {
-                $query = $wpdb->query("UPDATE {$wpdb->ea_wishlist_lists} SET user_id = {$user->ID}, expiration = null, session_id = null WHERE session_id = '{$session_id}'");
+                $query = $wpdb->query("UPDATE {$wpdb->better_wishlist_lists} SET user_id = {$user->ID}, expiration = null, session_id = null WHERE session_id = '{$session_id}'");
 
-                $query = $wpdb->query("UPDATE {$wpdb->ea_wishlist_items} SET user_id = {$user->ID} WHERE wishlist_id = {$wishlist->ID}");
+                $query = $wpdb->query("UPDATE {$wpdb->better_wishlist_items} SET user_id = {$user->ID} WHERE wishlist_id = {$wishlist->ID}");
             } else {
                 
                 if ($wishlist->ID > 0) {
 
-                    $query = $wpdb->query("UPDATE {$wpdb->ea_wishlist_items} SET user_id = {$user->ID}, wishlist_id = {$check_login_user_wishlist->ID} WHERE wishlist_id = {$wishlist->ID}");
+                    $query = $wpdb->query("UPDATE {$wpdb->better_wishlist_items} SET user_id = {$user->ID}, wishlist_id = {$check_login_user_wishlist->ID} WHERE wishlist_id = {$wishlist->ID}");
 
-                    $wpdb->query("DELETE FROM {$wpdb->ea_wishlist_lists} WHERE session_id = '{$session_id}'");
+                    $wpdb->query("DELETE FROM {$wpdb->better_wishlist_lists} WHERE session_id = '{$session_id}'");
                 }
             }
 
@@ -181,10 +181,10 @@ class Better_Wishlist_Helper {
     public static function delete_expired_wishlist()
     {
         global $wpdb;
-        $count = $wpdb->get_var("SELECT count(ID) FROM {$wpdb->ea_wishlist_lists} WHERE CURTIME() >= expiration AND user_id IS NULL");
+        $count = $wpdb->get_var("SELECT count(ID) FROM {$wpdb->better_wishlist_lists} WHERE CURTIME() >= expiration AND user_id IS NULL");
         
         if( $count > 0 ) {
-            $wpdb->query("DELETE T1,T2 FROM {$wpdb->ea_wishlist_lists} T1 INNER JOIN {$wpdb->ea_wishlist_items} T2 on T1.ID = T2.wishlist_id WHERE CURTIME() >= expiration AND T1.user_id IS NULL");
+            $wpdb->query("DELETE T1,T2 FROM {$wpdb->better_wishlist_lists} T1 INNER JOIN {$wpdb->better_wishlist_items} T2 on T1.ID = T2.wishlist_id WHERE CURTIME() >= expiration AND T1.user_id IS NULL");
         }
     }
 
