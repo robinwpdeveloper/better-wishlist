@@ -72,7 +72,23 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
         public static function mutiple_product_to_cart()
         {
-            var_dump($_REQUEST);
+            if( empty($_REQUEST['product_ids']) ) {
+                return false;
+            }
+            $product_ids = apply_filters('better_wishlist_multiple_product_ids_to_add_to_cart', $_REQUEST['product_ids']);
+            foreach($product_ids as $id) {
+                $product = wc_get_product($id);
+
+                // if($product->get_type() == 'variable') {
+                //     $children = $product->get_children();
+                //     if(!empty($children)) {
+                //         $id = current($children);
+                //     }
+                // }
+
+                WC()->cart->add_to_cart( $id, 1);
+            }
+            wp_send_json_success();
         }
     }
 }
