@@ -21,8 +21,11 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
             add_action('wp_ajax_mutiple_product_to_cart', ['Better_Wishlist_Form_Handler', 'mutiple_product_to_cart']);
             add_action('wp_ajax_nopriv_mutiple_product_to_cart', ['Better_Wishlist_Form_Handler', 'mutiple_product_to_cart']);
 
+            add_action('wp_ajax_remove_from_wishlist', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist']);
+            add_action('wp_ajax_nopriv_remove_from_wishlist', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist']);
 
-            add_action('init', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist'], 20);
+
+            // add_action('init', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist'], 20);
         }
 
         public static function process_form_handling()
@@ -63,8 +66,8 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
         public static function remove_from_wishlist()
         {
-            if (isset($_GET['remove_from_wishlist'])) {
-                $product_id = absint($_GET['remove_from_wishlist']);
+            if (!empty($_REQUEST['product_id'])) {
+                $product_id = absint($_REQUEST['product_id']);
 
                 Better_Wishlist_Item()->remove($product_id);
             }

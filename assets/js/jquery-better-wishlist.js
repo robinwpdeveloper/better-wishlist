@@ -35,7 +35,7 @@
 
         $(document).on('click', '.bw-multiple-products-add-to-carts', function(e) {
             e.preventDefault();
-
+            
             var $product_ids = $(this).data('product-ids'),
                 $product_ids = $product_ids.split(":");
 
@@ -55,6 +55,35 @@
                 });
 
         });
+
+
+        $(document).on('click', '.remove_from_wishlist', function(e) {
+          e.preventDefault();
+
+          var $this = $(this),
+              $product_id = $this.data('product_id'),
+              product_row = "#wishlist-row-" + $product_id;
+
+
+              $.ajax({
+                  type: 'POST',
+                  url: BETTER_WISHLIST_SCRIPTS.ajax_url,
+                  data: {
+                      action: BETTER_WISHLIST_SCRIPTS.actions.remove_from_wishlist_action,
+                      product_id: $product_id
+                  },
+                  success: function( response ) {
+
+                      if (response.success) {
+                        $(product_row).remove();
+                      }
+                  },
+                  error: function( response ) {
+                      console.log(response);
+                  }
+              });
+
+      });
 
     });
     
