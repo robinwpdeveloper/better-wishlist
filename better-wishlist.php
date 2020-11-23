@@ -29,7 +29,7 @@ if (!class_exists('Better_Wishlist')) {
 		{
 
 			$this->define();
-            $this->define_table();
+      $this->define_table();
 			$this->includes();
 
 			add_action('woocommerce_after_shop_loop_item', [$this, 'view_addto_htmlloop'], 9);
@@ -41,6 +41,7 @@ if (!class_exists('Better_Wishlist')) {
 			add_action('wp_login', ['Better_Wishlist_Helper', 'update_db_and_cookie_in_login'], 10, 2);
 			add_action('better_wishlist_delete_expired_wishlist_cron_hook', ['Better_Wishlist_Helper','delete_expired_wishlist']);
 			$this->scheduled_remove_wishlist();
+			$this->Better_Wishlist_Plugin_Core_Loaded();
 
 			$this->active_plugin();
 		}
@@ -110,7 +111,9 @@ if (!class_exists('Better_Wishlist')) {
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-form-handler.php';
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-user-wishlist.php';
 			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-item.php';
-			require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-shortcode.php';
+      require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-shortcode.php';
+      require_once BETTER_WISHLIST_PLUGIN_PATH . 'settings/Settings.php';
+      require_once BETTER_WISHLIST_PLUGIN_PATH . 'options/option.php';
 		}
 
 		/**
@@ -132,11 +135,23 @@ if (!class_exists('Better_Wishlist')) {
 		}
 
 		public function active_plugin(){
-            register_activation_hook( __FILE__, array( 'Better_Wishlist_Install','install' ) );
-        }
+        register_activation_hook( __FILE__, array( 'Better_Wishlist_Install','install' ) );
 
-	}
+        
+        register_activation_hook( __FILE__, array( $this, 'Better_Wishlist_Plugin_Core_Activated' ) );
+    }
 
+    public function Better_Wishlist_Plugin_Core_Loaded()
+    {
+        return new Settings('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1, true);
+    }
+
+    public function Better_Wishlist_Plugin_Core_Activated()
+    {
+        do_action('wprs_save_default_settings');
+    }
+
+  }
 
 }
 

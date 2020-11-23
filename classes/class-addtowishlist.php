@@ -62,7 +62,7 @@ class Addtowishlist
 
         
         $product_type = $current_product->get_type();
-        $already_in_wishlist = __('This product is only in wishlist', 'better-wishlist');
+        $already_in_wishlist = __('Added to wishlist', 'better-wishlist');
         $product_added = __('Product Added', 'better-wishlist');
 
         $label = apply_filters('better_wishlist_button_text', $label_text);
@@ -102,7 +102,8 @@ class Addtowishlist
             'disable_wishlist'  => false,
             'show_count'    => false,
             'ajax_loading'  => true,
-            'template_part' => $template_part
+            'template_part' => $template_part,
+            'product_title' => $current_product->get_title()
         ];
 
         $atts = apply_filters('better_wishlist_add_to_wishlist_params', $atts);

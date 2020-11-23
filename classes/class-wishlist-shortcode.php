@@ -56,7 +56,7 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
             $items = Better_Wishlist_Item()->get_items( User_Wishlist()->get_current_user_wishlist() );
 
             if ( empty( $items ) ) {
-                return _e( 'No Records Found', 'better-wishlist' );
+                return '<span class="no-record-message">'._e( 'No Records Found', 'better-wishlist' ).'</span>';
             }
 
             ob_start();
@@ -91,7 +91,7 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
                 if ( $product ) {
                     array_push( $product_ids, $product->get_id() );
                     ?>
-                  <tr id="wishlist-row-<?php echo $product->get_id(); ?>" data-row-id="<?php echo $product->get_id(); ?>">
+                  <tr id="wishlist-row-<?php echo $product->get_id(); ?>" data-row-id="<?php echo $product->get_id(); ?>" class="wishlist-row">
                       <td class="product-remove">
                           <div>
                               <a href="#" data-product_id="<?php echo $product->get_id(); ?>" class="remove remove_from_wishlist" title="<?php _e( 'Remove this product', 'better-wishlist' );?>">×</a>
