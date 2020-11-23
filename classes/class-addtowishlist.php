@@ -57,13 +57,13 @@ class Addtowishlist
         $wishlist_url = Better_Wishlist_Helper::get_wishlist_page_id();
 
         // labels & icons settings.
-        $label_text = __('Add to Wishlist', 'better-wishlist');
-        $browse_wishlist_text = __('Browse Wishlist', 'better-wishlist');
+        $label_text = Better_Wishlist_Helper::get_settings('add_to_wishlist_text');
+        $browse_wishlist_text = Better_Wishlist_Helper::get_settings('browse_wishlist');
 
         
         $product_type = $current_product->get_type();
-        $already_in_wishlist = __('Added to wishlist', 'better-wishlist');
-        $product_added = __('Product Added', 'better-wishlist');
+        $already_in_wishlist = Better_Wishlist_Helper::get_settings('already_in_wishlist');
+        $product_added = Better_Wishlist_Helper::get_settings('added_to_wishlist_text');
 
         $label = apply_filters('better_wishlist_button_text', $label_text);
         $classes = apply_filters('better_wishlist_button_classes', ['add_to_wishlist', 'wishlist_button']);
@@ -115,7 +115,7 @@ class Addtowishlist
     public function button($atts)
     {
         $content = apply_filters('better_wishlist_button_before', '');
-        $button_text = apply_filters('better_wishlist_addtowishlist_text_loop', __('Add to Wishlist', 'better-wishlist'));
+        $button_text = apply_filters('better_wishlist_addtowishlist_text_loop',Better_Wishlist_Helper::get_settings('add_to_wishlist_text'));
         $text = $button_text;
 
         if (empty($text)) {

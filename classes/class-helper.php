@@ -62,6 +62,15 @@ class Better_Wishlist_Helper {
         return apply_filters('better_wishlist_page_id', $wishlist_page_id);
     }
 
+    public static function get_settings($key)
+    {
+        global $better_wishlist_settings;
+        if (isset($better_wishlist_settings->{$key})) {
+            return $better_wishlist_settings->{$key};
+        }
+        return;
+    }
+
     /**
      * Returns true if it finds that you're printing a single product
      * Should return false in any loop (including the ones inside single product page)

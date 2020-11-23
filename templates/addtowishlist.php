@@ -28,11 +28,3 @@ global $product;
 		?>
 	</div>
 </div>
-
-<div class="added-to-wishlist-dialog-box">
-    <div>
-        <h2><?php echo $atts['product_title']; ?></h2>
-        <div class="dialogBoxCloseButton">&times;</div>
-        <p>Add any HTML content<br />inside the popup box!</p>
-    </div>
-</div>

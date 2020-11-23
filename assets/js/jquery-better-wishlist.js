@@ -1,9 +1,24 @@
 (function($) {
 
   function show_modal() {
-    var dialogbox = $('body').find('#added-to-wishlist-dialog-box');
-    dialogbox.css('visibility', 'show');
+    var dialogbox = $('body').find('.added-to-wishlist-dialog-box');
+    
+    dialogbox.css('visibility', 'visible');
+    dialogbox.css('opacity', '1');
   }
+
+  $(window).load(function () {
+    var dialogbox = $('body').find('.added-to-wishlist-dialog-box');
+    $(dialogbox).click(function(){
+        $(dialogbox).css('visibility', 'hidden');
+        $(dialogbox).css('opacity', '0');
+    });
+    $('.popupCloseButton').click(function(){
+      $(dialogbox).css('visibility', 'hidden');
+      $(dialogbox).css('opacity', '0');
+    });
+});
+
 
   $(document).ready(function() {
 

@@ -16,22 +16,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="tinv-table">
 		<div class="tinv-cell">
 			<div class="tinv-modal-inner">
-				<i class="<?php echo esc_attr( $icon ); ?>"></i>
-				<div class="tinv-txt"><?php echo $msg; // WPCS: xss ok. ?></div>
+				<i class="<?php //echo esc_attr( $icon ); ?>"></i>
+				<div class="tinv-txt"><?php //echo $msg; // WPCS: xss ok. ?></div>
 				<div class="tinvwl-buttons-group tinv-wishlist-clear">
-					<?php if ( isset( $wishlist_url ) ) : ?>
+					<?php //if ( isset( $wishlist_url ) ) : ?>
 						<button class="button tinvwl_button_view tinvwl-btn-onclick"
 								data-url="<?php echo esc_url( $wishlist_url ); ?>" type="button"><i
-									class="ftinvwl ftinvwl-heart-o"></i><?php echo wp_kses_post( apply_filters( 'tinvwl_view_wishlist_text', tinv_get_option( 'general', 'text_browse' ) ) ); ?>
+									class="ftinvwl ftinvwl-heart-o"></i><?php //echo wp_kses_post( apply_filters( 'tinvwl_view_wishlist_text', tinv_get_option( 'general', 'text_browse' ) ) ); ?>
 						</button>
-					<?php endif; ?>
-					<?php if ( isset( $dialog_custom_url ) && isset( $dialog_custom_html ) ) : ?>
+					<?php //endif; ?>
+					<?php //if ( isset( $dialog_custom_url ) && isset( $dialog_custom_html ) ) : ?>
 						<button class="button tinvwl_button_view tinvwl-btn-onclick"
-								data-url="<?php echo esc_url( $dialog_custom_url ); ?>"
-								type="button"><?php echo $dialog_custom_html; // WPCS: xss ok. ?></button>
-					<?php endif; ?>
+								data-url="<?php //echo esc_url( $dialog_custom_url ); ?>"
+								type="button"><?php //echo $dialog_custom_html; // WPCS: xss ok. ?></button>
+					<?php //endif; ?>
 					<button class="button tinvwl_button_close" type="button"><i
-								class="ftinvwl ftinvwl-times"></i><?php esc_html_e( 'Close', 'ti-woocommerce-wishlist' ); ?>
+								class="ftinvwl ftinvwl-times"></i><?php //esc_html_e( 'Close', 'ti-woocommerce-wishlist' ); ?>
 					</button>
 				</div>
 				<div class="tinv-wishlist-clear"></div>
@@ -41,9 +41,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div> -->
 
 
-<div class="added-to-wishlist-dialog-box">
+<!-- <div class="added-to-wishlist-dialog-box">
     <div>
         <div class="dialogBoxCloseButton">&times;</div>
         <p>Add any HTML content<br />inside the popup box!</p>
     </div>
-</div>
+</div> -->

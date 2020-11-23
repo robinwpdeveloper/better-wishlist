@@ -58,7 +58,14 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 
 			wp_enqueue_script('jquery-wishlist-main');
 
-			wp_enqueue_style('wishlist-main-style');
+      wp_enqueue_style('wishlist-main-style');
+      if( is_shop() || is_product() ){
+
+        add_action( 'wp_body_open', array( $this, 'better_wishlist_success_modal' ) );
+    
+      }
+    
+      
 		}
 
 		/**
@@ -103,7 +110,20 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 		public function better_wishlist_menu_content()
 		{
 			echo do_shortcode('[better_wishlist_shortcode]');
-		}
+    }
+    
+    public function better_wishlist_success_modal()
+    {
+      ?>
+      <div class="added-to-wishlist-dialog-box">
+          <span class="helper"></span>
+          <div>
+              <div class="popupCloseButton">&times;</div>
+              <p><?php echo $atts['product_title']; ?><br/> Added to Wishlist!</p>
+          </div>
+      </div>
+      <?php
+    }
 
 	}
 }

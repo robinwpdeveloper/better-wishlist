@@ -43,7 +43,9 @@ if (!class_exists('Better_Wishlist')) {
 			$this->scheduled_remove_wishlist();
 			$this->Better_Wishlist_Plugin_Core_Loaded();
 
-			$this->active_plugin();
+      $this->active_plugin();
+      $this->setGlobalVariable();
+
 		}
 
 		public function define_table(){
@@ -141,6 +143,10 @@ if (!class_exists('Better_Wishlist')) {
         register_activation_hook( __FILE__, array( $this, 'Better_Wishlist_Plugin_Core_Activated' ) );
     }
 
+    /**
+		 * Set Wishlist options page
+		 */
+
     public function Better_Wishlist_Plugin_Core_Loaded()
     {
         return new Settings('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1, true);
@@ -150,6 +156,17 @@ if (!class_exists('Better_Wishlist')) {
     {
         do_action('wprs_save_default_settings');
     }
+
+    /**
+		 * Set Wishlist settings in global variable
+		 */
+
+    public function setGlobalVariable()
+    {
+      $GLOBALS['better_wishlist_settings'] = json_decode(get_option('better_wishlist_settings')); 
+    }
+
+ 
 
   }
 
@@ -167,4 +184,4 @@ function run_better_wishlist()
 
 run_better_wishlist();
 
-
+//var_dump(Better_Wishlist_Helper::get_settings('add_to_wishlist_text'));
