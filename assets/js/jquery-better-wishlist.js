@@ -14,9 +14,17 @@
     dialogbox.css('opacity', '1');
   }
 
+  function all_product_add_cart_modal() {
+    var allCart = $('body').find('.all_product_added-to-cart-dialog-box');
+    
+    allCart.css('visibility', 'visible');
+    allCart.css('opacity', '1');
+  }
+
   $(window).load(function () {
     var dialogbox = $('body').find('.added-to-wishlist-dialog-box')
-        addToCartBox = $('body').find('.added-to-cart-dialog-box');
+        addToCartBox = $('body').find('.added-to-cart-dialog-box')
+        allCart = $('body').find('.all_product_added-to-cart-dialog-box');
     $(dialogbox).click(function(){
         $(dialogbox).css('visibility', 'hidden');
         $(dialogbox).css('opacity', '0');
@@ -27,10 +35,16 @@
       $(addToCartBox).css('opacity', '0');
     });
 
+    $(allCart).click(function(){
+      $(allCart).css('visibility', 'hidden');
+      $(allCart).css('opacity', '0');
+    });
+
     $('.popupCloseButton').click(function(){
       $(dialogbox).css('visibility', 'hidden');
       $(dialogbox).css('opacity', '0');
     });
+
 });
 
 
@@ -83,7 +97,7 @@
                     product_ids: $product_ids
                 },
                 success: function( response ) {
-                    console.log(response);
+                  all_product_add_cart_modal();
                 },
                 error: function( response ) {
                     console.log(response);

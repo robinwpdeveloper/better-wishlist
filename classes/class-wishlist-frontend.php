@@ -67,7 +67,11 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 
       if ( is_page( 'better-wishlist' ) ) {
         add_action( 'wp_body_open', array( $this, 'better_wishlist_add_to_cart_modal' ) );
-      }    
+      }
+
+      if ( is_page( 'better-wishlist' ) ) {
+        add_action( 'wp_body_open', array( $this, 'all_product_add_to_cart_modal' ) );
+      }  
       
 		}
 
@@ -137,6 +141,19 @@ if (!class_exists('Better_Wishlist_Frontend')) {
           <div>
               <div class="popupCloseButton">&times;</div>
               <p>Added to Cart!</p>
+          </div>
+      </div>
+      <?php
+    }
+
+    public function all_product_add_to_cart_modal()
+    {
+      ?>
+      <div class="all_product_added-to-cart-dialog-box">
+          <span class="helper"></span>
+          <div>
+              <div class="popupCloseButton">&times;</div>
+              <p>All Products added to Cart!</p>
           </div>
       </div>
       <?php
