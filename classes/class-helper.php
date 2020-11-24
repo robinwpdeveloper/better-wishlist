@@ -62,6 +62,12 @@ class Better_Wishlist_Helper {
         return apply_filters('better_wishlist_page_id', $wishlist_page_id);
     }
 
+    /**
+     * Retrive wishlist settings from database
+     *
+     * @return string Wishlist settings value
+     */
+
     public static function get_settings($key)
     {
         global $better_wishlist_settings;
@@ -70,6 +76,7 @@ class Better_Wishlist_Helper {
         }
         return;
     }
+
 
     /**
      * Returns true if it finds that you're printing a single product

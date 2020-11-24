@@ -1,18 +1,32 @@
 (function($) {
 
-  function show_modal() {
+  function show_wishlist_modal() {
     var dialogbox = $('body').find('.added-to-wishlist-dialog-box');
     
     dialogbox.css('visibility', 'visible');
     dialogbox.css('opacity', '1');
   }
 
+  function show_add_cart_modal() {
+    var dialogbox = $('body').find('.added-to-cart-dialog-box');
+    
+    dialogbox.css('visibility', 'visible');
+    dialogbox.css('opacity', '1');
+  }
+
   $(window).load(function () {
-    var dialogbox = $('body').find('.added-to-wishlist-dialog-box');
+    var dialogbox = $('body').find('.added-to-wishlist-dialog-box')
+        addToCartBox = $('body').find('.added-to-cart-dialog-box');
     $(dialogbox).click(function(){
         $(dialogbox).css('visibility', 'hidden');
         $(dialogbox).css('opacity', '0');
     });
+
+    $(addToCartBox).click(function(){
+      $(addToCartBox).css('visibility', 'hidden');
+      $(addToCartBox).css('opacity', '0');
+    });
+
     $('.popupCloseButton').click(function(){
       $(dialogbox).css('visibility', 'hidden');
       $(dialogbox).css('opacity', '0');
@@ -46,7 +60,7 @@
                     if(response.success) {
                         $this.replaceWith(data.fragments.already_in_wishlist_text + ' <a href="'+data.fragments.wishlist_url+'">'+data.fragments.browse_wishlist_text+'</a>');
 
-                        show_modal();
+                        show_wishlist_modal();
                     }
                 },
                 error: function( response ) {
@@ -122,6 +136,32 @@
             });
 
     });
+
+    $(document).on('click', '.single-product-add-to-cart', function(e) {
+      e.preventDefault();
+
+      var $this = $(this),
+          $product_id = $this.data('product_id');
+
+          $.ajax({
+              type: 'POST',
+              url: BETTER_WISHLIST_SCRIPTS.ajax_url,
+              data: {
+                  action: BETTER_WISHLIST_SCRIPTS.actions.single_product_add_to_cart_action,
+                  product_id: $product_id
+              },
+              success: function( response ) {
+
+                  if (response.success) {
+                    show_add_cart_modal();
+                  }
+              },
+              error: function( response ) {
+                  console.log(response);
+              }
+          });
+
+     });
 
   });
     

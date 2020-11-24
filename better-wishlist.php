@@ -183,5 +183,3 @@ function run_better_wishlist()
 }
 
 run_better_wishlist();
-
-//var_dump(Better_Wishlist_Helper::get_settings('add_to_wishlist_text'));

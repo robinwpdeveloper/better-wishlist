@@ -90,7 +90,7 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
 
                 if ( $product ) {
                     array_push( $product_ids, $product->get_id() );
-                    ?>
+                ?>
                   <tr id="wishlist-row-<?php echo $product->get_id(); ?>" data-row-id="<?php echo $product->get_id(); ?>" class="wishlist-row">
                       <td class="product-remove">
                           <div>
@@ -107,7 +107,12 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
                           <span><?php echo $product->get_stock_status(); ?></span>
                       </td>
                       <td class="add-to-cart">
-                          <?php echo do_shortcode( '[add_to_cart style="border: 0px solid; margin: 0;" show_price="FALSE" class="better-wishlist-addto-cart-button" id="' . $product->get_id() . '"]' ); ?>
+                          <?php if( !Better_Wishlist_Helper::get_settings('cart_page_redirect')): ?>
+                            <a class="single-product-add-to-cart" data-product_id="<?php echo $product->get_id(); ?>" href="#">Add To Cart</a>
+                          <?php else: ?>
+                            <?php echo do_shortcode( '[add_to_cart style="border: 0px solid; margin: 0;" show_price="FALSE" class="better-wishlist-addto-cart-button" id="' . $product->get_id() . '"]' ); ?>
+                          <?php endif; ?>
+                          
                       </td>
                   </tr>
           <?php

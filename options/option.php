@@ -48,6 +48,20 @@ function wprs_build_settings_callback($config)
       'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
       'default' => false, // 1 = on | 0 = off
     ]);
+
+    $config::add_field('general_settings', [
+      'id' => 'remove_from_wishlist',
+      'type' => 'checkbox',
+      'title' => __('Remove From Wishlist', 'better-wishlist'),
+      'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
+      'default' => false, // 1 = on | 0 = off
+    ]);
+
+    $config::add_tab([
+      'title' => __('Pro Settings', 'better-wishlist'),
+      'id' => 'pro_settings',
+    ]);
+
     // $config::add_field('general_settings', [
     //     'id' => 'radiofield',
     //     'type' => 'radio',

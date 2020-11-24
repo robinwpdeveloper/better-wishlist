@@ -24,8 +24,9 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
             add_action('wp_ajax_remove_from_wishlist', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist']);
             add_action('wp_ajax_nopriv_remove_from_wishlist', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist']);
 
+            add_action('wp_ajax_single_product_to_cart', ['Better_Wishlist_Form_Handler', 'single_product_to_cart']);
+            add_action('wp_ajax_nopriv_single_product_to_cart', ['Better_Wishlist_Form_Handler', 'single_product_to_cart']);
 
-            // add_action('init', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist'], 20);
         }
 
         public static function process_form_handling()
@@ -91,6 +92,18 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
                 WC()->cart->add_to_cart( $id, 1);
             }
+            wp_send_json_success();
+        }
+
+        public static function single_product_to_cart()
+        {
+            if( empty($_REQUEST['product_id']) ) {
+                return false;
+            }
+            $product_id = apply_filters('better_wishlist_single_product_id_to_add_to_cart', $_REQUEST['product_id']);
+                
+            WC()->cart->add_to_cart( $product_id, 1);
+
             wp_send_json_success();
         }
     }

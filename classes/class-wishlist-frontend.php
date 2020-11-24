@@ -64,7 +64,10 @@ if (!class_exists('Better_Wishlist_Frontend')) {
         add_action( 'wp_body_open', array( $this, 'better_wishlist_success_modal' ) );
     
       }
-    
+
+      if ( is_page( 'better-wishlist' ) ) {
+        add_action( 'wp_body_open', array( $this, 'better_wishlist_add_to_cart_modal' ) );
+      }    
       
 		}
 
@@ -81,7 +84,8 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 				'actions' => [
 					'add_to_wishlist_action' => 'add_to_wishlist',
 					'remove_from_wishlist_action' => 'remove_from_wishlist',
-					'multiple_product_add_to_cart_action'	=> 'mutiple_product_to_cart'
+					'multiple_product_add_to_cart_action'	=> 'mutiple_product_to_cart',
+					'single_product_add_to_cart_action'	=> 'single_product_to_cart'
 				]
 			]);
 		}
@@ -119,7 +123,20 @@ if (!class_exists('Better_Wishlist_Frontend')) {
           <span class="helper"></span>
           <div>
               <div class="popupCloseButton">&times;</div>
-              <p><?php echo $atts['product_title']; ?><br/> Added to Wishlist!</p>
+              <p> Added to Wishlist! </p>
+          </div>
+      </div>
+      <?php
+    }
+
+    public function better_wishlist_add_to_cart_modal()
+    {
+      ?>
+      <div class="added-to-cart-dialog-box">
+          <span class="helper"></span>
+          <div>
+              <div class="popupCloseButton">&times;</div>
+              <p>Added to Cart!</p>
           </div>
       </div>
       <?php
