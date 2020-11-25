@@ -99,10 +99,24 @@
                     product_ids: $product_ids
                 },
                 success: function( response ) {
+
+                  if (response.success) {
+                    if ( response.data.removed ) {
+                      $('.wishlist_table').remove();
+                      $('.multiple-products-add-to-cart').remove();
+                    }
+
+                    if ( (response.data.redirects) != null ) {
+                      window.location.replace(response.data.redirects);
+                    } else {
+                      all_product_add_cart_modal();
+                    }
+                    
+                  }
                   //console.log(response);
-                  $('.wishlist_table').remove();
-                  $('.multiple-products-add-to-cart').remove();
-                  all_product_add_cart_modal();
+                  // $('.wishlist_table').remove();
+                  // $('.multiple-products-add-to-cart').remove();
+                  // all_product_add_cart_modal();
                 },
                 error: function( response ) {
                     console.log(response);
