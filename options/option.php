@@ -57,10 +57,10 @@ function wprs_build_settings_callback($config)
       'default' => false, // 1 = on | 0 = off
     ]);
 
-    $config::add_tab([
-      'title' => __('Pro Settings', 'better-wishlist'),
-      'id' => 'pro_settings',
-    ]);
+    // $config::add_tab([
+    //   'title' => __('Pro Settings', 'better-wishlist'),
+    //   'id' => 'pro_settings',
+    // ]);
 
     // $config::add_field('general_settings', [
     //     'id' => 'radiofield',
