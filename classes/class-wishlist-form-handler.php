@@ -49,10 +49,17 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
             
             $is_already_in_wishlist = Better_Wishlist_Item()->is_already_in_wishlist($product_id, $wishlist_id);
 
-            
+            $data = array(
+              'added_to_wishlist' => false,
+              'redirects' => null
+            );
+
+            if( Better_Wishlist_Helper::get_settings('wishlist_page_redirect')){
+              $data['redirects'] = true;
+            }
             if(!$is_already_in_wishlist) {
-                $added_to_wishlist = Better_Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
-                wp_send_json_success($added_to_wishlist, 200);
+              $data['added_to_wishlist'] = Better_Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
+                wp_send_json_success($data, 200);
             }else {
                 wp_send_json_error(['message' => __( 'Already in wishlist', 'better-wishlist')]);
             }

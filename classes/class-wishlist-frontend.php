@@ -67,11 +67,9 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 
       if ( is_page( 'better-wishlist' ) ) {
         add_action( 'wp_body_open', array( $this, 'better_wishlist_add_to_cart_modal' ) );
-      }
-
-      if ( is_page( 'better-wishlist' ) ) {
         add_action( 'wp_body_open', array( $this, 'all_product_add_to_cart_modal' ) );
-      }  
+        add_action( 'wp_body_open', array( $this, 'product_remove_from_wishlist_modal' ) );
+      } 
       
 		}
 
@@ -155,6 +153,19 @@ if (!class_exists('Better_Wishlist_Frontend')) {
           <div>
               <div class="popupCloseButton">&times;</div>
               <p>All Products added to Cart!</p>
+          </div>
+      </div>
+      <?php
+    }
+
+    public function product_remove_from_wishlist_modal()
+    {
+      ?>
+      <div class="product_remove_from_wishlist_dialog_box">
+          <span class="helper"></span>
+          <div>
+              <div class="popupCloseButton">&times;</div>
+              <p>Product remove from wishlist!</p>
           </div>
       </div>
       <?php
