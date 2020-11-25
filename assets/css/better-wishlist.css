@@ -63,8 +63,8 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
   right: -20px;
   font-size: 25px;
   line-height: 30px;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   text-align: center;
 }
 .popupCloseButton:hover {
@@ -78,6 +78,13 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
   font-size: 20px;
   display: inline-block;
   font-weight: bold;
+}
+
+.added-to-wishlist-dialog-box p,
+.added-to-cart-dialog-box p,
+.all_product_added-to-cart-dialog-box p,
+.product_remove_from_wishlist_dialog_box p {
+   margin: 15px;
 }
 
 /* Popup box End */
