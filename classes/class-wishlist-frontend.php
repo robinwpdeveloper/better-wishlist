@@ -84,7 +84,8 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 		public function get_localize()
 		{
 			return apply_filters('better_wishlist_localize_script', [
-				'ajax_url' => admin_url('admin-ajax.php', 'relative'),
+        'ajax_url' => admin_url('admin-ajax.php', 'relative'),
+        'nonce'    => wp_create_nonce( 'better_wishlist_nonce' ),
 				'actions' => [
 					'add_to_wishlist_action' => 'add_to_wishlist',
 					'remove_from_wishlist_action' => 'remove_from_wishlist',

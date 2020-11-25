@@ -107,12 +107,7 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
                           <span><?php echo $product->get_stock_status(); ?></span>
                       </td>
                       <td class="add-to-cart">
-                          <?php if( !Better_Wishlist_Helper::get_settings('cart_page_redirect')): ?>
-                            <a class="single-product-add-to-cart" data-product_id="<?php echo $product->get_id(); ?>" href="#">Add To Cart</a>
-                          <?php else: ?>
-                            <?php echo do_shortcode( '[add_to_cart style="border: 0px solid; margin: 0;" show_price="FALSE" class="better-wishlist-addto-cart-button" id="' . $product->get_id() . '"]' ); ?>
-                          <?php endif; ?>
-                          
+                            <a class="single-product-add-to-cart better-wishlist-addto-cart-button button product_type_simple add_to_cart_button" data-product_id="<?php echo $product->get_id(); ?>" href="#">Add To Cart</a>
                       </td>
                   </tr>
           <?php

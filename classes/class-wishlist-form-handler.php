@@ -42,7 +42,7 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
         public static function add_to_wishlist()
         {
-
+            check_ajax_referer( 'better_wishlist_nonce' );
             $wishlist_id = User_Wishlist()->get_current_user_wishlist() ? User_Wishlist()->get_current_user_wishlist() : User_Wishlist()->create();
 
             $product_id = self::get_proudct_id($_REQUEST['fragments']);
@@ -76,35 +76,56 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
         public static function mutiple_product_to_cart()
         {
+            check_ajax_referer( 'better_wishlist_nonce' );
             if( empty($_REQUEST['product_ids']) ) {
                 return false;
             }
             $product_ids = apply_filters('better_wishlist_multiple_product_ids_to_add_to_cart', $_REQUEST['product_ids']);
             foreach($product_ids as $id) {
+
                 $product = wc_get_product($id);
-
-                // if($product->get_type() == 'variable') {
-                //     $children = $product->get_children();
-                //     if(!empty($children)) {
-                //         $id = current($children);
-                //     }
-                // }
-
                 WC()->cart->add_to_cart( $id, 1);
+
+                if( Better_Wishlist_Helper::get_settings('remove_from_wishlist')){
+                  $removed = Better_Wishlist_Item()->remove($id);
+                } else {
+                  $removed = false;
+                }
             }
-            wp_send_json_success();
+            if( Better_Wishlist_Helper::get_settings('cart_page_redirect')){
+                 wp_safe_redirect( wc_get_cart_url() );
+                 exit;
+            }
+            wp_send_json_success($removed);
         }
 
         public static function single_product_to_cart()
         {
+            check_ajax_referer( 'better_wishlist_nonce' );
             if( empty($_REQUEST['product_id']) ) {
                 return false;
             }
-            $product_id = apply_filters('better_wishlist_single_product_id_to_add_to_cart', $_REQUEST['product_id']);
-                
+          
+            $product_id = intval($_REQUEST['product_id']);
+
             WC()->cart->add_to_cart( $product_id, 1);
 
-            wp_send_json_success();
+            $data = array(
+              'removed' => false,
+              'redirects' => null
+            );
+            
+            if( Better_Wishlist_Helper::get_settings('remove_from_wishlist')){
+              Better_Wishlist_Item()->remove($product_id,false);
+              $data['removed'] = true;
+            }      
+
+            if( Better_Wishlist_Helper::get_settings('cart_page_redirect')){
+              $data['redirects'] = wc_get_cart_url();
+            }
+
+            wp_send_json_success($data);
+
         }
     }
 }

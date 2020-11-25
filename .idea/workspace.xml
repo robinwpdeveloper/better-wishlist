@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="55a98c8f-34c6-46ea-91ed-20f1c88bf8ab" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/assets/js/jquery-better-wishlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/jquery-better-wishlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/better-wishlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/better-wishlist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/class-wishlist-form-handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/class-wishlist-form-handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/class-wishlist-frontend.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/class-wishlist-frontend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/class-wishlist-shortcode.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/class-wishlist-shortcode.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/settings/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="composer.json" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/settings/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1klzA0Y77a50ZgqzwT0jv0zZFNw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="55a98c8f-34c6-46ea-91ed-20f1c88bf8ab" name="Default Changelist" comment="" />
+      <created>1606289819674</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606289819674</updated>
+      <workItem from="1606289823320" duration="536000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="517" y="324" width="375" height="154" key="#WordPress" timestamp="1606289881354">
+      <screen x="54" y="27" width="1312" height="741" />
+    </state>
+    <state x="517" y="324" width="375" height="154" key="#WordPress/54.27.1312.741@54.27.1312.741" timestamp="1606289881354" />
+    <state x="488" y="145" width="424" height="520" key="FileChooserDialogImpl" timestamp="1606289876957">
+      <screen x="54" y="27" width="1312" height="741" />
+    </state>
+    <state x="488" y="145" width="424" height="520" key="FileChooserDialogImpl/54.27.1312.741@54.27.1312.741" timestamp="1606289876957" />
+    <state x="199" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1606289981755">
+      <screen x="54" y="27" width="1312" height="741" />
+    </state>
+    <state x="199" y="31" width="1022" height="737" key="SettingsEditor/54.27.1312.741@54.27.1312.741" timestamp="1606289981755" />
+  </component>
+  <component name="WordPressConfiguration" enabled="true">
+    <wordpressPath>$PROJECT_DIR$/../../..</wordpressPath>
+  </component>
+</project>

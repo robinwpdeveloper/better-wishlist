@@ -166,7 +166,7 @@ if (!class_exists('Better_Wishlist')) {
       $GLOBALS['better_wishlist_settings'] = json_decode(get_option('better_wishlist_settings')); 
     }
 
- 
+    
 
   }
 

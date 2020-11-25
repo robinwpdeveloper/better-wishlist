@@ -56,6 +56,7 @@
             product_id = $this.attr( 'data-product-id' ),
             product_wrap = $('.add-to-wishlist-' + product_id),
             data = {
+                _ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
                 action: BETTER_WISHLIST_SCRIPTS.actions.add_to_wishlist_action,
                 context: 'frontend',
                 add_to_wishlist: product_id,
@@ -93,10 +94,14 @@
                 type: 'POST',
                 url: BETTER_WISHLIST_SCRIPTS.ajax_url,
                 data: {
+                    _ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
                     action: BETTER_WISHLIST_SCRIPTS.actions.multiple_product_add_to_cart_action,
                     product_ids: $product_ids
                 },
                 success: function( response ) {
+                  //console.log(response);
+                  $('.wishlist_table').remove();
+                  $('.multiple-products-add-to-cart').remove();
                   all_product_add_cart_modal();
                 },
                 error: function( response ) {
@@ -115,15 +120,11 @@
             product_row = "#wishlist-row-" + $product_id,
             wishlist_table = $('.wishlist_table');
 
-            // console.log($('.wishlist_table tr.wishlist-row').length);
-
-            // return false;
-
-
             $.ajax({
                 type: 'POST',
                 url: BETTER_WISHLIST_SCRIPTS.ajax_url,
                 data: {
+                    _ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
                     action: BETTER_WISHLIST_SCRIPTS.actions.remove_from_wishlist_action,
                     product_id: $product_id
                 },
@@ -147,7 +148,7 @@
                 error: function( response ) {
                     console.log(response);
                 }
-            });
+          });
 
     });
 
@@ -156,18 +157,36 @@
 
       var $this = $(this),
           $product_id = $this.data('product_id');
+          product_row = "#wishlist-row-" + $product_id,
+          wishlist_table = $('.wishlist_table');
 
           $.ajax({
               type: 'POST',
               url: BETTER_WISHLIST_SCRIPTS.ajax_url,
               data: {
+                  _ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
                   action: BETTER_WISHLIST_SCRIPTS.actions.single_product_add_to_cart_action,
                   product_id: $product_id
               },
               success: function( response ) {
 
+                console.log(response);
+
                   if (response.success) {
-                    show_add_cart_modal();
+                    if ( response.data.removed ) {
+                      $(product_row).remove();
+                    }
+                    if ( $('.wishlist_table tr.wishlist-row').length < 1 ) {
+                      $('.multiple-products-add-to-cart').remove();
+                      $('.wishlist_table').remove();
+                    }
+
+                    if ( (response.data.redirects) != null ) {
+                      window.location.replace(response.data.redirects);
+                    } else {
+                      show_add_cart_modal();
+                    }
+                    
                   }
               },
               error: function( response ) {
