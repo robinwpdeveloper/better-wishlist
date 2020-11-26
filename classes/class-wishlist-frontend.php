@@ -58,19 +58,7 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 
 			wp_enqueue_script('jquery-wishlist-main');
 
-      wp_enqueue_style('wishlist-main-style');
-      if( is_shop() || is_product() ){
-
-        add_action( 'wp_body_open', array( $this, 'better_wishlist_success_modal' ) );
-    
-      }
-
-      if ( is_page( 'better-wishlist' ) ) {
-        add_action( 'wp_body_open', array( $this, 'better_wishlist_add_to_cart_modal' ) );
-        add_action( 'wp_body_open', array( $this, 'all_product_add_to_cart_modal' ) );
-        add_action( 'wp_body_open', array( $this, 'product_remove_from_wishlist_modal' ) );
-      } 
-      
+      wp_enqueue_style('wishlist-main-style');      
 		}
 
 		/**
@@ -117,58 +105,6 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 		public function better_wishlist_menu_content()
 		{
 			echo do_shortcode('[better_wishlist_shortcode]');
-    }
-    
-    public function better_wishlist_success_modal()
-    {
-      ?>
-      <div class="added-to-wishlist-dialog-box">
-          <span class="helper"></span>
-          <div>
-              <div class="popupCloseButton">&times;</div>
-              <p> Added to Wishlist! </p>
-          </div>
-      </div>
-      <?php
-    }
-
-    public function better_wishlist_add_to_cart_modal()
-    {
-      ?>
-      <div class="added-to-cart-dialog-box">
-          <span class="helper"></span>
-          <div>
-              <div class="popupCloseButton">&times;</div>
-              <p>Added to Cart!</p>
-          </div>
-      </div>
-      <?php
-    }
-
-    public function all_product_add_to_cart_modal()
-    {
-      ?>
-      <div class="all_product_added-to-cart-dialog-box">
-          <span class="helper"></span>
-          <div>
-              <div class="popupCloseButton">&times;</div>
-              <p>All Products added to Cart!</p>
-          </div>
-      </div>
-      <?php
-    }
-
-    public function product_remove_from_wishlist_modal()
-    {
-      ?>
-      <div class="product_remove_from_wishlist_dialog_box">
-          <span class="helper"></span>
-          <div>
-              <div class="popupCloseButton">&times;</div>
-              <p>Product remove from wishlist!</p>
-          </div>
-      </div>
-      <?php
     }
 
 	}

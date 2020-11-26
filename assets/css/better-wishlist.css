@@ -10,10 +10,7 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
 
 /* Popup box BEGIN */
 
-.added-to-wishlist-dialog-box,
-.added-to-cart-dialog-box,
-.all_product_added-to-cart-dialog-box,
-.product_remove_from_wishlist_dialog_box {
+.wishlist-modal-dialog-box {
   cursor:pointer;
   display:none;
   height:100%;
@@ -22,22 +19,16 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
   top:0;
   width:100%;
   z-index:10000;
-  visibility: hidden;
-  opacity: 0;
+  /* visibility: hidden;
+  opacity: 0; */
   transition: 300ms;
 }
-.added-to-wishlist-dialog-box .helper,
-.added-to-cart-dialog-box .helper,
-.all_product_added-to-cart-dialog-box .helper,
-.product_remove_from_wishlist_dialog_box .helper {
+.wishlist-modal-dialog-box .helper {
   display:inline-block;
   height:100%;
   vertical-align:middle;
 }
-.added-to-wishlist-dialog-box > div,
-.added-to-cart-dialog-box > div,
-.all_product_added-to-cart-dialog-box > div,
-.product_remove_from_wishlist_dialog_box >div {
+.wishlist-modal-dialog-box > div {
   background-color: #fff;
   box-shadow: 10px 10px 60px #555;
   display: inline-block;
@@ -70,20 +61,14 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
 .popupCloseButton:hover {
   background-color: #ccc;
 }
-.added-to-wishlist-dialog-box,
-.added-to-cart-dialog-box,
-.all_product_added-to-cart-dialog-box,
-.product_remove_from_wishlist_dialog_box {
+.wishlist-modal-dialog-box{
   cursor: pointer;
   font-size: 20px;
   display: inline-block;
   font-weight: bold;
 }
 
-.added-to-wishlist-dialog-box p,
-.added-to-cart-dialog-box p,
-.all_product_added-to-cart-dialog-box p,
-.product_remove_from_wishlist_dialog_box p {
+.wishlist-modal-dialog-box p {
    margin: 15px;
 }
 
