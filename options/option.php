@@ -67,17 +67,6 @@ function wprs_build_settings_callback($config)
         'default' => false,
     ]);
 
-    // $config::add_field('general_settings', [
-    //   'id' => 'cart_page_redirect',
-    //   'type' => 'select',
-    //   'title' => __('Redirect to cart page', 'better-wishlist'),
-    //   'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
-    //   'default' => false, // 1 = on | 0 = off
-    //   'options' => [
-    //     true => 'Yes',
-    //     false => 'No',
-    //   ],
-    // ]);
 
     $config::add_field('general_settings', [
       'id' => 'cart_page_redirect',
