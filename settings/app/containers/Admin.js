@@ -3,7 +3,7 @@ import Setting from './Settings'
 const Admin = ({wpObject}) => {
   return (
     <div className="wrap">
-      <h1>React Setting</h1>
+      <h1>Better Wishlist 1.0.0</h1>
       <Setting wpObject={wpObject} />
     </div>
   );

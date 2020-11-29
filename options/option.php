@@ -34,27 +34,88 @@ function wprs_build_settings_callback($config)
       'title' => __('"Browse Wishlist" Text', 'better-wishlist'),
       'default' => 'Browse Wishlist',
     ]);
+    // $config::add_field('general_settings', [
+    //     'id' => 'wishlist_page_redirect',
+    //     'type' => 'checkbox',
+    //     'title' => __('Redirect to wishlist page', 'better-wishlist'),
+    //     'desc' => __('Select whether redirect after adding to wishlist', 'better-wishlist'),
+    //     'default' => false, // 1 = on | 0 = off
+    // ]);
+
+    // $config::add_field('general_settings', [
+    //   'id' => 'wishlist_page_redirect',
+    //   'type' => 'select',
+    //   'title' => __('Redirect to wishlist page', 'better-wishlist'),
+    //   'desc' => __('Select whether redirect after adding to wishlist', 'better-wishlist'),
+    //   'default' => false,
+    //   'options' => [
+    //       true => 'Yes',
+    //       false => 'No',
+    //   ],
+    // ]);
+
     $config::add_field('general_settings', [
         'id' => 'wishlist_page_redirect',
-        'type' => 'checkbox',
+        'type' => 'radio',
+        'title' => __('Radio', 'rwprs'),
         'title' => __('Redirect to wishlist page', 'better-wishlist'),
         'desc' => __('Select whether redirect after adding to wishlist', 'better-wishlist'),
-        'default' => false, // 1 = on | 0 = off
+        'options' => array(
+            true => 'Yes',
+            false => 'No',
+        ),
+        'default' => false,
     ]);
+
+    // $config::add_field('general_settings', [
+    //   'id' => 'cart_page_redirect',
+    //   'type' => 'select',
+    //   'title' => __('Redirect to cart page', 'better-wishlist'),
+    //   'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
+    //   'default' => false, // 1 = on | 0 = off
+    //   'options' => [
+    //     true => 'Yes',
+    //     false => 'No',
+    //   ],
+    // ]);
+
     $config::add_field('general_settings', [
       'id' => 'cart_page_redirect',
-      'type' => 'checkbox',
+      'type' => 'radio',
       'title' => __('Redirect to cart page', 'better-wishlist'),
       'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
-      'default' => false, // 1 = on | 0 = off
+      'options' => [
+        true => 'Yes',
+        false => 'No',
+      ],
+      'default' => false,
     ]);
+    // $config::add_field('general_settings', [
+    //   'id' => 'cart_page_redirect',
+    //   'type' => 'checkbox',
+    //   'title' => __('Redirect to cart page', 'better-wishlist'),
+    //   'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
+    //   'default' => false, // 1 = on | 0 = off
+    // ]);
+
+    // $config::add_field('general_settings', [
+    //   'id' => 'remove_from_wishlist',
+    //   'type' => 'checkbox',
+    //   'title' => __('Remove From Wishlist', 'better-wishlist'),
+    //   'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
+    //   'default' => false, // 1 = on | 0 = off
+    // ]);
 
     $config::add_field('general_settings', [
       'id' => 'remove_from_wishlist',
-      'type' => 'checkbox',
+      'type' => 'radio',
       'title' => __('Remove From Wishlist', 'better-wishlist'),
       'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
-      'default' => false, // 1 = on | 0 = off
+      'options' => [
+        true => 'Yes',
+        false => 'No',
+      ],
+      'default' => false,
     ]);
 
     // $config::add_tab([

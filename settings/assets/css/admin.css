@@ -86,3 +86,126 @@
 .wprs-admin-root .form-group .form-body .desc {
   display: block;
 }
+
+
+/* Custom Css */
+
+.wprs-admin-root .wrap {
+  margin: 10px 20px 0 5px;
+}
+
+
+.wprs-admin-root .wrap h1 {
+  padding: 10px 0 10px 0;
+}
+
+.react-tabs__tab-list:not(.wp-clearfix)::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.react-tabs__tab-list {
+  border-color: #eee;
+  margin: 0;
+  padding-top: 9px;
+  padding-bottom: 0;
+  line-height: inherit;
+}
+
+.react-tabs__tab-list li {
+	margin-left: 0;
+	margin-right: 7px;
+	padding: 10px 20px;
+	outline: none;
+	box-shadow: none;
+  border-color: #eee;
+  margin-bottom: 0;
+}
+
+.react-tabs__tab {
+	float: left;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	margin-left: .5em;
+	padding: 5px 10px;
+	font-size: 14px;
+	line-height: 1.71428571;
+	font-weight: 600;
+	color: #555;
+	text-decoration: none;
+  white-space: nowrap;
+  background: #e5e5e5;
+}
+
+.react-tabs__tab--selected {
+  background-color: #fafafa;
+}
+
+.react-tabs__tab--selected li:hover {
+	background-color: #fafafa;
+	border-color: #fafafa;
+}
+
+.react-tabs__tab--selected li:hover {
+	border-bottom: 1px solid #f1f1f1;
+	background: #f1f1f1;
+	color: #000;
+}
+
+
+
+.react-tabs__tab--selected {
+	margin-bottom: -1px;
+	color: #444;
+}
+
+.react-tabs__tab--selected, .react-tabs__tab:focus:active {
+	box-shadow: none;
+}
+
+.react-tabs__tab-panel {
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-color: #eee;
+	background-color: #fff;
+	display: inline-block;
+	width: 100%;
+  margin: 0;
+}
+
+.react-tabs__tab-panel > div {
+	padding: 15px 20px;
+	border-bottom: 1px dashed #eee;
+}
+
+.react-tabs__tab-panel .form-group {
+  margin: 0px;
+  padding: 5px;
+}
+
+.wrap button {
+	background: #007cba;
+	border-color: #007cba;
+	color: #fff;
+	text-decoration: none;
+  text-shadow: none;
+  display: inline-block;
+	font-size: 16px;
+	line-height: 2.15384615;
+	min-height: 30px;
+	margin-left: 20px;
+	padding: 0 15px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+
+.form-body .radio-item {
+	display: inline-block;
+	padding: 10px;
+}
