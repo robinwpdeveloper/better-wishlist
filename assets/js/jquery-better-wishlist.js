@@ -40,7 +40,7 @@
     } else {
       let template = `<div class="better-wishlist-popup-area">
                         <div>
-                          <div class="toast" id="clonemother">
+                          <div class="better-wishlist-popup">
                             <div class="toast-content">
                             <div class="before"></div>
                             <div class="icon">&#x2714</div>
@@ -87,7 +87,7 @@
                     console.log(response);
                     if(response.success) {
 
-                        $this.replaceWith(data.fragments.already_in_wishlist_text + ' <a href="'+data.fragments.wishlist_url+'">'+data.fragments.browse_wishlist_text+'</a>');
+                        $this.replaceWith(data.fragments.already_in_wishlist_text + ' <a class="button" href="'+data.fragments.wishlist_url+'">'+data.fragments.browse_wishlist_text+'</a>');
                         if (response.data.redirects) {
                           window.location.replace(data.fragments.wishlist_url);
                         } else {

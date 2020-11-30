@@ -179,7 +179,12 @@ if (!class_exists('Better_Wishlist')) {
  */
 function run_better_wishlist()
 {
-	$wishlist = new Better_Wishlist();
+  include_once(ABSPATH.'wp-admin/includes/plugin.php');
+
+  if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+    $wishlist = new Better_Wishlist();
+  } 
 }
 
+//error_log(print_r(wc_get_product(),true));
 run_better_wishlist();

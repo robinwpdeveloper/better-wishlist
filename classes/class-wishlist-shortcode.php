@@ -63,7 +63,7 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
 
             ?>
             <div class="better-wishlist-page-wrap">
-                <table class="shop_table cart wishlist_table wishlist_view traditional responsive   " data-pagination="no" data-per-page="5" data-page="1" data-id="3">
+                <table class="shop_table cart wishlist_table wishlist_view traditional responsive" data-pagination="no" data-per-page="5" data-page="1" data-id="3">
                     <thead>
                         <tr>
                             <th class="product-remove">
@@ -98,7 +98,7 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
                           </div>
                       </td>
                       <td class="product-thumbnail">
-                          <a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>"><img width="300" height="300" src="<?php echo esc_url( get_the_post_thumbnail_url( $product->get_id() ) ); ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" loading="lazy"></a>
+                          <a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>"><img class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" src="<?php echo esc_url( get_the_post_thumbnail_url( $product->get_id() ) ); ?>" alt="" loading="lazy" sizes="(max-width: 450px) 100vw, 450px" width="450" height="450"></a>
                       </td>
                       <td class="product-name">
                           <a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>"><?php echo $product->get_title(); ?></a>
@@ -118,7 +118,7 @@ if ( !class_exists( 'Better_Wishlist_Shortcode' ) ) {
                 </table>
 
                 <div class="multiple-products-add-to-cart">
-                    <a href="?bw-multiple-products-add-to-cart" data-product-ids="<?php echo !empty( $product_ids ) ? implode( ":", $product_ids ) : ''; ?>" class="bw-multiple-products-add-to-carts"><?php _e( 'Add to Cart All Products', 'better-wishlist' );?></a>
+                    <a href="?bw-multiple-products-add-to-cart" data-product-ids="<?php echo !empty( $product_ids ) ? implode( ":", $product_ids ) : ''; ?>" class="button bw-multiple-products-add-to-carts"><?php _e( 'Add to Cart All Products', 'better-wishlist' );?></a>
                 </div>
             </div>
         <?php
