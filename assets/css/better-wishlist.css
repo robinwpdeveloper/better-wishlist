@@ -10,7 +10,7 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
 
 /* Popup box BEGIN */
 
-.wishlist-modal-dialog-box {
+/* .wishlist-modal-dialog-box {
   cursor:pointer;
   display:none;
   height:100%;
@@ -21,14 +21,14 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
   z-index:10000;
   /* visibility: hidden;
   opacity: 0; */
-  transition: 300ms;
-}
-.wishlist-modal-dialog-box .helper {
+  /* transition: 300ms; */
+/* } */ */
+/* .wishlist-modal-dialog-box .helper {
   display:inline-block;
   height:100%;
   vertical-align:middle;
-}
-.wishlist-modal-dialog-box > div {
+} */
+/* .wishlist-modal-dialog-box > div {
   background-color: #fff;
   box-shadow: 10px 10px 60px #555;
   display: inline-block;
@@ -40,8 +40,8 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
   position: relative;
   border-radius: 8px;
   padding: 15px 5%;
-}
-.popupCloseButton {
+} */
+/* .popupCloseButton {
   background-color: #fff;
   border: 3px solid #999;
   border-radius: 50px;
@@ -57,8 +57,8 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
   width: 35px;
   height: 35px;
   text-align: center;
-}
-.popupCloseButton:hover {
+} */
+/* .popupCloseButton:hover {
   background-color: #ccc;
 }
 .wishlist-modal-dialog-box{
@@ -66,10 +66,138 @@ p.product.woocommerce.add_to_cart_inline.better-wishlist-addto-cart-button .add_
   font-size: 20px;
   display: inline-block;
   font-weight: bold;
-}
+} */
 
-.wishlist-modal-dialog-box p {
+/* .wishlist-modal-dialog-box p {
    margin: 15px;
-}
+} */
 
 /* Popup box End */
+
+
+/* New Popoup CSS */
+
+.toast {
+  display: flex;
+  justify-content: start;
+  width: 460px;
+  height: 80px;
+  background: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+  overflow: hidden;
+  animation: slide-in .5s ease-out forwards;
+
+}
+.toast-content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.before {
+  width: 5px;
+  height: 80px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #a2de96;
+}
+
+
+.icon {
+  margin-left: 40px;
+  width: 35px;
+  height: 35px;
+  background: #79d70f;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white
+}
+
+.text {
+  /* width: 400px;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  display:flex;
+  align-items:start; */
+  margin-left: 30px;
+  font-family: Tahoma,Arial,"Hiragino Sans GB","simsun",sans-serif;
+}
+
+.text > * {
+  margin: 0px !important;
+}
+
+p:first-child {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.message {
+  font-size:1em;
+  color: #878787;
+}
+
+/* .close {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  user-select: none;
+  transform: translate(-25px,-5px);
+  font-size: 2.5em;
+  color: #bfbfbf;
+  cursor:pointer;
+} */
+
+
+@keyframes toast {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0,-10px);
+    opacity: 0;
+  }
+}
+
+.better-wishlist-popup-area {
+  z-index:2;
+  display: flex;
+  box-shadow: 10px 10px 60px #555;
+  justify-content: flex-start;
+  flex-direction: column;
+  position: fixed;
+  top: 200px;
+  left: 340px;
+  background: #fff;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 400px;
+}
+
+button {
+  background: #f7f7f7;
+  width: 150px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+  transition: all .2s ease;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translate(0,-10px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+button:hover {
+  background: #ffd36b;
+}

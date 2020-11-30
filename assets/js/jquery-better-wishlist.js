@@ -13,38 +13,48 @@
     const noticeWrapper = document.querySelector('.woocommerce-notices-wrapper');
 
     if (data.added_to_wishlist) {
-      message = data.product_title + " added to Wishlist";
+      message = "Added to Wishlist";
+      product_title = data.product_title;
     } else if (data.added_to_cart){
-      message = data.product_title + " added to Cart";
+      message = "Added to Cart";
+      product_title = data.product_title;
     } else if ( data.wishlist_removed ){
-      message = data.product_title + " removed from Wishlist";
+      message = '"' +data.product_title + '" Removed from Wishlist';
     } else {
-      message = "All product added to Cart";
+      message = "Added to Cart";
+      product_title = "All Products";
     }
 
     if (data.wishlist_removed) {
       let template = `<div class="woocommerce-notices-wrapper">
                        <div class="woocommerce-message" role="alert">
                          ${ message }
-                         <a href="http://localhost/wishlist/cart/?undo_item=6364d3f0f495b6ab9dcf8d3b5c6e0b01&amp;_wpnonce=31e6fd78ee" class="restore-wishlist-item">Undo?</a>
                        </div>
                       </div>`;
+
+
       if( noticeWrapper ){
         noticeWrapper.remove();
       }
       wishListTable.insertAdjacentHTML("beforebegin", template);
     } else {
-      let template = `<div class="wishlist-modal-dialog-box">
-                      <span class="helper"></span>
-                      <div>
-                          <div class="popupCloseButton">&times;</div>
-                          <p>${ message }</p>
-                      </div>
-                    </div>`;
+      let template = `<div class="better-wishlist-popup-area">
+                        <div>
+                          <div class="toast" id="clonemother">
+                            <div class="toast-content">
+                            <div class="before"></div>
+                            <div class="icon">&#x2714</div>
+                            <div class="text">
+                              <p> ${product_title} </p>
+                              <p class="message">${ message }</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>`;
       document.body.insertAdjacentHTML("beforeend", template);
       setTimeout(() => {
-        document.querySelector(".wishlist-modal-dialog-box").remove();
-      }, 2000);
+        document.querySelector(".better-wishlist-popup-area").remove();
+      }, 1000);
     }
 
 
