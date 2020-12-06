@@ -14,6 +14,7 @@ class Settings
     protected $option_name;
     protected $api_version;
     protected $is_development;
+    
     /**
      * Setup instance attributes
      *

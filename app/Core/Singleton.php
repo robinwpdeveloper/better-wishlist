@@ -14,7 +14,7 @@ class Singleton
     public static function instance()
     {
         if (self::$instance === null) {
-            self::$instance = new Self;
+            self::$instance = new static();
         }
 
         return self::$instance;

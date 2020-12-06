@@ -20,11 +20,14 @@ if (!defined('ABSPATH')) {
     die;
 }
 
-// Require composer autoloader
+define('BETTER_WISHLIST_PLUGIN_FILE', __FILE__);
+define('BETTER_WISHLIST_PLUGIN_BASENAME', plugin_basename(__FILE__));
+define('BETTER_WISHLIST_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
+define('BETTER_WISHLIST_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
+define('BETTER_WISHLIST_PLUGIN_VERSION', '1.0.0');
+
+// Require composer autoloader.
 require plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
-// Running the plugin.
-\BetterWishlist\Core\Plugin::instance();
-
-// Seed necessary things on DB.
-register_activation_hook(__FILE__, array('Better_Wishlist_Install', 'install'));
+// Run the plugin.
+BetterWishlist\Core\Plugin::instance();

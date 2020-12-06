@@ -23,7 +23,7 @@ function wprs_build_settings_callback($config)
         'title' => __('"Product added to Wishlist" Text', 'better-wishlist'),
         'default' => 'Added to Wishlist',
     ]);
-    
+
     $config::add_field('general_settings', [
         'id' => 'already_in_wishlist',
         'type' => 'text',
@@ -32,10 +32,10 @@ function wprs_build_settings_callback($config)
     ]);
 
     $config::add_field('general_settings', [
-      'id' => 'browse_wishlist',
-      'type' => 'text',
-      'title' => __('"Browse Wishlist" Text', 'better-wishlist'),
-      'default' => 'Browse Wishlist',
+        'id' => 'browse_wishlist',
+        'type' => 'text',
+        'title' => __('"Browse Wishlist" Text', 'better-wishlist'),
+        'default' => 'Browse Wishlist',
     ]);
 
     $config::add_field('general_settings', [
@@ -52,27 +52,27 @@ function wprs_build_settings_callback($config)
     ]);
 
     $config::add_field('general_settings', [
-      'id' => 'cart_page_redirect',
-      'type' => 'radio',
-      'title' => __('Redirect to cart page', 'better-wishlist'),
-      'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
-      'options' => [
-        true => 'Yes',
-        false => 'No',
-      ],
-      'default' => false,
+        'id' => 'cart_page_redirect',
+        'type' => 'radio',
+        'title' => __('Redirect to cart page', 'better-wishlist'),
+        'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
+        'options' => [
+            true => 'Yes',
+            false => 'No',
+        ],
+        'default' => false,
     ]);
 
     $config::add_field('general_settings', [
-      'id' => 'remove_from_wishlist',
-      'type' => 'radio',
-      'title' => __('Remove From Wishlist', 'better-wishlist'),
-      'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
-      'options' => [
-        true => 'Yes',
-        false => 'No',
-      ],
-      'default' => false,
+        'id' => 'remove_from_wishlist',
+        'type' => 'radio',
+        'title' => __('Remove From Wishlist', 'better-wishlist'),
+        'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
+        'options' => [
+            true => 'Yes',
+            false => 'No',
+        ],
+        'default' => false,
     ]);
 
 }
