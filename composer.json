@@ -1,0 +1,15 @@
+{
+	"name": "gadgetlife/better-wishlist",
+	"authors": [
+		{
+			"name": "Sabuz",
+			"email": "naz.sabuz@gmail.com"
+		}
+	],
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"BetterWishlist\\": "app/"
+		}
+	}
+}
