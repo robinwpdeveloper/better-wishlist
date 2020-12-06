@@ -101,7 +101,7 @@ if (!class_exists('Better_Wishlist_Item')) {
             return $res;
         }
 
-        public function remove($product_id)
+        public function remove($product_id,$json=true)
         {
             
             if (empty($product_id)) {
@@ -111,6 +111,12 @@ if (!class_exists('Better_Wishlist_Item')) {
             global $wpdb;
 
             $res = $wpdb->delete($wpdb->better_wishlist_items, ['product_id' => sanitize_text_field($product_id)], ['%d']);
+            if(!$json) return $res;
+            if($res){
+              wp_send_json_success();
+            }
+            wp_send_json_error();
+            
         }
 
         public function is_already_in_wishlist($product_id, $wishlist_id = null)

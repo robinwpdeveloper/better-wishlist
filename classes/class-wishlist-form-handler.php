@@ -21,8 +21,12 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
             add_action('wp_ajax_mutiple_product_to_cart', ['Better_Wishlist_Form_Handler', 'mutiple_product_to_cart']);
             add_action('wp_ajax_nopriv_mutiple_product_to_cart', ['Better_Wishlist_Form_Handler', 'mutiple_product_to_cart']);
 
+            add_action('wp_ajax_remove_from_wishlist', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist']);
+            add_action('wp_ajax_nopriv_remove_from_wishlist', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist']);
 
-            add_action('init', ['Better_Wishlist_Form_Handler', 'remove_from_wishlist'], 20);
+            add_action('wp_ajax_single_product_to_cart', ['Better_Wishlist_Form_Handler', 'single_product_to_cart']);
+            add_action('wp_ajax_nopriv_single_product_to_cart', ['Better_Wishlist_Form_Handler', 'single_product_to_cart']);
+
         }
 
         public static function process_form_handling()
@@ -38,17 +42,27 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
         public static function add_to_wishlist()
         {
-
+            check_ajax_referer( 'better_wishlist_nonce' );
             $wishlist_id = User_Wishlist()->get_current_user_wishlist() ? User_Wishlist()->get_current_user_wishlist() : User_Wishlist()->create();
 
             $product_id = self::get_proudct_id($_REQUEST['fragments']);
+            $product_title =  get_the_title( $product_id );
             
             $is_already_in_wishlist = Better_Wishlist_Item()->is_already_in_wishlist($product_id, $wishlist_id);
 
-            
+            $data = array(
+              'product_title' => '',
+              'added_to_wishlist' => false,
+              'redirects' => null
+            );
+
+            if( Better_Wishlist_Helper::get_settings('wishlist_page_redirect')){
+              $data['redirects'] = true;
+            }
             if(!$is_already_in_wishlist) {
-                $added_to_wishlist = Better_Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
-                wp_send_json_success($added_to_wishlist, 200);
+              $data['added_to_wishlist'] = Better_Wishlist_Item()->add($_REQUEST['fragments'], $wishlist_id);
+              $data['product_title'] = get_the_title( $product_id );
+              wp_send_json_success($data, 200);
             }else {
                 wp_send_json_error(['message' => __( 'Already in wishlist', 'better-wishlist')]);
             }
@@ -63,32 +77,94 @@ if (!class_exists('Better_Wishlist_Form_Handler')) {
 
         public static function remove_from_wishlist()
         {
-            if (isset($_GET['remove_from_wishlist'])) {
-                $product_id = absint($_GET['remove_from_wishlist']);
+            check_ajax_referer( 'better_wishlist_nonce' );
 
-                Better_Wishlist_Item()->remove($product_id);
+            $data = array(
+              'product_title' => '',
+              'wishlist_removed' => false
+            );
+
+            if (!empty($_POST['product_id'])) {
+                $product_id = absint($_POST['product_id']);
+
+                $removed = Better_Wishlist_Item()->remove( $product_id, false );
+                if( $removed ){
+                  $data['wishlist_removed'] = $removed;
+                  $data['product_title'] = get_the_title( $product_id );
+                  wp_send_json_success($data);
+                } else {
+                  wp_send_json_error();
+                }
+                
             }
         }
 
         public static function mutiple_product_to_cart()
         {
+            check_ajax_referer( 'better_wishlist_nonce' );
             if( empty($_REQUEST['product_ids']) ) {
                 return false;
             }
             $product_ids = apply_filters('better_wishlist_multiple_product_ids_to_add_to_cart', $_REQUEST['product_ids']);
-            foreach($product_ids as $id) {
-                $product = wc_get_product($id);
 
-                // if($product->get_type() == 'variable') {
-                //     $children = $product->get_children();
-                //     if(!empty($children)) {
-                //         $id = current($children);
-                //     }
-                // }
+            $data = array(
+              'removed' => false,
+              'redirects' => null
+            );
 
-                WC()->cart->add_to_cart( $id, 1);
+            if( Better_Wishlist_Helper::get_settings('remove_from_wishlist')){
+              $data['removed'] = true;
             }
-            wp_send_json_success();
+
+            foreach($product_ids as $id) {
+
+                $product = wc_get_product($id);
+                WC()->cart->add_to_cart( $id, 1);
+
+                if( $data['removed'] ){
+                Better_Wishlist_Item()->remove($id,false);
+                }
+            }
+
+            if( Better_Wishlist_Helper::get_settings('cart_page_redirect')){
+              $data['redirects'] = wc_get_cart_url();
+            }
+            wp_send_json_success($data);
+        }
+
+        public static function single_product_to_cart()
+        {
+            check_ajax_referer( 'better_wishlist_nonce' );
+            if( empty($_REQUEST['product_id']) ) {
+                return false;
+            }
+          
+            $product_id = intval($_REQUEST['product_id']);
+
+            $data = array(
+              'product_title' => '',
+              'added_to_cart' => false,
+              'removed' => false,
+              'redirects' => null
+            );
+
+            $addedToCart = WC()->cart->add_to_cart( $product_id, 1);
+            if ($addedToCart) {
+              $data['added_to_cart'] = true;
+              $data['product_title'] = get_the_title( $product_id );
+            }
+            
+            if( Better_Wishlist_Helper::get_settings('remove_from_wishlist')){
+              Better_Wishlist_Item()->remove($product_id,false);
+              $data['removed'] = true;
+            }      
+
+            if( Better_Wishlist_Helper::get_settings('cart_page_redirect')){
+              $data['redirects'] = wc_get_cart_url();
+            }
+
+            wp_send_json_success($data);
+
         }
     }
 }
