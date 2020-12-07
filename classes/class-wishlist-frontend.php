@@ -34,7 +34,7 @@ if (!class_exists('Better_Wishlist_Frontend')) {
 
         public function __construct()
         {
-            add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
+            // add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
 
             // Add rewrite rules
             add_action('init', [$this, 'better_wishlist_page_endpoint']);
@@ -45,20 +45,20 @@ if (!class_exists('Better_Wishlist_Frontend')) {
             add_action('woocommerce_account_better-wishlist_endpoint', array($this, 'better_wishlist_menu_content'));
         }
 
-        public function register_scripts()
-        {
-            $localize_scripts = $this->get_localize();
+        // public function register_scripts()
+        // {
+        //     $localize_scripts = $this->get_localize();
 
-            wp_register_script('jquery-wishlist-main', BETTER_WISHLIST_PLUGIN_URL . 'assets/js/' . 'jquery-better-wishlist.js', ['jquery'], '1.0.0', true);
+        //     wp_register_script('jquery-wishlist-main', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/' . 'jquery-better-wishlist.js', ['jquery'], '1.0.0', true);
 
-            wp_register_style('wishlist-main-style', BETTER_WISHLIST_PLUGIN_URL . 'assets/css/' . 'better-wishlist.css', null, '1.0.0', 'all');
+        //     wp_register_style('wishlist-main-style', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/' . 'better-wishlist.css', null, '1.0.0', 'all');
 
-            wp_localize_script('jquery-wishlist-main', 'BETTER_WISHLIST_SCRIPTS', $localize_scripts);
+        //     wp_localize_script('jquery-wishlist-main', 'BETTER_WISHLIST_SCRIPTS', $localize_scripts);
 
-            wp_enqueue_script('jquery-wishlist-main');
+        //     wp_enqueue_script('jquery-wishlist-main');
 
-            wp_enqueue_style('wishlist-main-style');
-        }
+        //     wp_enqueue_style('wishlist-main-style');
+        // }
 
         /**
          * Return localize array
@@ -66,19 +66,19 @@ if (!class_exists('Better_Wishlist_Frontend')) {
          * @return array Array with variables to be localized inside js
          * @since 2.2.3
          */
-        public function get_localize()
-        {
-            return apply_filters('better_wishlist_localize_script', [
-                'ajax_url' => admin_url('admin-ajax.php', 'relative'),
-                'nonce' => wp_create_nonce('better_wishlist_nonce'),
-                'actions' => [
-                    'add_to_wishlist_action' => 'add_to_wishlist',
-                    'remove_from_wishlist_action' => 'remove_from_wishlist',
-                    'multiple_product_add_to_cart_action' => 'mutiple_product_to_cart',
-                    'single_product_add_to_cart_action' => 'single_product_to_cart',
-                ],
-            ]);
-        }
+        // public function get_localize()
+        // {
+        //     return apply_filters('better_wishlist_localize_script', [
+        //         'ajax_url' => admin_url('admin-ajax.php', 'relative'),
+        //         'nonce' => wp_create_nonce('better_wishlist_nonce'),
+        //         'actions' => [
+        //             'add_to_wishlist_action' => 'add_to_wishlist',
+        //             'remove_from_wishlist_action' => 'remove_from_wishlist',
+        //             'multiple_product_add_to_cart_action' => 'mutiple_product_to_cart',
+        //             'single_product_add_to_cart_action' => 'single_product_to_cart',
+        //         ],
+        //     ]);
+        // }
 
         public function better_wishlist_page_endpoint()
         {

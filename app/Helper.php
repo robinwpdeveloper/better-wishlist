@@ -1,6 +1,6 @@
 <?php
 
-namespace BetterWishlist\Core;
+namespace BetterWishlist;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {

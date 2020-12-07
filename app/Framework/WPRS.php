@@ -1,6 +1,6 @@
 <?php
 
-namespace BetterWishlist\Backend\Framework;
+namespace BetterWishlist\Framework;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -83,7 +83,7 @@ class WPRS
             return;
         }
 
-        wp_enqueue_style($this->slug . '-style', BETTER_WISHLIST_PLUGIN_URL . 'assets/css/admin.css', array());
+        wp_enqueue_style($this->slug . '-style', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/admin.css', array());
     }
 
     /**
@@ -97,7 +97,7 @@ class WPRS
             return;
         }
 
-        wp_enqueue_script($this->slug . '-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'assets/js/admin.js', array('jquery'));
+        wp_enqueue_script($this->slug . '-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/admin.js', array('jquery'));
         wp_localize_script($this->slug . '-admin-script', 'wpr_object', [
             'api_nonce' => wp_create_nonce('wp_rest'),
             'api_url' => rest_url($this->slug . '/v1/'),

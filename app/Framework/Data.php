@@ -1,6 +1,6 @@
 <?php
 
-namespace BetterWishlist\Backend\Framework;
+namespace BetterWishlist\Framework;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {

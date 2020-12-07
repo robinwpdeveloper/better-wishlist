@@ -1,6 +1,6 @@
 <?php
 
-namespace BetterWishlist\Core;
+namespace BetterWishlist;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -12,6 +12,8 @@ class Plugin extends Singleton
     public $seed;
     public $schedule;
     public $database;
+    public $loader;
+    public $twig;
 
     protected function __construct()
     {
@@ -19,6 +21,8 @@ class Plugin extends Singleton
         $this->seed = new Seed;
         $this->schedule = new Schedule;
         $this->database = new Database;
+        $this->loader = new \Twig\Loader\FilesystemLoader(BETTER_WISHLIST_PLUGIN_PATH . 'public/views');
+        $this->twig = new \Twig\Environment($this->loader);
 
         add_action('woocommerce_after_shop_loop_item', [$this, 'view_addto_htmlloop'], 9);
         add_action('woocommerce_single_product_summary', [$this, 'view_addto_htmlout'], 29);
@@ -98,7 +102,7 @@ class Plugin extends Singleton
             ]);
         });
 
-        new \BetterWishlist\Backend\Framework\WPRS('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1);
+        new \BetterWishlist\Framework\WPRS('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1);
 
         // $this->setGlobalVariable();
 
