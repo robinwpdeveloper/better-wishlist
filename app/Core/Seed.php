@@ -9,31 +9,42 @@ if (!defined('ABSPATH')) {
 
 class Seed
 {
+    public function __construct()
+    {
+        register_activation_hook(BETTER_WISHLIST_PLUGIN_FILE, [$this, 'run']);
+    }
+
     public function run()
     {
-        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-
+        // create wishlist tables
         $this->create_tables();
+
+        // create default page
         $this->create_page();
+
+        // save default settings
+        do_action('wprs_save_default_settings');
     }
 
     /**
      * Add database tables.
      *
      * @return void
-     * @access private
+     * @access public
      * @since  1.0.0
      */
-    private function create_tables()
+    public function create_tables()
     {
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
         global $wpdb;
 
-        $better_wishlist_items = $wpdb->prefix . 'better_wishlist_item';
-        $better_wishlist_lists = $wpdb->prefix . 'better_wishlist_item_lists';
+        $wpdb->better_wishlist_lists = $wpdb->prefix . 'better_wishlist_item_lists';
+        $wpdb->better_wishlist_items = $wpdb->prefix . 'better_wishlist_item';
         $charset_collate = $wpdb->get_charset_collate();
 
-        if ($wpdb->get_var("SHOW TABLES LIKE '$better_wishlist_lists'") != $better_wishlist_lists) {
-            dbDelta("CREATE TABLE {$better_wishlist_lists} (
+        if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->better_wishlist_lists'") != $wpdb->better_wishlist_lists) {
+            dbDelta("CREATE TABLE {$wpdb->better_wishlist_lists} (
                     ID BIGINT(20) NOT NULL AUTO_INCREMENT,
                     user_id BIGINT(20) NULL DEFAULT NULL,
                     session_id VARCHAR(255) DEFAULT NULL,
@@ -50,8 +61,8 @@ class Seed
                ) $charset_collate");
         }
 
-        if ($wpdb->get_var("SHOW TABLES LIKE '$better_wishlist_items'") != $better_wishlist_items) {
-            dbDelta("CREATE TABLE {$better_wishlist_items} (
+        if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->better_wishlist_items'") != $wpdb->better_wishlist_items) {
+            dbDelta("CREATE TABLE {$wpdb->better_wishlist_items} (
                     ID BIGINT(20) NOT NULL AUTO_INCREMENT,
                     product_id BIGINT(20) NOT NULL,
                     quantity INT(11) NOT NULL,
@@ -71,9 +82,11 @@ class Seed
     /**
      * Add "Wishlist" page in database.
      *
-     * @since 1.0.0
+     * @return void
+     * @access public
+     * @since  1.0.0
      */
-    private function create_page()
+    public function create_page()
     {
         $post = get_post(get_option('better_wishlist_page_id'));
 

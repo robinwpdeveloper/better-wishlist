@@ -10,16 +10,15 @@ if (!defined('ABSPATH')) {
 class Plugin extends Singleton
 {
     public $seed;
+    public $schedule;
+    public $database;
 
     protected function __construct()
     {
         // init modules
         $this->seed = new Seed;
-
-        // init hooks
-        register_activation_hook(BETTER_WISHLIST_PLUGIN_FILE, [$this->seed, 'run']);
-
-        // $this->includes();
+        $this->schedule = new Schedule;
+        $this->database = new Database;
 
         add_action('woocommerce_after_shop_loop_item', [$this, 'view_addto_htmlloop'], 9);
         add_action('woocommerce_single_product_summary', [$this, 'view_addto_htmlout'], 29);
@@ -27,24 +26,82 @@ class Plugin extends Singleton
 
         add_filter('body_class', [$this, 'add_body_class']);
 
-        add_action('wp_login', ['Better_Wishlist_Helper', 'update_db_and_cookie_in_login'], 10, 2);
-        add_action('better_wishlist_delete_expired_wishlist_cron_hook', ['Better_Wishlist_Helper', 'delete_expired_wishlist']);
-        $this->scheduled_remove_wishlist();
-        // $this->Better_Wishlist_Plugin_Core_Loaded();
+        add_action('wprs_build_settings', function ($config) {
+            $config::add_tab([
+                'title' => __('General Settings', 'better-wishlist'),
+                'id' => 'general_settings',
+            ]);
 
-        // $this->active_plugin();
+            $config::add_field('general_settings', [
+                'id' => 'add_to_wishlist_text',
+                'type' => 'text',
+                'title' => __('Add to wishlist button text', 'better-wishlist'),
+                'default' => 'Add to wishlist',
+            ]);
+
+            $config::add_field('general_settings', [
+                'id' => 'added_to_wishlist_text',
+                'type' => 'text',
+                'title' => __('"Product added to Wishlist" Text', 'better-wishlist'),
+                'default' => 'Added to Wishlist',
+            ]);
+
+            $config::add_field('general_settings', [
+                'id' => 'already_in_wishlist',
+                'type' => 'text',
+                'title' => __('"Product already in Wishlist" Text', 'better-wishlist'),
+                'default' => 'Already in Wishlist',
+            ]);
+
+            $config::add_field('general_settings', [
+                'id' => 'browse_wishlist',
+                'type' => 'text',
+                'title' => __('"Browse Wishlist" Text', 'better-wishlist'),
+                'default' => 'Browse Wishlist',
+            ]);
+
+            $config::add_field('general_settings', [
+                'id' => 'wishlist_page_redirect',
+                'type' => 'radio',
+                'title' => __('Radio', 'rwprs'),
+                'title' => __('Redirect to wishlist page', 'better-wishlist'),
+                'desc' => __('Select whether redirect after adding to wishlist', 'better-wishlist'),
+                'options' => array(
+                    true => 'Yes',
+                    false => 'No',
+                ),
+                'default' => false,
+            ]);
+
+            $config::add_field('general_settings', [
+                'id' => 'cart_page_redirect',
+                'type' => 'radio',
+                'title' => __('Redirect to cart page', 'better-wishlist'),
+                'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
+                'options' => [
+                    true => 'Yes',
+                    false => 'No',
+                ],
+                'default' => false,
+            ]);
+
+            $config::add_field('general_settings', [
+                'id' => 'remove_from_wishlist',
+                'type' => 'radio',
+                'title' => __('Remove From Wishlist', 'better-wishlist'),
+                'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
+                'options' => [
+                    true => 'Yes',
+                    false => 'No',
+                ],
+                'default' => false,
+            ]);
+        });
+
+        new \BetterWishlist\Backend\Framework\WPRS('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1);
+
         // $this->setGlobalVariable();
 
-    }
-
-    /**
-     * Check if there is a hook in the cron
-     */
-    public function scheduled_remove_wishlist()
-    {
-        if (!wp_next_scheduled('better_wishlist_delete_expired_wishlist_cron_hook') && !wp_installing()) {
-            wp_schedule_event(time(), 'twicedaily', 'better_wishlist_delete_expired_wishlist_cron_hook');
-        }
     }
 
     public function add_display_status_on_page($states, $post)
@@ -78,7 +135,6 @@ class Plugin extends Singleton
      */
     public function includes()
     {
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-install.php';
         // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-addtowishlist.php';
         // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-helper.php';
         // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-frontend.php';
@@ -86,8 +142,6 @@ class Plugin extends Singleton
         // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-user-wishlist.php';
         // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-item.php';
         // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-shortcode.php';
-        require_once BETTER_WISHLIST_PLUGIN_PATH . 'settings/Settings.php';
-        require_once BETTER_WISHLIST_PLUGIN_PATH . 'options/option.php';
     }
 
     /**
@@ -107,27 +161,6 @@ class Plugin extends Singleton
         $class = Addtowishlist::get_instance();
         $class->htmloutput_out();
     }
-
-    // public function active_plugin()
-    // {
-    //     register_activation_hook(__FILE__, array('Better_Wishlist_Install', 'install'));
-
-    //     register_activation_hook(__FILE__, array($this, 'Better_Wishlist_Plugin_Core_Activated'));
-    // }
-
-    /**
-     * Set Wishlist options page
-     */
-
-    // public function Better_Wishlist_Plugin_Core_Loaded()
-    // {
-    //     return new Settings('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1, true);
-    // }
-
-    // public function Better_Wishlist_Plugin_Core_Activated()
-    // {
-    //     do_action('wprs_save_default_settings');
-    // }
 
     /**
      * Set Wishlist settings in global variable
