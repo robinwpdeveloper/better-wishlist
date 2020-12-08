@@ -106,9 +106,6 @@ class Plugin extends Singleton
         });
 
         new \BetterWishlist\Framework\WPRS('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1);
-
-        // $this->setGlobalVariable();
-
     }
 
     public function add_display_status_on_page($states, $post)
@@ -136,22 +133,6 @@ class Plugin extends Singleton
     }
 
     /**
-     * Including all necessary files.
-     *
-     * @since 1.0.0
-     */
-    public function includes()
-    {
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-addtowishlist.php';
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-helper.php';
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-frontend.php';
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-form-handler.php';
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-user-wishlist.php';
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-item.php';
-        // require_once BETTER_WISHLIST_PLUGIN_PATH . 'classes/class-wishlist-shortcode.php';
-    }
-
-    /**
      * Show button Add to Wishlsit, in loop
      */
     public static function view_addto_htmlloop()
@@ -168,14 +149,4 @@ class Plugin extends Singleton
         $class = Addtowishlist::get_instance();
         $class->htmloutput_out();
     }
-
-    /**
-     * Set Wishlist settings in global variable
-     */
-
-    // public function setGlobalVariable()
-    // {
-    //     $GLOBALS['better_wishlist_settings'] = json_decode(get_option('better_wishlist_settings'));
-    // }
-
 }

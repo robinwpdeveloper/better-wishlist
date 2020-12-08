@@ -22,6 +22,9 @@ class Seed
         // create default page
         $this->create_page();
 
+        // set flush rewrite flag enabled
+		set_transient('better_wishlist_flush_rewrite_rules', true, 86400);
+
         // save default settings
         do_action('wprs_save_default_settings');
     }
@@ -96,7 +99,7 @@ class Seed
                 'post_type' => 'page',
                 'post_status' => 'publish',
                 'post_author' => get_current_user_id(),
-                'post_content' => '[better_wishlist_shortcode]',
+                'post_content' => '[better_wishlist]',
             ));
 
             update_option('better_wishlist_page_id', $post_id);
