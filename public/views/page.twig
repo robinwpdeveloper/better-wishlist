@@ -1,0 +1,74 @@
+{% if products %}
+  <div class="better-wishlist-page-wrap">
+    <table class="shop_table cart wishlist_table wishlist_view traditional responsive">
+      <thead>
+        <tr>
+          <th class="product-remove">
+            <span class="nobr"></span>
+          </th>
+          <th class="product-thumbnail"></th>
+          <th class="product-name">
+            <span class="nobr">Product name</span>
+          </th>
+          <th class="stock-status">
+            <span class="nobr">Stock Status</span>
+          </th>
+          <th class="add-to-cart"></th>
+        </tr>
+      </thead>
+      <tbody class="wishlist-items-wrapper">
+        {% for product in products %}
+          <tr id="wishlist-row-{{ product.id }}"
+            data-row-id="{{ product.id }}"
+            class="wishlist-row">
+            <td class="product-remove">
+              <div>
+                <a href="#"
+                  data-product_id="{{ product.id }}"
+                  class="remove remove_from_wishlist"
+                  title="Remove this product">
+                  ×
+                </a>
+              </div>
+            </td>
+            <td class="product-thumbnail">
+              <a href="{{ product.url }}">
+                <img class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
+                  src="{{ product.thumbnail_url }}"
+                  alt=""
+                  loading="lazy"
+                  sizes="(max-width: 450px) 100vw, 450px"
+                  width="450"
+                  height="450" />
+              </a>
+            </td>
+            <td class="product-name">
+              <a href="{{ product.url }}">{{ product.title }}</a>
+            </td>
+            <td class="stock-status">
+              <span>{{ product.stock_status }}</span>
+            </td>
+            <td class="add-to-cart">
+              <a class="single-product-add-to-cart better-wishlist-addto-cart-button button product_type_simple add_to_cart_button"
+                data-product_id="{{ product.id }}"
+                href="#">
+                Add To Cart
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="multiple-products-add-to-cart">
+      <a href="?bw-multiple-products-add-to-cart"
+        data-product-ids="{{ ids|join(':') }}"
+        class="button bw-multiple-products-add-to-carts">
+        Add to Cart All Products
+      </a>
+    </div>
+  </div>
+{% else %}
+  <div class="no-record-message">
+    No Records Found
+  </div>
+{% endif %}

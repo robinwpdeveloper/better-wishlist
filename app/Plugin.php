@@ -11,7 +11,7 @@ class Plugin extends Singleton
 {
     public $seed;
     public $schedule;
-    public $database;
+    public $model;
     public $loader;
     public $twig;
 
@@ -20,9 +20,12 @@ class Plugin extends Singleton
         // init modules
         $this->seed = new Seed;
         $this->schedule = new Schedule;
-        $this->database = new Database;
+        $this->model = new Model;
         $this->loader = new \Twig\Loader\FilesystemLoader(BETTER_WISHLIST_PLUGIN_PATH . 'public/views');
         $this->twig = new \Twig\Environment($this->loader);
+
+        // create instance of coworkers
+        new Template();
 
         add_action('woocommerce_after_shop_loop_item', [$this, 'view_addto_htmlloop'], 9);
         add_action('woocommerce_single_product_summary', [$this, 'view_addto_htmlout'], 29);

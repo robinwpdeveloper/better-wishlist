@@ -39,12 +39,12 @@ class Seed
 
         global $wpdb;
 
-        $wpdb->better_wishlist_lists = $wpdb->prefix . 'better_wishlist_item_lists';
-        $wpdb->better_wishlist_items = $wpdb->prefix . 'better_wishlist_item';
+        $better_wishlist_lists = $wpdb->prefix . 'better_wishlist_lists';
+        $better_wishlist_items = $wpdb->prefix . 'better_wishlist_items';
         $charset_collate = $wpdb->get_charset_collate();
 
-        if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->better_wishlist_lists'") != $wpdb->better_wishlist_lists) {
-            dbDelta("CREATE TABLE {$wpdb->better_wishlist_lists} (
+        if ($wpdb->get_var("SHOW TABLES LIKE '$better_wishlist_lists'") != $better_wishlist_lists) {
+            dbDelta("CREATE TABLE $better_wishlist_lists (
                     ID BIGINT(20) NOT NULL AUTO_INCREMENT,
                     user_id BIGINT(20) NULL DEFAULT NULL,
                     session_id VARCHAR(255) DEFAULT NULL,
@@ -61,8 +61,8 @@ class Seed
                ) $charset_collate");
         }
 
-        if ($wpdb->get_var("SHOW TABLES LIKE '$wpdb->better_wishlist_items'") != $wpdb->better_wishlist_items) {
-            dbDelta("CREATE TABLE {$wpdb->better_wishlist_items} (
+        if ($wpdb->get_var("SHOW TABLES LIKE '$better_wishlist_items'") != $better_wishlist_items) {
+            dbDelta("CREATE TABLE $better_wishlist_items (
                     ID BIGINT(20) NOT NULL AUTO_INCREMENT,
                     product_id BIGINT(20) NOT NULL,
                     quantity INT(11) NOT NULL,

@@ -12,44 +12,44 @@ class Better_Wishlist_Helper {
      * @param  array   $args           Array variable in template.
      * @param  string  $template_path  Customization path.
      */
-    public static function better_wishlist_locate_template ($path, $var = null) {
-        $woocommerce_base = WC()->template_path();
-        $template_woocommerce_path = $woocommerce_base.$path;
-        $template_path = '/'.$path;
-        $plugin_path = BETTER_WISHLIST_PLUGIN_PATH.'templates/'.$path;
+    // public static function better_wishlist_locate_template ($path, $var = null) {
+    //     $woocommerce_base = WC()->template_path();
+    //     $template_woocommerce_path = $woocommerce_base.$path;
+    //     $template_path = '/'.$path;
+    //     $plugin_path = BETTER_WISHLIST_PLUGIN_PATH.'templates/'.$path;
 
-        $located = locate_template(
-            array(
-                $template_woocommerce_path,
-                $template_path
-            )
-        );
+    //     $located = locate_template(
+    //         array(
+    //             $template_woocommerce_path,
+    //             $template_path
+    //         )
+    //     );
 
-        if (!$located && file_exists($plugin_path)) {
-            return apply_filters('better_wishlist_locate_template', $plugin_path, $path);
-        }
+    //     if (!$located && file_exists($plugin_path)) {
+    //         return apply_filters('better_wishlist_locate_template', $plugin_path, $path);
+    //     }
 
-        return apply_filters('better_wishlist_locate_template', $located, $path);
-    }
+    //     return apply_filters('better_wishlist_locate_template', $located, $path);
+    // }
 
-    public static function better_wishlist_get_template ($path, $var = null, $return = false) {
-        $located = self::better_wishlist_locate_template($path, $var);
+    // public static function better_wishlist_get_template ($path, $var = null, $return = false) {
+    //     $located = self::better_wishlist_locate_template($path, $var);
 
-        if ($var && is_array($var)) {
-            $atts = $var;
-            extract($var);
-        }
+    //     if ($var && is_array($var)) {
+    //         $atts = $var;
+    //         extract($var);
+    //     }
 
-        if ($return) {
-            ob_start();
-        }
+    //     if ($return) {
+    //         ob_start();
+    //     }
 
-        include($located);
+    //     include($located);
 
-        if ($return) {
-            return ob_get_clean();
-        }
-    }
+    //     if ($return) {
+    //         return ob_get_clean();
+    //     }
+    // }
 
     /**
      * Retrive wishlist page id, if any
