@@ -58,40 +58,24 @@
 
 	$(document).ready(function () {
 		$(document).on("click", ".add_to_wishlist_button", function (e) {
-			var $this = $(this),
-				product_id = $this.attr("data-product-id"),
-				product_wrap = $(".add-to-wishlist-" + product_id),
-				data = {
-					_ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
-					action: BETTER_WISHLIST_SCRIPTS.actions.add_to_wishlist_action,
-					context: "frontend",
-					add_to_wishlist: product_id,
-					product_type: $this.data("product-type"),
-					wishlist_id: $this.data("wishlist-id"),
-					fragments: product_wrap.data("fragment-options"),
-				};
-
 			e.preventDefault();
+
+			var $this = $(this);
 
 			$.ajax({
 				type: "POST",
-				url: BETTER_WISHLIST_SCRIPTS.ajax_url,
-				data: data,
+				url: BETTER_WISHLIST.ajax_url,
+				data: {
+					action: BETTER_WISHLIST.actions.add_to_wishlist,
+					security: BETTER_WISHLIST.nonce,
+					product_id: $this.data("product-id"),
+				},
 				success: function (response) {
 					console.log(response);
 					if (response.success) {
-						$this.replaceWith(
-							data.fragments.already_in_wishlist_text +
-								' <a class="button" href="' +
-								data.fragments.wishlist_url +
-								'">' +
-								data.fragments.browse_wishlist_text +
-								"</a>"
-						);
 						if (response.data.redirects) {
 							window.location.replace(data.fragments.wishlist_url);
 						} else {
-							//show_wishlist_modal();
 							wishlist_show_modal(response.data);
 						}
 					}
@@ -110,11 +94,10 @@
 
 			$.ajax({
 				type: "POST",
-				url: BETTER_WISHLIST_SCRIPTS.ajax_url,
+				url: BETTER_WISHLIST.ajax_url,
 				data: {
-					_ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
-					action:
-						BETTER_WISHLIST_SCRIPTS.actions.multiple_product_add_to_cart_action,
+					_ajax_nonce: BETTER_WISHLIST.nonce,
+					action: BETTER_WISHLIST.actions.multiple_product_add_to_cart,
 					product_ids: $product_ids,
 				},
 				success: function (response) {
@@ -151,10 +134,10 @@
 
 			$.ajax({
 				type: "POST",
-				url: BETTER_WISHLIST_SCRIPTS.ajax_url,
+				url: BETTER_WISHLIST.ajax_url,
 				data: {
-					_ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
-					action: BETTER_WISHLIST_SCRIPTS.actions.remove_from_wishlist_action,
+					_ajax_nonce: BETTER_WISHLIST.nonce,
+					action: BETTER_WISHLIST.actions.remove_from_wishlist,
 					product_id: $product_id,
 				},
 				success: function (response) {
@@ -183,11 +166,10 @@
 
 			$.ajax({
 				type: "POST",
-				url: BETTER_WISHLIST_SCRIPTS.ajax_url,
+				url: BETTER_WISHLIST.ajax_url,
 				data: {
-					_ajax_nonce: BETTER_WISHLIST_SCRIPTS.nonce,
-					action:
-						BETTER_WISHLIST_SCRIPTS.actions.single_product_add_to_cart_action,
+					_ajax_nonce: BETTER_WISHLIST.nonce,
+					action: BETTER_WISHLIST.actions.single_product_add_to_cart,
 					product_id: $product_id,
 				},
 				success: function (response) {

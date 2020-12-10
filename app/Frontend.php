@@ -7,13 +7,15 @@ if (!defined('ABSPATH')) {
     die;
 }
 
-class Template
+class Frontend
 {
     public function __construct()
     {
         add_action('init', [$this, 'init']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('woocommerce_account_better-wishlist_endpoint', array($this, 'menu_content'));
+        add_action('woocommerce_after_add_to_cart_button', [$this, 'single_add_to_wishlist_button'], 10);
+        add_action('woocommerce_loop_add_to_cart_link', [$this, 'archive_add_to_wishlist_button'], 10, 3);
 
         add_filter('woocommerce_account_menu_items', [$this, 'add_menu']);
 
@@ -37,10 +39,10 @@ class Template
             'ajax_url' => admin_url('admin-ajax.php', 'relative'),
             'nonce' => wp_create_nonce('better_wishlist_nonce'),
             'actions' => [
-                'add_to_wishlist_action' => 'add_to_wishlist',
-                'remove_from_wishlist_action' => 'remove_from_wishlist',
-                'multiple_product_add_to_cart_action' => 'mutiple_product_to_cart',
-                'single_product_add_to_cart_action' => 'single_product_to_cart',
+                'add_to_wishlist' => 'add_to_wishlist',
+                'remove_from_wishlist' => 'remove_from_wishlist',
+                'multiple_product_add_to_cart' => 'mutiple_product_to_cart',
+                'single_product_add_to_cart' => 'single_product_to_cart',
             ],
         ]);
 
@@ -49,7 +51,7 @@ class Template
 
         // js
         wp_enqueue_script('better-wishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/' . 'jquery-better-wishlist.js', ['jquery'], '1.0.0', true);
-        wp_localize_script('better-wishlist', 'BETTER_WISHLIST_SCRIPTS', $localize_scripts);
+        wp_localize_script('better-wishlist', 'BETTER_WISHLIST', $localize_scripts);
     }
 
     public function add_menu($items)
@@ -104,5 +106,17 @@ class Template
         if (!$product) {
             return;
         }
+
+        return Plugin::instance()->twig->render('button.twig', ['product_id' => $product->get_id()]);
+    }
+
+    public function single_add_to_wishlist_button()
+    {
+        echo $this->add_to_wishlist_button();
+    }
+
+    public function archive_add_to_wishlist_button($add_to_cart_html, $product, $args)
+    {
+        return $add_to_cart_html . $this->add_to_wishlist_button();
     }
 }

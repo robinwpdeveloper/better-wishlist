@@ -152,13 +152,34 @@ class Model
         return false;
     }
 
-    public function create_item($item, $wishlist_id)
+    public function item_in_list($product_id, $wishlist_id)
     {
         global $wpdb;
 
-        if (empty($item) || empty($wishlist_id)) {
+        if (empty($product_id)) {
             return false;
         }
+
+        if (empty($product_id)) {
+            return false;
+        }
+
+        $product_id = sanitize_text_field($product_id);
+        $wishlist_id = sanitize_text_field($wishlist_id);
+        $result = $wpdb->get_row("SELECT * FROM {$this->better_wishlist_items} WHERE wishlist_id = '{$wishlist_id}' and product_id = {$product_id}");
+
+        return !empty($result);
+    }
+
+    public function insert_item($product_id, $wishlist_id)
+    {
+        global $wpdb;
+
+        if (empty($product_id) || empty($wishlist_id)) {
+            return false;
+        }
+
+        error_log($wishlist_id);
 
         $columns = [
             'product_id' => '%d',
@@ -171,15 +192,14 @@ class Model
             'user_id' => '%d',
         ];
 
-        $product = wc_get_product($item['product_id']);
-        $product_price = $this->get_product_price($product);
+        $product = wc_get_product($product_id);
 
         $values = [
-            $item['product_id'],
+            $product_id,
             1,
             $wishlist_id,
             $product->get_stock_status(),
-            $product_price,
+            Plugin::instance()->helper->get_product_price($product),
             get_woocommerce_currency(),
             $product->is_on_sale(),
             get_current_user_id(),

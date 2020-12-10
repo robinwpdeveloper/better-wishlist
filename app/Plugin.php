@@ -11,27 +11,37 @@ class Plugin extends Singleton
 {
     public $seed;
     public $schedule;
+    public $helper;
     public $model;
     public $loader;
     public $twig;
+    public $frontend;
 
     protected function __construct()
     {
         // init modules
         $this->seed = new Seed;
         $this->schedule = new Schedule;
+        $this->helper = new Helper;
         $this->model = new Model;
         $this->loader = new \Twig\Loader\FilesystemLoader(BETTER_WISHLIST_PLUGIN_PATH . 'public/views');
         $this->twig = new \Twig\Environment($this->loader);
-
-        // create instance of coworkers
-        new Template();
-
-        add_action('woocommerce_after_shop_loop_item', [$this, 'view_addto_htmlloop'], 9);
-        add_action('woocommerce_single_product_summary', [$this, 'view_addto_htmlout'], 29);
-        add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);
+        $this->frontend = new Frontend();
 
         add_filter('body_class', [$this, 'add_body_class']);
+        add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);
+
+        add_action('wp_ajax_add_to_wishlist', [$this, 'add_to_wishlist']);
+        add_action('wp_ajax_nopriv_add_to_wishlist', [$this, 'add_to_wishlist']);
+
+        add_action('wp_ajax_mutiple_product_to_cart', [$this, 'mutiple_product_to_cart']);
+        add_action('wp_ajax_nopriv_mutiple_product_to_cart', [$this, 'mutiple_product_to_cart']);
+
+        add_action('wp_ajax_remove_from_wishlist', [$this, 'remove_from_wishlist']);
+        add_action('wp_ajax_nopriv_remove_from_wishlist', [$this, 'remove_from_wishlist']);
+
+        add_action('wp_ajax_single_product_to_cart', [$this, 'single_product_to_cart']);
+        add_action('wp_ajax_nopriv_single_product_to_cart', [$this, 'single_product_to_cart']);
 
         add_action('wprs_build_settings', function ($config) {
             $config::add_tab([
@@ -132,21 +142,130 @@ class Plugin extends Singleton
         return $classes;
     }
 
-    /**
-     * Show button Add to Wishlsit, in loop
-     */
-    public static function view_addto_htmlloop()
+    public function add_to_wishlist()
     {
-        $class = Addtowishlist::get_instance();
-        $class->htmloutput_loop();
+        check_ajax_referer('better_wishlist_nonce', 'security');
+
+        $wishlist_id = $this->model->get_current_user_list() ? $this->model->get_current_user_list() : $this->model->create_list();
+        $product_id = $_POST['product_id'];
+        $already_in_wishlist = $this->model->item_in_list($product_id, $wishlist_id);
+
+        $data = array(
+            'product_title' => '',
+            'added_to_wishlist' => false,
+            'redirects' => null,
+        );
+
+        // if (Better_Wishlist_Helper::get_settings('wishlist_page_redirect')) {
+        //     $data['redirects'] = true;
+        // }
+
+        if (!$already_in_wishlist) {
+            $data['product_title'] = get_the_title($product_id);
+            $data['added_to_wishlist'] = $this->model->insert_item($product_id, $wishlist_id);
+
+            wp_send_json_success($data, 200);
+        } else {
+            wp_send_json_error(['message' => __('Already in wishlist', 'better-wishlist')]);
+        }
+
+        die();
     }
 
-    /**
-     * Show button Add to Wishlsit, if product is not purchasable
-     */
-    public static function view_addto_htmlout()
+    public function get_proudct_id($fragments)
     {
-        $class = Addtowishlist::get_instance();
-        $class->htmloutput_out();
+        return isset($fragments['product_id']) ? $fragments['product_id'] : false;
+    }
+
+    public function remove_from_wishlist()
+    {
+        check_ajax_referer('better_wishlist_nonce');
+
+        $data = array(
+            'product_title' => '',
+            'wishlist_removed' => false,
+        );
+
+        if (!empty($_POST['product_id'])) {
+            $product_id = absint($_POST['product_id']);
+
+            $removed = Plugin::instance()->model->delete_item($product_id, false);
+            if ($removed) {
+                $data['wishlist_removed'] = $removed;
+                $data['product_title'] = get_the_title($product_id);
+                wp_send_json_success($data);
+            } else {
+                wp_send_json_error();
+            }
+
+        }
+    }
+
+    public function mutiple_product_to_cart()
+    {
+        check_ajax_referer('better_wishlist_nonce');
+        if (empty($_REQUEST['product_ids'])) {
+            return false;
+        }
+        $product_ids = apply_filters('better_wishlist_multiple_product_ids_to_add_to_cart', $_REQUEST['product_ids']);
+
+        $data = array(
+            'removed' => false,
+            'redirects' => null,
+        );
+
+        if (Better_Wishlist_Helper::get_settings('remove_from_wishlist')) {
+            $data['removed'] = true;
+        }
+
+        foreach ($product_ids as $id) {
+
+            $product = wc_get_product($id);
+            WC()->cart->add_to_cart($id, 1);
+
+            if ($data['removed']) {
+                Better_Wishlist_Item()->remove($id, false);
+            }
+        }
+
+        if (Better_Wishlist_Helper::get_settings('cart_page_redirect')) {
+            $data['redirects'] = wc_get_cart_url();
+        }
+        wp_send_json_success($data);
+    }
+
+    public function single_product_to_cart()
+    {
+        check_ajax_referer('better_wishlist_nonce');
+        if (empty($_REQUEST['product_id'])) {
+            return false;
+        }
+
+        $product_id = intval($_REQUEST['product_id']);
+
+        $data = array(
+            'product_title' => '',
+            'added_to_cart' => false,
+            'removed' => false,
+            'redirects' => null,
+        );
+
+        $addedToCart = WC()->cart->add_to_cart($product_id, 1);
+        if ($addedToCart) {
+            $data['added_to_cart'] = true;
+            $data['product_title'] = get_the_title($product_id);
+        }
+
+        if (Better_Wishlist_Helper::get_settings('remove_from_wishlist')) {
+            Better_Wishlist_Item()->remove($product_id, false);
+            $data['removed'] = true;
+        }
+
+        if (Better_Wishlist_Helper::get_settings('cart_page_redirect')) {
+            $data['redirects'] = wc_get_cart_url();
+        }
+
+        wp_send_json_success($data);
+
     }
 }
