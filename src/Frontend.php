@@ -44,13 +44,24 @@ class Frontend
                 'multiple_product_add_to_cart' => 'mutiple_product_to_cart',
                 'single_product_add_to_cart' => 'single_product_to_cart',
             ],
+            'settings' => [
+                'remove_from_wishlist' => false,
+                'redirect_to_cart_page' => false,
+                'cart_page_url' => wc_get_cart_url(),
+            ],
+            'strings' => [
+                'added_in_cart' => __('added in cart.', 'better-wishlist'),
+                'removed_from_cart' => __('removed from cart.', 'better-wishlist'),
+                'added_in_wishlist' => __('added in wishlist.', 'better-wishlist'),
+                'removed_from_wishlist' => __('removed from wishlist.', 'better-wishlist'),
+            ],
         ]);
 
         // css
         wp_enqueue_style('better-wishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/' . 'better-wishlist.css', null, '1.0.0', 'all');
 
         // js
-        wp_enqueue_script('better-wishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/' . 'jquery-better-wishlist.js', ['jquery'], '1.0.0', true);
+        wp_enqueue_script('better-wishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/' . 'better-wishlist.js', ['jquery'], '1.0.0', true);
         wp_localize_script('better-wishlist', 'BETTER_WISHLIST', $localize_scripts);
     }
 

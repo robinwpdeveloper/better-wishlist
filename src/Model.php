@@ -18,18 +18,25 @@ class Model
     {
         global $wpdb;
 
+        // init props
         $this->user_id = get_current_user_id();
         $this->session_id = $this->generate_session_id();
         $this->better_wishlist_lists = $wpdb->prefix . 'better_wishlist_lists';
         $this->better_wishlist_items = $wpdb->prefix . 'better_wishlist_items';
 
+        // action
         add_action('wp_login', [$this, 'update_db_and_cookie_on_login'], 10, 2);
     }
 
+    /**
+     * generate_session_id
+     *
+     * @return string
+     */
     public function generate_session_id()
     {
         if ($this->user_id) {
-            return false;
+            return;
         }
 
         if (isset($_COOKIE['better_wishlist_session_id']) && !empty($_COOKIE['better_wishlist_session_id'])) {
@@ -39,6 +46,13 @@ class Model
         return md5(rand());
     }
 
+    /**
+     * update_db_and_cookie_on_login
+     *
+     * @param  mixed $user_login
+     * @param  mixed $user
+     * @return void
+     */
     public function update_db_and_cookie_on_login($user_login, $user)
     {
         global $wpdb;
@@ -64,6 +78,11 @@ class Model
         }
     }
 
+    /**
+     * create_list
+     *
+     * @return mixed
+     */
     public function create_list()
     {
         global $wpdb;
@@ -100,24 +119,27 @@ class Model
         if (!is_user_logged_in()) {
             $columns['expiration'] = 'FROM_UNIXTIME( %d )';
             $timestamp = strtotime('+1 day', current_time('timestamp'));
-
             $values[] = $timestamp;
         }
 
         $query_columns = implode(', ', array_map('esc_sql', array_keys($columns)));
         $query_values = implode(', ', array_values($columns));
-
-        $query = "INSERT INTO {$this->better_wishlist_lists} ( {$query_columns} ) VALUES ( {$query_values} ) ";
-
+        $query = "INSERT INTO {$this->better_wishlist_lists} ({$query_columns}) VALUES ({$query_values})";
         $res = $wpdb->query($wpdb->prepare($query, $values));
 
         if ($res) {
-            return apply_filters('better_wishlist_successfully_created', intval($wpdb->insert_id));
+            return $wpdb->insert_id;
         }
 
         return false;
     }
 
+    /**
+     * read_list
+     *
+     * @param  mixed $wishlist_id
+     * @return array
+     */
     public function read_list($wishlist_id)
     {
         if (empty($wishlist_id)) {
@@ -125,14 +147,18 @@ class Model
         }
 
         global $wpdb;
+
         $wishlist_id = sanitize_text_field($wishlist_id);
         $query = "SELECT DISTINCT product_id,user_id,wishlist_id FROM {$this->better_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
 
-        $res = $wpdb->get_results($query, OBJECT);
-
-        return $res;
+        return $wpdb->get_results($query, OBJECT);
     }
 
+    /**
+     * get_current_user_list
+     *
+     * @return mixed
+     */
     public function get_current_user_list()
     {
         global $wpdb;
@@ -152,6 +178,13 @@ class Model
         return false;
     }
 
+    /**
+     * item_in_list
+     *
+     * @param  mixed $product_id
+     * @param  mixed $wishlist_id
+     * @return bool
+     */
     public function item_in_list($product_id, $wishlist_id)
     {
         global $wpdb;
@@ -171,6 +204,13 @@ class Model
         return !empty($result);
     }
 
+    /**
+     * insert_item
+     *
+     * @param  mixed $product_id
+     * @param  mixed $wishlist_id
+     * @return mixed
+     */
     public function insert_item($product_id, $wishlist_id)
     {
         global $wpdb;
@@ -178,8 +218,6 @@ class Model
         if (empty($product_id) || empty($wishlist_id)) {
             return false;
         }
-
-        error_log($wishlist_id);
 
         $columns = [
             'product_id' => '%d',
@@ -191,9 +229,7 @@ class Model
             'on_sale' => '%s',
             'user_id' => '%d',
         ];
-
         $product = wc_get_product($product_id);
-
         $values = [
             $product_id,
             1,
@@ -204,42 +240,35 @@ class Model
             $product->is_on_sale(),
             get_current_user_id(),
         ];
-
         $columns['dateadded'] = 'FROM_UNIXTIME( %d )';
         $values[] = current_time('timestamp');
-
         $query_columns = implode(', ', array_map('esc_sql', array_keys($columns)));
         $query_values = implode(', ', array_values($columns));
-
         $query = "INSERT INTO {$this->better_wishlist_items} ( {$query_columns} ) VALUES ( {$query_values} ) ";
-
         $res = $wpdb->query($wpdb->prepare($query, $values));
 
         if ($res) {
-            return apply_filters('better_wishlist_item_added_successfully', $wpdb->insert_id);
+            return $wpdb->insert_id;
         }
 
         return false;
     }
 
-    public function delete_item($product_id, $json = true)
+    /**
+     * delete_item
+     *
+     * @param  mixed $product_id
+     * @param  mixed $json
+     * @return bool
+     */
+    public function delete_item($product_id)
     {
-
         if (empty($product_id)) {
             return false;
         }
 
         global $wpdb;
 
-        $res = $wpdb->delete($this->better_wishlist_items, ['product_id' => sanitize_text_field($product_id)], ['%d']);
-        if (!$json) {
-            return $res;
-        }
-
-        if ($res) {
-            wp_send_json_success();
-        }
-        wp_send_json_error();
-
+        return $wpdb->delete($this->better_wishlist_items, ['product_id' => sanitize_text_field($product_id)], ['%d']);
     }
 }

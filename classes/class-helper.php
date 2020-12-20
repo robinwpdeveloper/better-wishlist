@@ -56,11 +56,11 @@ class Better_Wishlist_Helper {
      *
      * @return int Wishlist page id
      */
-    public static function get_wishlist_page_id () {
-        $wishlist_page_id = get_option('better_wishlist_page_id');
+    // public static function get_wishlist_page_id () {
+    //     $wishlist_page_id = get_option('better_wishlist_page_id');
 
-        return apply_filters('better_wishlist_page_id', $wishlist_page_id);
-    }
+    //     return apply_filters('better_wishlist_page_id', $wishlist_page_id);
+    // }
 
     /**
      * Retrive wishlist settings from database
@@ -85,8 +85,8 @@ class Better_Wishlist_Helper {
      * @return bool Whether you're currently on single product template
      * @since 3.0.0
      */
-    public static function wishlist_is_single () {
-        return apply_filters('better_wishlist_is_single', is_product() && !in_array(wc_get_loop_prop('name'),
-                array('related', 'up-sells')) && !wc_get_loop_prop('is_shortcode'));
-    }
+    // public static function wishlist_is_single () {
+    //     return apply_filters('better_wishlist_is_single', is_product() && !in_array(wc_get_loop_prop('name'),
+    //             array('related', 'up-sells')) && !wc_get_loop_prop('is_shortcode'));
+    // }
 }
