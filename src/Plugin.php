@@ -26,7 +26,7 @@ class Plugin extends Singleton
         $this->model = new Model;
         $this->loader = new \Twig\Loader\FilesystemLoader(BETTER_WISHLIST_PLUGIN_PATH . 'public/views');
         $this->twig = new \Twig\Environment($this->loader);
-        $this->frontend = new Frontend();
+        $this->frontend = new Frontend;
 
         add_filter('body_class', [$this, 'add_body_class']);
         add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);

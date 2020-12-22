@@ -1,20 +1,30 @@
 (function ($) {
 	// create notification
 	function createNotification(cssClass, response) {
+		var uid = Math.random().toString(36).substr(2, 9);
 		var message = response.product_title
 			? `<strong>${response.product_title}</strong> ${response.message}`
 			: response.message;
-		var template = `<div class="better-wishlist-notification ${cssClass}">
+		var template = `<div class="better-wishlist-notification notification-${uid} ${cssClass}">
 			<p class="message">${message}</p>
 		</div>`;
 
 		// insert
-		document.body.insertAdjacentHTML("beforeend", template);
+		if (document.querySelector(".better-wishlist-notification-wrap") === null) {
+			document.body.insertAdjacentHTML(
+				"beforeend",
+				`<div class="better-wishlist-notification-wrap"></div>`
+			);
+		}
+
+		document
+			.querySelector(".better-wishlist-notification-wrap")
+			.insertAdjacentHTML("beforeend", template);
 
 		// remove
 		setTimeout(() => {
-			document.querySelector(".better-wishlist-notification").remove();
-		}, 3000);
+			document.querySelector(".notification-" + uid).remove();
+		}, 3500);
 	}
 
 	// create notice

@@ -7,44 +7,51 @@
 	max-width: 95%;
 } */
 
-/* animation slide-bottom */
-@-webkit-keyframes slide-bottom {
+/* animation fadeIn */
+@-webkit-keyframes fadeIn {
 	0% {
-
 		opacity: 0;
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
 	}
 	100% {
 		opacity: 1;
-		-webkit-transform: translateY(25px);
-		transform: translateY(25px);
 	}
 }
-@keyframes slide-bottom {
+@keyframes fadeIn {
 	0% {
 		opacity: 0;
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
 	}
 	100% {
 		opacity: 1;
-		-webkit-transform: translateY(25px);
-		transform: translateY(25px);
+	}
+}
+@-webkit-keyframes fadeOut {
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes fadeOut {
+	100% {
+		opacity: 0;
 	}
 }
 
 /* notification */
-.better-wishlist-notification {
+.better-wishlist-notification-wrap {
 	position: fixed;
 	top: 0;
 	right: 50px;
-	z-index: 999999999;
+	z-index: 99999;
+}
+.better-wishlist-notification {
+	display: table;
+	float: right;
+	clear: both;
 	padding: 8px 20px;
+	margin: 5px 0;
 	border-radius: 3px;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	transition: ease opacity 500ms;
-	animation: slide-bottom 0.5s 100ms both;
+	transition: ease opacity 250ms;
+	animation: fadeIn 250ms 100ms both, fadeOut 250ms 3000ms both;
 }
 .better-wishlist-notification.success {
 	background-color: #00a65a;
