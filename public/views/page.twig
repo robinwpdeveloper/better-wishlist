@@ -59,16 +59,18 @@
         {% endfor %}
       </tbody>
     </table>
-    <div class="multiple-products-add-to-cart">
-      <a href="?bw-multiple-products-add-to-cart"
-        data-product-ids="{{ ids|join(':') }}"
-        class="button bw-multiple-products-add-to-carts">
-        Add to Cart All Products
+    <div class="add-to-cart-multiple">
+      <a href="?bw-add-to-cart-multiple"
+        data-products="{{ ids|join(',') }}"
+        class="button bw-add-to-cart-multiple">
+        Add All to Cart
       </a>
     </div>
   </div>
 {% else %}
-  <div class="no-record-message">
-    No Records Found
+  <div class="better-wishlist-page-wrap">
+    <div class="no-record-message">
+      No Records Found
+    </div>
   </div>
 {% endif %}

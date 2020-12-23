@@ -28,9 +28,9 @@
 	}
 
 	// create notice
-	function createNotice(cssClass, response) {
-		var wishlistTable = document.querySelector(".wishlist_table");
-		var noticeWrapper = document.querySelector(".woocommerce-notices-wrapper");
+	function createNotice(response) {
+		var pageWrap = document.querySelector(".better-wishlist-page-wrap");
+		var noticeWrap = document.querySelector(".woocommerce-notices-wrapper");
 		var message = response.product_title
 			? `<strong>${response.product_title}</strong> ${response.message}`
 			: response.message;
@@ -40,11 +40,11 @@
 			</div>
 		</div>`;
 
-		if (noticeWrapper) {
-			noticeWrapper.remove();
+		if (noticeWrap) {
+			noticeWrap.remove();
 		}
 
-		wishlistTable.insertAdjacentHTML("beforebegin", template);
+		pageWrap.insertAdjacentHTML("beforebegin", template);
 	}
 
 	$(document).ready(function () {
@@ -83,11 +83,8 @@
 		$(document).on("click", ".remove_from_wishlist", function (e) {
 			e.preventDefault();
 
-			// var $this = $(this),
-			// 	$product_id = $this.data("product_id"),
-			// 	product_row = "#wishlist-row-" + $product_id,
-			// 	wishlist_table = $(".wishlist_table");
 			var productID = $(this).data("product_id");
+			var pageWrap = $('.better-wishlist-page-wrap');
 			var table = $(".wishlist_table");
 			var productRow = $("#wishlist-row-" + productID, table);
 
@@ -101,14 +98,17 @@
 				},
 				success: function (response) {
 					if (response.success) {
+						createNotice(response.data);
+
 						productRow.remove();
 
-						createNotice("error", response.data);
-
 						if ($("tr.wishlist-row", table).length < 1) {
-							$(".multiple-products-add-to-cart", table).remove();
+							$(".add-to-cart-multiple").remove();
 							table.remove();
+							pageWrap.html('<div class="no-record-message">No Records Found</div>');
 						}
+					} else {
+						createNotice(response.data);
 					}
 				},
 				error: function (response) {
@@ -122,6 +122,7 @@
 			e.preventDefault();
 
 			var productID = $(this).data("product_id");
+			var pageWrap = $('.better-wishlist-page-wrap');
 			var table = $(".wishlist_table");
 			var productRow = $("#wishlist-row-" + productID, table);
 
@@ -129,7 +130,7 @@
 				type: "POST",
 				url: BETTER_WISHLIST.ajax_url,
 				data: {
-					action: BETTER_WISHLIST.actions.single_product_add_to_cart,
+					action: BETTER_WISHLIST.actions.add_to_cart_single,
 					security: BETTER_WISHLIST.nonce,
 					product_id: productID,
 				},
@@ -137,11 +138,12 @@
 					if (response.success) {
 						if (BETTER_WISHLIST.settings.remove_from_wishlist) {
 							productRow.remove();
-						}
 
-						if ($("tr.wishlist-row", table).length < 1) {
-							$(".multiple-products-add-to-cart", table).remove();
-							table.remove();
+							if ($("tr.wishlist-row", table).length < 1) {
+								$(".add-to-cart-multiple").remove();
+								table.remove();
+								pageWrap.html('<div class="no-record-message">No Records Found</div>');
+							}
 						}
 
 						if (BETTER_WISHLIST.settings.redirect_to_cart_page !== false) {
@@ -160,37 +162,34 @@
 		});
 
 		// add to cart - multiple
-		$(document).on("click", ".bw-multiple-products-add-to-carts", function (e) {
+		$(document).on("click", ".bw-add-to-cart-multiple", function (e) {
 			e.preventDefault();
 
-			var $product_ids = $(this).data("product-ids"),
-				$product_ids = $product_ids.split(":");
+			var products = $(this).data("products").split(",");
 
 			$.ajax({
 				type: "POST",
 				url: BETTER_WISHLIST.ajax_url,
 				data: {
-					_ajax_nonce: BETTER_WISHLIST.nonce,
-					action: BETTER_WISHLIST.actions.multiple_product_add_to_cart,
-					product_ids: $product_ids,
+					action: BETTER_WISHLIST.actions.add_to_cart_multiple,
+					security: BETTER_WISHLIST.nonce,
+					products: products,
 				},
 				success: function (response) {
 					if (response.success) {
-						if (response.data.removed) {
+						if (BETTER_WISHLIST.settings.remove_from_wishlist) {
 							$(".wishlist_table").remove();
-							$(".multiple-products-add-to-cart").remove();
+							$(".add-to-cart-multiple").remove();
 						}
 
-						if (response.data.redirects != null) {
-							window.location.replace(response.data.redirects);
+						if (BETTER_WISHLIST.settings.redirect_to_cart_page !== false) {
+							window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
 						} else {
-							wishlist_show_modal(response.data);
+							createNotification("success", response.data);
 						}
+					} else {
+						createNotification("error", response.data);
 					}
-					//console.log(response);
-					// $('.wishlist_table').remove();
-					// $('.multiple-products-add-to-cart').remove();
-					// all_product_add_cart_modal();
 				},
 				error: function (response) {
 					console.log(response);

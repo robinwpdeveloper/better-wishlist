@@ -41,8 +41,8 @@ class Frontend
             'actions' => [
                 'add_to_wishlist' => 'add_to_wishlist',
                 'remove_from_wishlist' => 'remove_from_wishlist',
-                'multiple_product_add_to_cart' => 'mutiple_product_to_cart',
-                'single_product_add_to_cart' => 'single_product_to_cart',
+                'add_to_cart_multiple' => 'add_to_cart_multiple',
+                'add_to_cart_single' => 'add_to_cart_single',
             ],
             'settings' => [
                 'remove_from_wishlist' => false,
