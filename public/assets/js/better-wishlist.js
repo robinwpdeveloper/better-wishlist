@@ -52,7 +52,7 @@
 		$(document).on("click", ".add_to_wishlist_button", function (e) {
 			e.preventDefault();
 
-			var $this = $(this);
+			var productID = $(this).data("product_id");
 
 			$.ajax({
 				type: "POST",
@@ -60,7 +60,7 @@
 				data: {
 					action: BETTER_WISHLIST.actions.add_to_wishlist,
 					security: BETTER_WISHLIST.nonce,
-					product_id: $this.data("product-id"),
+					product_id: productID,
 				},
 				success: function (response) {
 					if (response.success) {
@@ -84,7 +84,7 @@
 			e.preventDefault();
 
 			var productID = $(this).data("product_id");
-			var pageWrap = $('.better-wishlist-page-wrap');
+			var pageWrap = $(".better-wishlist-page-wrap");
 			var table = $(".wishlist_table");
 			var productRow = $("#wishlist-row-" + productID, table);
 
@@ -105,7 +105,9 @@
 						if ($("tr.wishlist-row", table).length < 1) {
 							$(".add-to-cart-multiple").remove();
 							table.remove();
-							pageWrap.html('<div class="no-record-message">No Records Found</div>');
+							pageWrap.html(
+								'<div class="no-record-message">No Records Found</div>'
+							);
 						}
 					} else {
 						createNotice(response.data);
@@ -122,7 +124,7 @@
 			e.preventDefault();
 
 			var productID = $(this).data("product_id");
-			var pageWrap = $('.better-wishlist-page-wrap');
+			var pageWrap = $(".better-wishlist-page-wrap");
 			var table = $(".wishlist_table");
 			var productRow = $("#wishlist-row-" + productID, table);
 
@@ -142,7 +144,9 @@
 							if ($("tr.wishlist-row", table).length < 1) {
 								$(".add-to-cart-multiple").remove();
 								table.remove();
-								pageWrap.html('<div class="no-record-message">No Records Found</div>');
+								pageWrap.html(
+									'<div class="no-record-message">No Records Found</div>'
+								);
 							}
 						}
 
@@ -165,7 +169,7 @@
 		$(document).on("click", ".bw-add-to-cart-multiple", function (e) {
 			e.preventDefault();
 
-			var products = $(this).data("products").split(",");
+			var products = $(this).data("products").toString().split(",");
 
 			$.ajax({
 				type: "POST",
