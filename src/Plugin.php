@@ -16,6 +16,7 @@ class Plugin extends Singleton
     public $loader;
     public $twig;
     public $frontend;
+    public $admin;
 
     protected function __construct()
     {
@@ -27,6 +28,10 @@ class Plugin extends Singleton
         $this->loader = new \Twig\Loader\FilesystemLoader(BETTER_WISHLIST_PLUGIN_PATH . 'public/views');
         $this->twig = new \Twig\Environment($this->loader);
         $this->frontend = new Frontend;
+
+        if (is_admin()) {
+            $this->admin = new Admin;
+        }
 
         add_filter('body_class', [$this, 'add_body_class']);
         add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);
@@ -43,79 +48,77 @@ class Plugin extends Singleton
         add_action('wp_ajax_add_to_cart_multiple', [$this, 'add_to_cart_multiple']);
         add_action('wp_ajax_nopriv_add_to_cart_multiple', [$this, 'add_to_cart_multiple']);
 
-        add_action('wprs_build_settings', function ($config) {
-            $config::add_tab([
-                'title' => __('General Settings', 'better-wishlist'),
-                'id' => 'general_settings',
-            ]);
+        // add_action('wprs_build_settings', function ($config) {
+        //     $config::add_tab([
+        //         'title' => __('General Settings', 'better-wishlist'),
+        //         'id' => 'general_settings',
+        //     ]);
 
-            $config::add_field('general_settings', [
-                'id' => 'add_to_wishlist_text',
-                'type' => 'text',
-                'title' => __('Add to wishlist button text', 'better-wishlist'),
-                'default' => 'Add to wishlist',
-            ]);
+        //     $config::add_field('general_settings', [
+        //         'id' => 'add_to_wishlist_text',
+        //         'type' => 'text',
+        //         'title' => __('Add to wishlist button text', 'better-wishlist'),
+        //         'default' => 'Add to wishlist',
+        //     ]);
 
-            $config::add_field('general_settings', [
-                'id' => 'added_to_wishlist_text',
-                'type' => 'text',
-                'title' => __('"Product added to Wishlist" Text', 'better-wishlist'),
-                'default' => 'Added to Wishlist',
-            ]);
+        //     $config::add_field('general_settings', [
+        //         'id' => 'added_to_wishlist_text',
+        //         'type' => 'text',
+        //         'title' => __('"Product added to Wishlist" Text', 'better-wishlist'),
+        //         'default' => 'Added to Wishlist',
+        //     ]);
 
-            $config::add_field('general_settings', [
-                'id' => 'already_in_wishlist',
-                'type' => 'text',
-                'title' => __('"Product already in Wishlist" Text', 'better-wishlist'),
-                'default' => 'Already in Wishlist',
-            ]);
+        //     $config::add_field('general_settings', [
+        //         'id' => 'already_in_wishlist',
+        //         'type' => 'text',
+        //         'title' => __('"Product already in Wishlist" Text', 'better-wishlist'),
+        //         'default' => 'Already in Wishlist',
+        //     ]);
 
-            $config::add_field('general_settings', [
-                'id' => 'browse_wishlist',
-                'type' => 'text',
-                'title' => __('"Browse Wishlist" Text', 'better-wishlist'),
-                'default' => 'Browse Wishlist',
-            ]);
+        //     $config::add_field('general_settings', [
+        //         'id' => 'browse_wishlist',
+        //         'type' => 'text',
+        //         'title' => __('"Browse Wishlist" Text', 'better-wishlist'),
+        //         'default' => 'Browse Wishlist',
+        //     ]);
 
-            $config::add_field('general_settings', [
-                'id' => 'wishlist_page_redirect',
-                'type' => 'radio',
-                'title' => __('Radio', 'rwprs'),
-                'title' => __('Redirect to wishlist page', 'better-wishlist'),
-                'desc' => __('Select whether redirect after adding to wishlist', 'better-wishlist'),
-                'options' => array(
-                    true => 'Yes',
-                    false => 'No',
-                ),
-                'default' => false,
-            ]);
+        //     $config::add_field('general_settings', [
+        //         'id' => 'wishlist_page_redirect',
+        //         'type' => 'radio',
+        //         'title' => __('Radio', 'rwprs'),
+        //         'title' => __('Redirect to wishlist page', 'better-wishlist'),
+        //         'desc' => __('Select whether redirect after adding to wishlist', 'better-wishlist'),
+        //         'options' => array(
+        //             true => 'Yes',
+        //             false => 'No',
+        //         ),
+        //         'default' => false,
+        //     ]);
 
-            $config::add_field('general_settings', [
-                'id' => 'cart_page_redirect',
-                'type' => 'radio',
-                'title' => __('Redirect to cart page', 'better-wishlist'),
-                'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
-                'options' => [
-                    true => 'Yes',
-                    false => 'No',
-                ],
-                'default' => false,
-            ]);
+        //     $config::add_field('general_settings', [
+        //         'id' => 'cart_page_redirect',
+        //         'type' => 'radio',
+        //         'title' => __('Redirect to cart page', 'better-wishlist'),
+        //         'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
+        //         'options' => [
+        //             true => 'Yes',
+        //             false => 'No',
+        //         ],
+        //         'default' => false,
+        //     ]);
 
-            $config::add_field('general_settings', [
-                'id' => 'remove_from_wishlist',
-                'type' => 'radio',
-                'title' => __('Remove From Wishlist', 'better-wishlist'),
-                'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
-                'options' => [
-                    true => 'Yes',
-                    false => 'No',
-                ],
-                'default' => false,
-            ]);
-        });
-
-        new \BetterWishlist\Framework\WPRS('Better Wishlist', 'better-wishlist', 'better_wishlist_settings', 1);
+        //     $config::add_field('general_settings', [
+        //         'id' => 'remove_from_wishlist',
+        //         'type' => 'radio',
+        //         'title' => __('Remove From Wishlist', 'better-wishlist'),
+        //         'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
+        //         'options' => [
+        //             true => 'Yes',
+        //             false => 'No',
+        //         ],
+        //         'default' => false,
+        //     ]);
+        // });
     }
 
     public function add_display_status_on_page($states, $post)
