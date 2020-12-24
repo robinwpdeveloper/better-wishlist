@@ -33,7 +33,7 @@ class Model
      */
     public function generate_session_id()
     {
-        if (is_user_logged_in()) {
+        if (get_current_user_id()) {
             return;
         }
 
