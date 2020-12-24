@@ -59,16 +59,16 @@ class Model
 
         if (isset($_COOKIE['better_wishlist_session_id'])) {
             $session_id = sanitize_text_field($_COOKIE['better_wishlist_session_id']);
-            $check_logged_user_wishlist = $wpdb->get_row("SELECT * FROM {$this->better_wishlist_lists} WHERE user_id = {$user->ID}");
-            $wishlist = $wpdb->get_row("SELECT ID FROM {$this->better_wishlist_lists} WHERE session_id = '{$session_id}'");
+            $logged_user_wishlist = $wpdb->get_row("SELECT * FROM {$this->better_wishlist_lists} WHERE user_id={$user->ID}");
+            $wishlist = $wpdb->get_row("SELECT ID FROM {$this->better_wishlist_lists} WHERE session_id='{$session_id}'");
 
-            if (empty($check_logged_user_wishlist)) {
-                $query = $wpdb->query("UPDATE {$this->better_wishlist_lists} SET user_id = {$user->ID}, expiration = null, session_id = null WHERE session_id = '{$session_id}'");
-                $query = $wpdb->query("UPDATE {$this->better_wishlist_items} SET user_id = {$user->ID} WHERE wishlist_id = {$wishlist->ID}");
+            if (empty($logged_user_wishlist)) {
+                $query = $wpdb->query("UPDATE {$this->better_wishlist_lists} SET user_id={$user->ID}, expiration=null, session_id=null WHERE session_id='{$session_id}'");
+                $query = $wpdb->query("UPDATE {$this->better_wishlist_items} SET user_id={$user->ID} WHERE wishlist_id={$wishlist->ID}");
             } else {
                 if ($wishlist->ID > 0) {
-                    $query = $wpdb->query("UPDATE {$this->better_wishlist_items} SET user_id = {$user->ID}, wishlist_id = {$check_logged_user_wishlist->ID} WHERE wishlist_id = {$wishlist->ID}");
-                    $wpdb->query("DELETE FROM {$this->better_wishlist_lists} WHERE session_id = '{$session_id}'");
+                    $query = $wpdb->query("UPDATE {$this->better_wishlist_items} SET user_id={$user->ID}, wishlist_id={$logged_user_wishlist->ID} WHERE wishlist_id={$wishlist->ID}");
+                    $wpdb->query("DELETE FROM {$this->better_wishlist_lists} WHERE session_id='{$session_id}'");
                 }
             }
 
@@ -149,7 +149,7 @@ class Model
         global $wpdb;
 
         $wishlist_id = sanitize_text_field($wishlist_id);
-        $query = "SELECT DISTINCT product_id,user_id,wishlist_id FROM {$this->better_wishlist_items} WHERE wishlist_id = {$wishlist_id}";
+        $query = "SELECT DISTINCT product_id,user_id,wishlist_id FROM {$this->better_wishlist_items} WHERE wishlist_id={$wishlist_id}";
 
         return $wpdb->get_results($query, OBJECT);
     }
@@ -166,9 +166,9 @@ class Model
         $wishlist_id = null;
 
         if (is_user_logged_in()) {
-            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$this->better_wishlist_lists} WHERE user_id = {$this->user_id}");
+            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$this->better_wishlist_lists} WHERE user_id={$this->user_id}");
         } else {
-            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$this->better_wishlist_lists} WHERE session_id = '{$this->session_id}'");
+            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$this->better_wishlist_lists} WHERE session_id='{$this->session_id}'");
         }
 
         if ($wishlist_id) {
@@ -199,7 +199,7 @@ class Model
 
         $product_id = sanitize_text_field($product_id);
         $wishlist_id = sanitize_text_field($wishlist_id);
-        $result = $wpdb->get_row("SELECT * FROM {$this->better_wishlist_items} WHERE wishlist_id = '{$wishlist_id}' and product_id = {$product_id}");
+        $result = $wpdb->get_row("SELECT * FROM {$this->better_wishlist_items} WHERE wishlist_id='{$wishlist_id}' and product_id={$product_id}");
 
         return !empty($result);
     }

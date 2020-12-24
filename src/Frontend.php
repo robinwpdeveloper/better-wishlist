@@ -35,6 +35,7 @@ class Frontend
 
     public function enqueue_scripts()
     {
+        $settings = get_option('bw_settings');
         $localize_scripts = apply_filters('better_wishlist_localize_script', [
             'ajax_url' => admin_url('admin-ajax.php', 'relative'),
             'nonce' => wp_create_nonce('better_wishlist_nonce'),
@@ -45,9 +46,11 @@ class Frontend
                 'add_to_cart_single' => 'add_to_cart_single',
             ],
             'settings' => [
-                'remove_from_wishlist' => false,
-                'redirect_to_cart_page' => false,
+                'redirect_to_wishlist' => isset($settings['redirect_to_wishlist']),
+                'remove_from_wishlist' => isset($settings['remove_from_wishlist']),
+                'redirect_to_cart' => isset($settings['redirect_to_cart']),
                 'cart_page_url' => wc_get_cart_url(),
+                'wishlist_page_url' => esc_url(wc_get_account_endpoint_url('better-wishlist')),
             ],
             'strings' => [
                 'added_in_cart' => __('added in cart.', 'better-wishlist'),

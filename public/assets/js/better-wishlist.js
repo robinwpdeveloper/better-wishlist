@@ -49,10 +49,10 @@
 
 	$(document).ready(function () {
 		// add to wishlist
-		$(document).on("click", ".add_to_wishlist_button", function (e) {
+		$(document).on("click", ".bw_add_to_wishlist", function (e) {
 			e.preventDefault();
 
-			var productID = $(this).data("product_id");
+			var productID = $(this).data("product-id");
 
 			$.ajax({
 				type: "POST",
@@ -64,8 +64,8 @@
 				},
 				success: function (response) {
 					if (response.success) {
-						if (BETTER_WISHLIST.settings.redirect_to_cart_page !== false) {
-							window.location.replace(BETTER_WISHLIST.settings.cart_page_url); // set wishlist page here
+						if (BETTER_WISHLIST.settings.redirect_to_wishlist !== false) {
+							window.location.replace(BETTER_WISHLIST.settings.wishlist_page_url);
 						} else {
 							createNotification("success", response.data);
 						}
@@ -150,7 +150,7 @@
 							}
 						}
 
-						if (BETTER_WISHLIST.settings.redirect_to_cart_page !== false) {
+						if (BETTER_WISHLIST.settings.redirect_to_cart !== false) {
 							window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
 						} else {
 							createNotification("success", response.data);
@@ -186,7 +186,7 @@
 							$(".add-to-cart-multiple").remove();
 						}
 
-						if (BETTER_WISHLIST.settings.redirect_to_cart_page !== false) {
+						if (BETTER_WISHLIST.settings.redirect_to_cart !== false) {
 							window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
 						} else {
 							createNotification("success", response.data);
