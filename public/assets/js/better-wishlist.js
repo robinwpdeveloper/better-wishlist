@@ -65,7 +65,9 @@
 				success: function (response) {
 					if (response.success) {
 						if (BETTER_WISHLIST.settings.redirect_to_wishlist !== false) {
-							window.location.replace(BETTER_WISHLIST.settings.wishlist_page_url);
+							window.location.replace(
+								BETTER_WISHLIST.settings.wishlist_page_url
+							);
 						} else {
 							createNotification("success", response.data);
 						}
@@ -138,22 +140,22 @@
 				},
 				success: function (response) {
 					if (response.success) {
-						if (BETTER_WISHLIST.settings.remove_from_wishlist) {
-							productRow.remove();
-
-							if ($("tr.wishlist-row", table).length < 1) {
-								$(".add-to-cart-multiple").remove();
-								table.remove();
-								pageWrap.html(
-									'<div class="no-record-message">No Records Found</div>'
-								);
-							}
-						}
-
 						if (BETTER_WISHLIST.settings.redirect_to_cart !== false) {
 							window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
 						} else {
 							createNotification("success", response.data);
+
+							if (BETTER_WISHLIST.settings.remove_from_wishlist) {
+								productRow.remove();
+
+								if ($("tr.wishlist-row", table).length < 1) {
+									$(".add-to-cart-multiple").remove();
+									table.remove();
+									pageWrap.html(
+										'<div class="no-record-message">No Records Found</div>'
+									);
+								}
+							}
 						}
 					} else {
 						createNotification("error", response.data);
@@ -181,15 +183,15 @@
 				},
 				success: function (response) {
 					if (response.success) {
-						if (BETTER_WISHLIST.settings.remove_from_wishlist) {
-							$(".wishlist_table").remove();
-							$(".add-to-cart-multiple").remove();
-						}
-
 						if (BETTER_WISHLIST.settings.redirect_to_cart !== false) {
 							window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
 						} else {
 							createNotification("success", response.data);
+
+							if (BETTER_WISHLIST.settings.remove_from_wishlist) {
+								$(".wishlist_table").remove();
+								$(".add-to-cart-multiple").remove();
+							}
 						}
 					} else {
 						createNotification("error", response.data);

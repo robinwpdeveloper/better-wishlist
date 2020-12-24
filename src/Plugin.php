@@ -47,78 +47,6 @@ class Plugin extends Singleton
 
         add_action('wp_ajax_add_to_cart_multiple', [$this, 'add_to_cart_multiple']);
         add_action('wp_ajax_nopriv_add_to_cart_multiple', [$this, 'add_to_cart_multiple']);
-
-        // add_action('wprs_build_settings', function ($config) {
-        //     $config::add_tab([
-        //         'title' => __('General Settings', 'better-wishlist'),
-        //         'id' => 'general_settings',
-        //     ]);
-
-        //     $config::add_field('general_settings', [
-        //         'id' => 'add_to_wishlist_text',
-        //         'type' => 'text',
-        //         'title' => __('Add to wishlist button text', 'better-wishlist'),
-        //         'default' => 'Add to wishlist',
-        //     ]);
-
-        //     $config::add_field('general_settings', [
-        //         'id' => 'added_to_wishlist_text',
-        //         'type' => 'text',
-        //         'title' => __('"Product added to Wishlist" Text', 'better-wishlist'),
-        //         'default' => 'Added to Wishlist',
-        //     ]);
-
-        //     $config::add_field('general_settings', [
-        //         'id' => 'already_in_wishlist',
-        //         'type' => 'text',
-        //         'title' => __('"Product already in Wishlist" Text', 'better-wishlist'),
-        //         'default' => 'Already in Wishlist',
-        //     ]);
-
-        //     $config::add_field('general_settings', [
-        //         'id' => 'browse_wishlist',
-        //         'type' => 'text',
-        //         'title' => __('"Browse Wishlist" Text', 'better-wishlist'),
-        //         'default' => 'Browse Wishlist',
-        //     ]);
-
-        //     $config::add_field('general_settings', [
-        //         'id' => 'wishlist_page_redirect',
-        //         'type' => 'radio',
-        //         'title' => __('Radio', 'rwprs'),
-        //         'title' => __('Redirect to wishlist page', 'better-wishlist'),
-        //         'desc' => __('Select whether redirect after adding to wishlist', 'better-wishlist'),
-        //         'options' => array(
-        //             true => 'Yes',
-        //             false => 'No',
-        //         ),
-        //         'default' => false,
-        //     ]);
-
-        //     $config::add_field('general_settings', [
-        //         'id' => 'cart_page_redirect',
-        //         'type' => 'radio',
-        //         'title' => __('Redirect to cart page', 'better-wishlist'),
-        //         'desc' => __('Select whether redirect cart page after adding to cart from wishlist page', 'better-wishlist'),
-        //         'options' => [
-        //             true => 'Yes',
-        //             false => 'No',
-        //         ],
-        //         'default' => false,
-        //     ]);
-
-        //     $config::add_field('general_settings', [
-        //         'id' => 'remove_from_wishlist',
-        //         'type' => 'radio',
-        //         'title' => __('Remove From Wishlist', 'better-wishlist'),
-        //         'desc' => __('Remove from wishlist after adding to cart', 'better-wishlist'),
-        //         'options' => [
-        //             true => 'Yes',
-        //             false => 'No',
-        //         ],
-        //         'default' => false,
-        //     ]);
-        // });
     }
 
     public function add_display_status_on_page($states, $post)
@@ -215,11 +143,12 @@ class Plugin extends Singleton
         }
 
         $product_id = intval($_REQUEST['product_id']);
+        $settings = get_option('bw_settings');
 
         if (WC()->cart->add_to_cart($product_id, 1)) {
-            // if (Better_Wishlist_Helper::get_settings('remove_from_wishlist')) {
-            //     Plugin::instance()->model->delete_item($product_id);
-            // }
+            if ($settings['remove_from_wishlist']) {
+                Plugin::instance()->model->delete_item($product_id);
+            }
 
             wp_send_json_success([
                 'product_title' => get_the_title($product_id),
@@ -244,12 +173,14 @@ class Plugin extends Singleton
             ]);
         }
 
+        $settings = get_option('bw_settings');
+
         foreach ($_REQUEST['products'] as $product_id) {
             WC()->cart->add_to_cart($product_id, 1);
 
-            // // if (Better_Wishlist_Helper::get_settings('remove_from_wishlist')) {
-            //     Plugin::instance()->model->delete_item($product_id);
-            // }
+            if ($settings['remove_from_wishlist']) {
+                Plugin::instance()->model->delete_item($product_id);
+            }
         }
 
         wp_send_json_success([
