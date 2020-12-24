@@ -9,7 +9,6 @@ if (!defined('ABSPATH')) {
 
 class Model
 {
-    private $user_id;
     private $session_id;
     private $better_wishlist_lists;
     private $better_wishlist_items;
@@ -19,7 +18,6 @@ class Model
         global $wpdb;
 
         // init props
-        $this->user_id = get_current_user_id();
         $this->session_id = $this->generate_session_id();
         $this->better_wishlist_lists = $wpdb->prefix . 'better_wishlist_lists';
         $this->better_wishlist_items = $wpdb->prefix . 'better_wishlist_items';
@@ -35,7 +33,7 @@ class Model
      */
     public function generate_session_id()
     {
-        if ($this->user_id) {
+        if (is_user_logged_in()) {
             return;
         }
 
@@ -63,7 +61,7 @@ class Model
             $wishlist = $wpdb->get_row("SELECT ID FROM {$this->better_wishlist_lists} WHERE session_id='{$session_id}'");
 
             if (empty($logged_user_wishlist)) {
-                $query = $wpdb->query("UPDATE {$this->better_wishlist_lists} SET user_id={$user->ID}, expiration=null, session_id=null WHERE session_id='{$session_id}'");
+                $query = $wpdb->query("UPDATE {$this->better_wishlist_lists} SET user_id={$user->ID}, expire_on=null, session_id=null WHERE session_id='{$session_id}'");
                 $query = $wpdb->query("UPDATE {$this->better_wishlist_items} SET user_id={$user->ID} WHERE wishlist_id={$wishlist->ID}");
             } else {
                 if ($wishlist->ID > 0) {
@@ -110,14 +108,14 @@ class Model
             setcookie('better_wishlist_session_id', $this->session_id, time() + 86400, "/");
         } else {
             $columns['user_id'] = '%d';
-            $values[] = $this->user_id;
+            $values[] = get_current_user_id();
         }
 
-        $columns['dateadded'] = 'FROM_UNIXTIME( %d )';
+        $columns['created_at'] = 'FROM_UNIXTIME( %d )';
         $values[] = current_time('timestamp');
 
         if (!is_user_logged_in()) {
-            $columns['expiration'] = 'FROM_UNIXTIME( %d )';
+            $columns['expire_on'] = 'FROM_UNIXTIME( %d )';
             $timestamp = strtotime('+1 day', current_time('timestamp'));
             $values[] = $timestamp;
         }
@@ -166,7 +164,8 @@ class Model
         $wishlist_id = null;
 
         if (is_user_logged_in()) {
-            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$this->better_wishlist_lists} WHERE user_id={$this->user_id}");
+            $user_id = get_current_user_id();
+            $wishlist_id = $wpdb->get_var("SELECT ID FROM {$this->better_wishlist_lists} WHERE user_id={$user_id}");
         } else {
             $wishlist_id = $wpdb->get_var("SELECT ID FROM {$this->better_wishlist_lists} WHERE session_id='{$this->session_id}'");
         }
@@ -221,26 +220,16 @@ class Model
 
         $columns = [
             'product_id' => '%d',
-            'quantity' => '%d',
             'wishlist_id' => '%d',
-            'stock_status' => '%s',
-            'original_price' => '%d',
-            'original_currency' => '%s',
-            'on_sale' => '%s',
             'user_id' => '%d',
         ];
         $product = wc_get_product($product_id);
         $values = [
             $product_id,
-            1,
             $wishlist_id,
-            $product->get_stock_status(),
-            Plugin::instance()->helper->get_product_price($product),
-            get_woocommerce_currency(),
-            $product->is_on_sale(),
             get_current_user_id(),
         ];
-        $columns['dateadded'] = 'FROM_UNIXTIME( %d )';
+        $columns['created_at'] = 'FROM_UNIXTIME( %d )';
         $values[] = current_time('timestamp');
         $query_columns = implode(', ', array_map('esc_sql', array_keys($columns)));
         $query_values = implode(', ', array_values($columns));

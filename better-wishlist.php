@@ -30,4 +30,4 @@ define('BETTER_WISHLIST_PLUGIN_VERSION', '1.0.0');
 require plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
 // Run the plugin.
-add_action('plugins_loaded', ['BetterWishlist\Plugin', 'instance']);
+BetterWishlist\Plugin::instance();

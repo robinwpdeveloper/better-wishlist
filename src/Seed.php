@@ -56,8 +56,8 @@ class Seed
                     wishlist_token VARCHAR(64) NOT NULL UNIQUE,
                     wishlist_privacy TINYINT(1) NOT NULL DEFAULT 0,
                     is_default TINYINT(1) NOT NULL DEFAULT 0,
-                    dateadded timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    expiration timestamp NULL DEFAULT NULL,
+                    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    expire_on timestamp NULL DEFAULT NULL,
                     PRIMARY KEY  (ID),
                     KEY wishlist_slug (wishlist_slug),
                     KEY user_id (user_id)
@@ -68,14 +68,9 @@ class Seed
             dbDelta("CREATE TABLE $better_wishlist_items (
                     ID BIGINT(20) NOT NULL AUTO_INCREMENT,
                     product_id BIGINT(20) NOT NULL,
-                    quantity INT(11) NOT NULL,
                     user_id BIGINT(20) NULL DEFAULT NULL,
                     wishlist_id BIGINT(20) NULL,
-                    stock_status VARCHAR(64) DEFAULT NULL,
-                    original_price DECIMAL(9, 3) NULL DEFAULT NULL,
-                    original_currency CHAR(3) NULL DEFAULT NULL,
-                    dateadded timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    on_sale tinyint NOT NULL DEFAULT 0,
+                    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY  (ID),
                     KEY product_id (product_id)
                ) $charset_collate");
