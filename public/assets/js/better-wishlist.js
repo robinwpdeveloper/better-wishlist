@@ -49,7 +49,7 @@
 
 	$(document).ready(function () {
 		// add to wishlist
-		$(document).on("click", ".bw_add_to_wishlist", function (e) {
+		$(document).on("click", ".better-wishlist-add-to-wishlist", function (e) {
 			e.preventDefault();
 
 			var productID = $(this).data("product-id");
@@ -82,7 +82,7 @@
 		});
 
 		// remove from wishlist
-		$(document).on("click", ".remove_from_wishlist", function (e) {
+		$(document).on("click", ".better-wishlist-remove-from-wishlist", function (e) {
 			e.preventDefault();
 
 			var pageWrap = $(".better-wishlist-page-wrap");
@@ -121,7 +121,7 @@
 		});
 
 		// add to cart
-		$(document).on("click", ".single-product-add-to-cart", function (e) {
+		$(document).on("click", ".better-wishlist-add-to-cart-single", function (e) {
 			e.preventDefault();
 
 			var pageWrap = $(".better-wishlist-page-wrap");
@@ -166,7 +166,7 @@
 		});
 
 		// add to cart - multiple
-		$(document).on("click", ".bw-add-to-cart-multiple", function (e) {
+		$(document).on("click", ".better-wishlist-add-to-cart-multiple", function (e) {
 			e.preventDefault();
 
 			var pageWrap = $(".better-wishlist-page-wrap");

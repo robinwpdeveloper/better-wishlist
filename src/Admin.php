@@ -31,7 +31,7 @@ class Admin
 
     public function create_admin_page()
     {
-        $this->settings = get_option('bw_settings');?>
+        $this->settings = get_option('better_wishlist_settings');?>
 
 		<div class="wrap">
 			<h2>Better Wishlist</h2>
@@ -50,7 +50,7 @@ class Admin
     {
         register_setting(
             'better_wishlist_option_group', // option_group
-            'bw_settings', // option_name
+            'better_wishlist_settings', // option_name
         );
 
         add_settings_section(
@@ -88,7 +88,7 @@ class Admin
     public function redirect_to_wishlist_callback()
     {
         printf(
-            '<input type="checkbox" name="bw_settings[redirect_to_wishlist]" id="redirect_to_wishlist" value="redirect_to_wishlist" %s> <label for="redirect_to_wishlist">Redirect to wishlist page after adding a product to wishlist</label>',
+            '<input type="checkbox" name="better_wishlist_settings[redirect_to_wishlist]" id="redirect_to_wishlist" value="redirect_to_wishlist" %s> <label for="redirect_to_wishlist">Redirect to wishlist page after adding a product to wishlist</label>',
             (isset($this->settings['redirect_to_wishlist']) && $this->settings['redirect_to_wishlist'] === 'redirect_to_wishlist') ? 'checked' : ''
         );
     }
@@ -96,7 +96,7 @@ class Admin
     public function remove_from_wishlist_callback()
     {
         printf(
-            '<input type="checkbox" name="bw_settings[remove_from_wishlist]" id="remove_from_wishlist" value="remove_from_wishlist" %s> <label for="remove_from_wishlist">Remove from wishlist after adding a product to cart</label>',
+            '<input type="checkbox" name="better_wishlist_settings[remove_from_wishlist]" id="remove_from_wishlist" value="remove_from_wishlist" %s> <label for="remove_from_wishlist">Remove from wishlist after adding a product to cart</label>',
             (isset($this->settings['remove_from_wishlist']) && $this->settings['remove_from_wishlist'] === 'remove_from_wishlist') ? 'checked' : ''
         );
     }
@@ -104,7 +104,7 @@ class Admin
     public function redirect_to_cart_callback()
     {
         printf(
-            '<input type="checkbox" name="bw_settings[redirect_to_cart]" id="redirect_to_cart" value="redirect_to_cart" %s> <label for="redirect_to_cart">Redirect to cart page after adding a product to cart</label>',
+            '<input type="checkbox" name="better_wishlist_settings[redirect_to_cart]" id="redirect_to_cart" value="redirect_to_cart" %s> <label for="redirect_to_cart">Redirect to cart page after adding a product to cart</label>',
             (isset($this->settings['redirect_to_cart']) && $this->settings['redirect_to_cart'] === 'redirect_to_cart') ? 'checked' : ''
         );
     }
