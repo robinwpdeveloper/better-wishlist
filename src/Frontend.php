@@ -84,6 +84,9 @@ class Frontend
                 'cart_page_url' => wc_get_cart_url(),
                 'wishlist_page_url' => esc_url(wc_get_account_endpoint_url('better-wishlist')),
             ],
+            'i18n' => [
+                'no_records_found' => __('No Records Found', 'better-wishlist'),
+            ],
         ]);
 
         // css
