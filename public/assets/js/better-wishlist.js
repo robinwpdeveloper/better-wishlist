@@ -85,9 +85,9 @@
 		$(document).on("click", ".remove_from_wishlist", function (e) {
 			e.preventDefault();
 
-			var productID = $(this).data("product_id");
 			var pageWrap = $(".better-wishlist-page-wrap");
 			var table = $(".wishlist_table");
+			var productID = $(this).data("product_id");
 			var productRow = $("#wishlist-row-" + productID, table);
 
 			$.ajax({
@@ -105,8 +105,7 @@
 						productRow.remove();
 
 						if ($("tr.wishlist-row", table).length < 1) {
-							$(".add-to-cart-multiple").remove();
-							table.remove();
+							pageWrap.empty();
 							pageWrap.html(
 								'<div class="no-record-message">No Records Found</div>'
 							);
@@ -125,9 +124,9 @@
 		$(document).on("click", ".single-product-add-to-cart", function (e) {
 			e.preventDefault();
 
-			var productID = $(this).data("product_id");
 			var pageWrap = $(".better-wishlist-page-wrap");
 			var table = $(".wishlist_table");
+			var productID = $(this).data("product_id");
 			var productRow = $("#wishlist-row-" + productID, table);
 
 			$.ajax({
@@ -149,8 +148,7 @@
 								productRow.remove();
 
 								if ($("tr.wishlist-row", table).length < 1) {
-									$(".add-to-cart-multiple").remove();
-									table.remove();
+									pageWrap.empty();
 									pageWrap.html(
 										'<div class="no-record-message">No Records Found</div>'
 									);
@@ -171,6 +169,7 @@
 		$(document).on("click", ".bw-add-to-cart-multiple", function (e) {
 			e.preventDefault();
 
+			var pageWrap = $(".better-wishlist-page-wrap");
 			var products = $(this).data("products").toString().split(",");
 
 			$.ajax({
@@ -189,8 +188,10 @@
 							createNotification("success", response.data);
 
 							if (BETTER_WISHLIST.settings.remove_from_wishlist) {
-								$(".wishlist_table").remove();
-								$(".add-to-cart-multiple").remove();
+								pageWrap.empty();
+								pageWrap.html(
+									'<div class="no-record-message">No Records Found</div>'
+								);
 							}
 						}
 					} else {
