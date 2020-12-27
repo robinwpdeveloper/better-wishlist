@@ -10,11 +10,11 @@
           <th class="product-thumbnail">
           </th>
           <th class="product-name">
-            <span class="nobr">Product name
+            <span class="nobr">{{ i18n.product_name }}
             </span>
           </th>
           <th class="stock-status">
-            <span class="nobr">Stock Status
+            <span class="nobr">{{ i18n.stock_status }}
             </span>
           </th>
           <th class="add-to-cart">
@@ -31,7 +31,7 @@
                 <a href="#"
                   data-product_id="{{ product.id }}"
                   class="remove better-wishlist-remove-from-wishlist"
-                  title="Remove this product">
+                  title="{{ i18n.remove_this_product }}">
                   ×
                 </a>
               </div>
@@ -40,8 +40,6 @@
               <a href="{{ product.url }}">
                 <img class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                     src="{{ product.thumbnail_url }}"
-                    alt=""
-                    loading="lazy"
                     sizes="(max-width: 450px) 100vw, 450px"
                     width="450"
                     height="450" />
@@ -59,7 +57,7 @@
               <a class="button better-wishlist-add-to-cart-single add_to_cart_button better-wishlist-addto-cart-button"
                 data-product_id="{{ product.id }}"
                 href="#">
-                Add To Cart
+                {{ i18n.add_to_cart }}
               </a>
             </td>
           </tr>
@@ -70,12 +68,12 @@
       <a href="#"
         data-products="{{ ids|join(',') }}"
         class="button better-wishlist-add-to-cart-multiple">
-        Add All to Cart
+        {{ i18n.add_all_to_cart }}
       </a>
     </div>
   {% else %}
     <div class="no-record-message">
-      No Records Found
+      {{ i18n.no_records_found }}
     </div>
   {% endif %}
 </div>

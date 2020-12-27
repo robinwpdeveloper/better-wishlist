@@ -12,7 +12,7 @@ class Frontend
     public function __construct()
     {
         include_once ABSPATH . 'wp-admin/includes/plugin.php';
-        
+
         if (!is_plugin_active('woocommerce/woocommerce.php')) {
             return;
         }
@@ -83,12 +83,6 @@ class Frontend
                 'redirect_to_cart' => isset($settings['redirect_to_cart']),
                 'cart_page_url' => wc_get_cart_url(),
                 'wishlist_page_url' => esc_url(wc_get_account_endpoint_url('better-wishlist')),
-            ],
-            'strings' => [
-                'added_in_cart' => __('added in cart.', 'better-wishlist'),
-                'removed_from_cart' => __('removed from cart.', 'better-wishlist'),
-                'added_in_wishlist' => __('added in wishlist.', 'better-wishlist'),
-                'removed_from_wishlist' => __('removed from wishlist.', 'better-wishlist'),
             ],
         ]);
 
@@ -169,6 +163,14 @@ class Frontend
             'layout' => '',
         ], $atts);
 
+        $i18n = [
+            'product_name' => __('Product name', 'better-wishlist'),
+            'stock_status' => __('Stock Status', 'better-wishlist'),
+            'add_to_cart' => __('Add To Cart', 'better-wishlist'),
+            'add_all_to_cart' => __('Add All to Cart', 'better-wishlist'),
+            'no_records_found' => __('No Records Found', 'better-wishlist'),
+            'remove_this_product' => __('Remove this product', 'better-wishlist'),
+        ];
         $items = Plugin::instance()->model->read_list(Plugin::instance()->model->get_current_user_list());
         $products = [];
 
@@ -188,7 +190,7 @@ class Frontend
             }
         }
 
-        return Plugin::instance()->twig->render('page.twig', ['ids' => wp_list_pluck($products, 'id'), 'products' => $products]);
+        return Plugin::instance()->twig->render('page.twig', ['i18n' => $i18n, 'ids' => wp_list_pluck($products, 'id'), 'products' => $products]);
     }
 
     /**
@@ -204,7 +206,11 @@ class Frontend
             return;
         }
 
-        return Plugin::instance()->twig->render('button.twig', ['product_id' => $product->get_id()]);
+        $i18n = [
+            'add_to_wishlist' => __('Add To Wishlist', 'better-wishlist'),
+        ];
+
+        return Plugin::instance()->twig->render('button.twig', ['i18n' => $i18n, 'product_id' => $product->get_id()]);
     }
 
     /**
