@@ -1,0 +1,116 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Better Wishlist\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-27 11:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.0; wp-5.6\n"
+"X-Domain: better-wishlist"
+
+#. URI of the plugin
+msgid "#"
+msgstr ""
+
+#: src/Plugin.php:44
+#, php-format
+msgid ""
+"%1$sBetter Wishlist%2$s requires %1$sWooCommerce%2$s plugin to be installed "
+"and activated. Please install/activate WooCommerce to continue."
+msgstr ""
+
+#: src/Frontend.php:173
+msgid "Add All to Cart"
+msgstr ""
+
+#: src/Frontend.php:172
+msgid "Add To Cart"
+msgstr ""
+
+#: src/Frontend.php:213
+msgid "Add To Wishlist"
+msgstr ""
+
+#: src/Frontend.php:344 src/Frontend.php:382
+msgid "added in cart."
+msgstr ""
+
+#: src/Frontend.php:274
+msgid "added in wishlist."
+msgstr ""
+
+#: src/Frontend.php:381
+msgid "All items"
+msgstr ""
+
+#: src/Frontend.php:265
+msgid "already exists in wishlist."
+msgstr ""
+
+#. parent
+#. page_title
+#. Name of the plugin
+#: src/Admin.php:24 src/Admin.php:25
+msgid "Better Wishlist"
+msgstr ""
+
+#: src/Frontend.php:350
+msgid "couldn't be added in cart."
+msgstr ""
+
+#: src/Frontend.php:300
+msgid "couldn't be removed."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpdeveloper.net/"
+msgstr ""
+
+#: src/Frontend.php:88 src/Frontend.php:174
+msgid "No Records Found"
+msgstr ""
+
+#: src/Frontend.php:254 src/Frontend.php:290 src/Frontend.php:322
+#: src/Frontend.php:366
+msgid "Product ID is should not be empty."
+msgstr ""
+
+#: src/Frontend.php:170
+msgid "Product name"
+msgstr ""
+
+#: src/Frontend.php:175
+msgid "Remove this product"
+msgstr ""
+
+#: src/Frontend.php:306
+msgid "removed from wishlist."
+msgstr ""
+
+#: src/Frontend.php:171
+msgid "Stock Status"
+msgstr ""
+
+#: src/Model.php:98 src/Seed.php:97 src/Frontend.php:132
+msgid "Wishlist"
+msgstr ""
+
+#. Description of the plugin
+msgid "Wishlist functionality for your WooCommerce store."
+msgstr ""
+
+#: src/Plugin.php:59
+msgid "Wishlist Page"
+msgstr ""
+
+#. Author of the plugin
+msgid "WPDeveloper"
+msgstr ""
