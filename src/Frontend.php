@@ -37,7 +37,7 @@ class Frontend
         // shortcode
         add_shortcode('better_wishlist', [$this, 'shortcode']);
     }
-    
+
     /**
      * init
      *
@@ -53,7 +53,7 @@ class Frontend
             delete_transient('better_wishlist_flush_rewrite_rules');
         }
     }
-    
+
     /**
      * enqueue_scripts
      *
@@ -102,7 +102,7 @@ class Frontend
             wp_enqueue_script('better-wishlist');
         }
     }
-    
+
     /**
      * add_body_class
      *
@@ -117,7 +117,7 @@ class Frontend
 
         return $classes;
     }
-    
+
     /**
      * add_menu
      *
@@ -130,7 +130,7 @@ class Frontend
 
         return $items;
     }
-    
+
     /**
      * menu_content
      *
@@ -140,7 +140,7 @@ class Frontend
     {
         echo do_shortcode('[better_wishlist]');
     }
-    
+
     /**
      * shortcode
      *
@@ -184,7 +184,7 @@ class Frontend
 
         return Plugin::instance()->twig->render('page.twig', ['ids' => wp_list_pluck($products, 'id'), 'products' => $products]);
     }
-    
+
     /**
      * add_to_wishlist_button
      *
@@ -200,7 +200,7 @@ class Frontend
 
         return Plugin::instance()->twig->render('button.twig', ['product_id' => $product->get_id()]);
     }
-    
+
     /**
      * single_add_to_wishlist_button
      *
@@ -210,7 +210,7 @@ class Frontend
     {
         echo $this->add_to_wishlist_button();
     }
-    
+
     /**
      * archive_add_to_wishlist_button
      *
@@ -223,7 +223,7 @@ class Frontend
     {
         return $add_to_cart_html . $this->add_to_wishlist_button();
     }
-    
+
     /**
      * ajax_add_to_wishlist
      *
@@ -259,7 +259,7 @@ class Frontend
             'message' => __('added in wishlist.', 'better-wishlist'),
         ]);
     }
-    
+
     /**
      * ajax_remove_from_wishlist
      *
@@ -291,7 +291,7 @@ class Frontend
             'message' => __('removed from wishlist.', 'better-wishlist'),
         ]);
     }
-    
+
     /**
      * ajax_add_to_cart_single
      *
@@ -309,10 +309,18 @@ class Frontend
         }
 
         $product_id = intval($_REQUEST['product_id']);
+        $product = wc_get_product($product_id);
         $settings = get_option('better_wishlist_settings');
 
-        if (WC()->cart->add_to_cart($product_id, 1)) {
-            if ($settings['remove_from_wishlist']) {
+        // add to cart
+        if ($product->is_type('variable')) {
+            $add_to_cart = WC()->cart->add_to_cart($product_id, 1, $product->get_default_attributes());
+        } else {
+            $add_to_cart = WC()->cart->add_to_cart($product_id, 1);
+        }
+
+        if ($add_to_cart) {
+            if (isset($settings['remove_from_wishlist'])) {
                 Plugin::instance()->model->delete_item($product_id);
             }
 
@@ -327,7 +335,7 @@ class Frontend
             'message' => __('couldn\'t be added in cart.', 'better-wishlist'),
         ]);
     }
-    
+
     /**
      * ajax_add_to_cart_multiple
      *
@@ -349,7 +357,7 @@ class Frontend
         foreach ($_REQUEST['products'] as $product_id) {
             WC()->cart->add_to_cart($product_id, 1);
 
-            if ($settings['remove_from_wishlist']) {
+            if (isset($settings['remove_from_wishlist'])) {
                 Plugin::instance()->model->delete_item($product_id);
             }
         }

@@ -23,10 +23,14 @@ class Seed
         $this->create_page();
 
         // set flush rewrite flag enabled
-		set_transient('better_wishlist_flush_rewrite_rules', true, 86400);
+        set_transient('better_wishlist_flush_rewrite_rules', true, 86400);
 
         // save default settings
-        do_action('wprs_save_default_settings');
+        if (get_option('better_wishlist_settings') === false) {
+            update_option('better_wishlist_settings', [
+                'remove_from_wishlist' => 'remove_from_wishlist',
+            ]);
+        }
     }
 
     /**
