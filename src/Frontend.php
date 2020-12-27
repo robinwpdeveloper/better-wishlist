@@ -11,6 +11,12 @@ class Frontend
 {
     public function __construct()
     {
+        include_once ABSPATH . 'wp-admin/includes/plugin.php';
+        
+        if (!is_plugin_active('woocommerce/woocommerce.php')) {
+            return;
+        }
+
         add_action('init', [$this, 'init']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('woocommerce_account_better-wishlist_endpoint', array($this, 'menu_content'));

@@ -31,7 +31,19 @@ class Plugin extends Singleton
             new Admin;
         }
 
+        add_filter('admin_notices', [$this, 'add_admin_notice'], 10, 2);
         add_filter('display_post_states', [$this, 'add_display_status_on_page'], 10, 2);
+    }
+
+    public function add_admin_notice()
+    {
+        if (class_exists('WooCommerce')) {
+            return;
+        }
+
+        $message = sprintf(__('%1$sBetter Wishlist%2$s requires %1$sWooCommerce%2$s plugin to be installed and activated. Please install/activate WooCommerce to continue.', 'better-wishlist'), '<strong>', '</strong>');
+
+        printf('<div class="error"><p>%1$s</p></div>', $message);
     }
 
     public function add_display_status_on_page($states, $post)
