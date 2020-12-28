@@ -41,9 +41,24 @@ class Plugin extends Singleton
             return;
         }
 
-        $message = sprintf(__('%1$sBetter Wishlist%2$s requires %1$sWooCommerce%2$s plugin to be installed and activated. Please install/activate WooCommerce to continue.', 'better-wishlist'), '<strong>', '</strong>');
+        if (!function_exists('get_plugins')) {
+            include_once ABSPATH . '/wp-admin/includes/plugin.php';
+        }
 
-        printf('<div class="error"><p>%1$s</p></div>', $message);
+        $installed_plugins = get_plugins();
+        $basename = 'woocommerce/woocommerce.php';
+
+        if (isset($installed_plugins[$basename])) {
+            $activation_url = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $basename . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $basename);
+            $message = sprintf(__('%1$sBetter Wishlist%2$s requires %1$sWooCommerce%2$s plugin to be active. Please activate WooCommerce to continue.', 'better-wishlist'), "<strong>", "</strong>");
+            $button = '<p><a href="' . $activation_url . '" class="button-primary">' . __('Activate WooCommerce', 'better-wishlist') . '</a></p>';
+        } else {
+            $activation_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=woocommerce'), 'install-plugin_woocommerce');
+            $message = sprintf(__('%1$sBetter Wishlist%2$s requires %1$sWooCommerce%2$s plugin to be installed and activated. Please install WooCommerce to continue.', 'better-wishlist'), '<strong>', '</strong>');
+            $button = '<p><a href="' . $activation_url . '" class="button-primary">' . __('Install WooCommerce', 'better-wishlist') . '</a></p>';
+        }
+
+        printf('<div class="error"><p>%1$s</p>%2$s</div>', $message, $button);
     }
 
     public function add_display_status_on_page($states, $post)
