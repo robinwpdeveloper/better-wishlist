@@ -9,6 +9,9 @@ if (!defined('ABSPATH')) {
 
 class Schedule
 {
+    private $better_wishlist_lists;
+    private $better_wishlist_items;
+
     public function __construct()
     {
         add_action('better_wishlist_delete_expired_wishlist', [$this, 'delete_expired_wishlist']);
@@ -22,10 +25,13 @@ class Schedule
     {
         global $wpdb;
 
-        $count = $wpdb->get_var("SELECT count(ID) FROM {$wpdb->better_wishlist_lists} WHERE CURTIME() >= expire_on AND user_id IS NULL");
+        $this->better_wishlist_lists = $wpdb->prefix . 'better_wishlist_lists';
+        $this->better_wishlist_items = $wpdb->prefix . 'better_wishlist_items';
+
+        $count = $wpdb->get_var("SELECT count(ID) FROM {$this->better_wishlist_lists} WHERE CURTIME() >= expire_on AND user_id IS NULL");
 
         if ($count > 0) {
-            $wpdb->query("DELETE T1,T2 FROM {$wpdb->better_wishlist_lists} T1 INNER JOIN {$wpdb->better_wishlist_items} T2 on T1.ID = T2.wishlist_id WHERE CURTIME() >= expire_on AND T1.user_id IS NULL");
+            $wpdb->query("DELETE T1,T2 FROM {$this->better_wishlist_lists} T1 INNER JOIN {$this->better_wishlist_items} T2 on T1.ID = T2.wishlist_id WHERE CURTIME() >= expire_on AND T1.user_id IS NULL");
         }
     }
 
