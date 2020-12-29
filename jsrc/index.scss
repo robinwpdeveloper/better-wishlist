@@ -1,0 +1,102 @@
+#wpcontent {
+	padding-left: 0;
+}
+
+// header
+.better-wishlist-admin-header {
+	height: 60px;
+	background-color: #fff;
+	box-shadow: 0 1px 0 rgba(213, 213, 213, 0.5), 0 1px 2px #eee;
+}
+.better-wishlist-admin-header-title {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 60px;
+	text-transform: capitalize;
+	margin: 0;
+	padding-left: 25px;
+}
+
+// content
+.better-wishlist-admin-content {
+	margin: 25px;
+
+	.components-panel__body {
+		background: #fff;
+		border: 1px solid #e2e4e7;
+		margin-bottom: 10px;
+
+		.components-panel__body-toggle {
+			border-bottom: 1px solid #d6e2ed;
+			box-shadow: none;
+            
+            &:hover {
+                background-color: #fafafa;
+            }
+		}
+
+		.components-panel__row {
+			padding: 10px;
+			margin: 0;
+
+			.components-base-control {
+				.components-base-control__field {
+					display: flex;
+					align-items: center;
+					margin-bottom: 10px;
+				}
+
+				// &.codeinwp-text-field {
+				// 	width: 100%;
+
+				// 	.components-base-control__field {
+				// 		display: block;
+
+				// 		label {
+				// 			font-weight: 600;
+				// 			margin-bottom: 10px;
+				// 		}
+
+				// 		input {
+				// 			border: 1px solid #b7c9d9;
+				// 			border-radius: 3px;
+				// 			font-size: 14px;
+				// 			padding: 9px 15px;
+				// 			width: 100%;
+				// 			box-shadow: none;
+				// 			height: 40px;
+				// 			margin: 0 0 10px 0;
+				// 			color: #444;
+
+				// 			&:disabled {
+				// 				background: #f6f6f6;
+				// 				border-color: #eeeeee;
+				// 				color: #bbbbbb;
+				// 			}
+
+				// 			&:focus {
+				// 				border-color: #00a0d2;
+				// 				box-shadow: 0 0 0 1px #00a0d2;
+				// 				outline: 2px solid transparent;
+				// 				outline-offset: -2px;
+				// 			}
+				// 		}
+
+				// 		.codeinwp-text-field-button-group {
+				// 			display: flex;
+				// 			align-items: center;
+				// 			margin: 2px 0 15px;
+
+				// 			.is-primary {
+				// 				padding: 2px 20px;
+				// 				height: auto;
+				// 				font-size: 14px;
+				// 				margin-right: 10px;
+				// 			}
+				// 		}
+				// 	}
+				// }
+			}
+		}
+	}
+}

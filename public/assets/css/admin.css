@@ -1,0 +1,35 @@
+#wpcontent {
+  padding-left: 0; }
+
+.better-wishlist-admin-header {
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 1px 0 rgba(213, 213, 213, 0.5), 0 1px 2px #eee; }
+
+.better-wishlist-admin-header-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 60px;
+  text-transform: capitalize;
+  margin: 0;
+  padding-left: 25px; }
+
+.better-wishlist-admin-content {
+  margin: 25px; }
+  .better-wishlist-admin-content .components-panel__body {
+    background: #fff;
+    border: 1px solid #e2e4e7;
+    margin-bottom: 10px; }
+    .better-wishlist-admin-content .components-panel__body .components-panel__body-toggle {
+      border-bottom: 1px solid #d6e2ed;
+      box-shadow: none; }
+      .better-wishlist-admin-content .components-panel__body .components-panel__body-toggle:hover {
+        background-color: #fafafa; }
+    .better-wishlist-admin-content .components-panel__body .components-panel__row {
+      padding: 10px;
+      margin: 0; }
+      .better-wishlist-admin-content .components-panel__body .components-panel__row .components-base-control .components-base-control__field {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px; }
+
