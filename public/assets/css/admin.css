@@ -1,12 +1,12 @@
 #wpcontent {
   padding-left: 0; }
 
-.better-wishlist-admin-header {
+.bw-settings-header {
   height: 60px;
   background-color: #fff;
   box-shadow: 0 1px 0 rgba(213, 213, 213, 0.5), 0 1px 2px #eee; }
 
-.better-wishlist-admin-header-title {
+.bw-settings-header-title {
   font-size: 14px;
   font-weight: 600;
   line-height: 60px;
@@ -14,41 +14,56 @@
   margin: 0;
   padding-left: 25px; }
 
-.better-wishlist-admin-content {
+.bw-settings-content {
   margin: 25px; }
-  .better-wishlist-admin-content .components-panel__body {
-    background: #fff;
-    border: 1px solid #e2e4e7;
-    margin-bottom: 10px; }
-    .better-wishlist-admin-content .components-panel__body .components-panel__body-toggle {
-      border-bottom: 1px solid #d6e2ed;
+  .bw-settings-content .components-tab-panel__tabs-item {
+    color: #516378;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #f8fafb;
+    box-shadow: none; }
+    .bw-settings-content .components-tab-panel__tabs-item.is-active {
+      background-color: #fff;
+      border: none;
+      border-top: 2px solid #17c9a2; }
+    .bw-settings-content .components-tab-panel__tabs-item:focus {
       box-shadow: none; }
-      .better-wishlist-admin-content .components-panel__body .components-panel__body-toggle:hover {
-        background-color: #fafafa; }
-    .better-wishlist-admin-content .components-panel__body .components-panel__row {
-      padding: 10px;
-      margin: 0; }
-      .better-wishlist-admin-content .components-panel__body .components-panel__row .components-base-control .components-base-control__field {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px; }
-
-.components-color-picker-wrap {
-  position: relative; }
-  .components-color-picker-wrap .components-color-picker-swatch {
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 3px;
-    padding: 1px;
-    cursor: pointer; }
-  .components-color-picker-wrap .components-color-picker-preview {
-    width: 18px;
-    height: 18px;
-    border-radius: 2px; }
-  .components-color-picker-wrap .components-color-picker {
-    position: absolute;
-    width: 320px;
-    height: auto;
-    background-color: #fff;
-    z-index: 99; }
+  .bw-settings-content .components-tab-panel__tab-content {
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+    padding: 30px 20px 20px; }
+    .bw-settings-content .components-tab-panel__tab-content > .components-base-control {
+      margin-bottom: 20px; }
+  .bw-settings-content .components-base-control .components-base-control__field {
+    display: flex; }
+  .bw-settings-content .components-base-control .components-base-control__label {
+    min-width: 240px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0; }
+  .bw-settings-content .components-base-control .components-base-control__help {
+    margin-left: 240px; }
+  .bw-settings-content .components-text-control__input {
+    background-color: #f2f2f2;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: border linear 0.2s, box-shadow linear 0.2s; }
+  .bw-settings-content .components-color-picker-wrap {
+    position: relative; }
+    .bw-settings-content .components-color-picker-wrap .components-color-picker-swatch {
+      background: #ffffff;
+      border: 1px solid #eee;
+      border-radius: 3px;
+      padding: 1px;
+      cursor: pointer; }
+    .bw-settings-content .components-color-picker-wrap .components-color-picker-preview {
+      width: 18px;
+      height: 18px;
+      border-radius: 2px; }
+    .bw-settings-content .components-color-picker-wrap .components-color-picker {
+      position: absolute;
+      width: 320px;
+      height: auto;
+      background-color: #fff;
+      z-index: 99; }
 

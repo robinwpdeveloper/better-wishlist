@@ -3,12 +3,12 @@
 }
 
 // header
-.better-wishlist-admin-header {
+.bw-settings-header {
 	height: 60px;
 	background-color: #fff;
 	box-shadow: 0 1px 0 rgba(213, 213, 213, 0.5), 0 1px 2px #eee;
 }
-.better-wishlist-admin-header-title {
+.bw-settings-header-title {
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 60px;
@@ -18,112 +18,88 @@
 }
 
 // content
-.better-wishlist-admin-content {
+.bw-settings-content {
 	margin: 25px;
 
-	.components-panel__body {
-		background: #fff;
-		border: 1px solid #e2e4e7;
-		margin-bottom: 10px;
+	// tabs panel
+	.components-tab-panel__tabs-item {
+		color: #516378;
+		font-size: 14px;
+		font-weight: 600;
+		background-color: #f8fafb;
+		box-shadow: none;
 
-		.components-panel__body-toggle {
-			border-bottom: 1px solid #d6e2ed;
+		&.is-active {
+			background-color: #fff;
+			border: none;
+			border-top: 2px solid #17c9a2;
+		}
+
+		&:focus {
 			box-shadow: none;
-
-			&:hover {
-				background-color: #fafafa;
-			}
-		}
-
-		.components-panel__row {
-			padding: 10px;
-			margin: 0;
-
-			.components-base-control {
-				.components-base-control__field {
-					display: flex;
-					align-items: center;
-					margin-bottom: 10px;
-				}
-
-				// &.codeinwp-text-field {
-				// 	width: 100%;
-
-				// 	.components-base-control__field {
-				// 		display: block;
-
-				// 		label {
-				// 			font-weight: 600;
-				// 			margin-bottom: 10px;
-				// 		}
-
-				// 		input {
-				// 			border: 1px solid #b7c9d9;
-				// 			border-radius: 3px;
-				// 			font-size: 14px;
-				// 			padding: 9px 15px;
-				// 			width: 100%;
-				// 			box-shadow: none;
-				// 			height: 40px;
-				// 			margin: 0 0 10px 0;
-				// 			color: #444;
-
-				// 			&:disabled {
-				// 				background: #f6f6f6;
-				// 				border-color: #eeeeee;
-				// 				color: #bbbbbb;
-				// 			}
-
-				// 			&:focus {
-				// 				border-color: #00a0d2;
-				// 				box-shadow: 0 0 0 1px #00a0d2;
-				// 				outline: 2px solid transparent;
-				// 				outline-offset: -2px;
-				// 			}
-				// 		}
-
-				// 		.codeinwp-text-field-button-group {
-				// 			display: flex;
-				// 			align-items: center;
-				// 			margin: 2px 0 15px;
-
-				// 			.is-primary {
-				// 				padding: 2px 20px;
-				// 				height: auto;
-				// 				font-size: 14px;
-				// 				margin-right: 10px;
-				// 			}
-				// 		}
-				// 	}
-				// }
-			}
 		}
 	}
-}
 
-// color control
-.components-color-picker-wrap {
-	position: relative;
+	.components-tab-panel__tab-content {
+		background-color: #ffffff;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+		padding: 30px 20px 20px;
 
-	.components-color-picker-swatch {
-		background: #ffffff;
-		border: 1px solid #eee;
-		border-radius: 3px;
-		padding: 1px;
-		cursor: pointer;
+		> .components-base-control {
+			margin-bottom: 20px;
+		}
 	}
 
-	.components-color-picker-preview {
-		width: 18px;
-		height: 18px;
-		border-radius: 2px;
+	// base control
+	.components-base-control {
+		.components-base-control__field {
+			display: flex;
+		}
+
+		.components-base-control__label {
+			min-width: 240px;
+			font-size: 14px;
+			font-weight: 600;
+			margin-bottom: 0;
+		}
+
+		.components-base-control__help {
+			margin-left: 240px;
+		}
 	}
 
-	.components-color-picker {
-		position: absolute;
-		width: 320px;
-		height: auto;
-		background-color: #fff;
-		z-index: 99;
+	// text control
+	.components-text-control__input {
+		background-color: #f2f2f2;
+		box-shadow: none;
+		border: 1px solid rgba(0, 0, 0, 0.05);
+		transition: border linear 0.2s, box-shadow linear 0.2s;
+	}
+
+	// color control
+	.components-color-picker-wrap {
+		position: relative;
+
+		.components-color-picker-swatch {
+			background: #ffffff;
+			border: 1px solid #eee;
+			border-radius: 3px;
+			padding: 1px;
+			cursor: pointer;
+		}
+
+		.components-color-picker-preview {
+			width: 18px;
+			height: 18px;
+			border-radius: 2px;
+		}
+
+		.components-color-picker {
+			position: absolute;
+			width: 320px;
+			height: auto;
+			background-color: #fff;
+			z-index: 99;
+		}
 	}
 }
