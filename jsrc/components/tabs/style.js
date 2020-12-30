@@ -1,16 +1,6 @@
 const { __ } = wp.i18n;
 
-const {
-	TabPanel,
-	BaseControl,
-	Button,
-	PanelBody,
-	PanelRow,
-	ToggleControl,
-	TextControl,
-	ColorPicker,
-	SelectControl,
-} = wp.components;
+const { BaseControl, Text } = wp.components;
 
 const { Component, Fragment } = wp.element;
 
@@ -36,16 +26,34 @@ class StyleSettings extends Component {
 	render() {
 		return (
 			<Fragment>
+				<h3>{__("Wishlist Button")}</h3>
+
 				<BaseControl
 					id="wishlist-button-color"
-					label="Add to wishlist button color"
+					label="Color"
 				>
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
 				<BaseControl
 					id="wishlist-button-color-hover"
-					label="Add to wishlist button color hover"
+					label="Color hover"
+				>
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+                <h3>{__("Cart Button")}</h3>
+
+                <BaseControl
+					id="cart-button-color"
+					label="Color"
+				>
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl
+					id="cart-button-color-hover"
+					label="Color hover"
 				>
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
