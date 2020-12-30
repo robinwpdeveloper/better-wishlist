@@ -108,7 +108,7 @@ class Page extends Component {
 						<PanelRow>
 							<BaseControl id="button-color" label="Button color">
 								<Color
-									value="#dd102d"
+									value="#cd2122"
 									onChange={(value) => console.log(value)}
 								/>
 							</BaseControl>

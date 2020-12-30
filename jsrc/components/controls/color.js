@@ -1,6 +1,5 @@
-const { __ } = wp.i18n;
-const { BaseControl, PanelBody, PanelRow, ColorPicker } = wp.components;
-const { Component, Fragment, createRef } = wp.element;
+const { ColorPicker } = wp.components;
+const { Component, createRef } = wp.element;
 
 class Color extends Component {
 	static defaultProps = {
@@ -43,13 +42,13 @@ class Color extends Component {
 		let { value } = this.props;
 
 		return (
-			<div className="better-wishlist-input-color" ref={this.ref}>
+			<div className="components-color-picker-wrap" ref={this.ref}>
 				<div
-					className="better-wishlist-input-color-swatch"
+					className="components-color-picker-swatch"
 					onClick={this.handleClick.bind(this)}
 				>
 					<div
-						className="better-wishlist-input-color-preview"
+						className="components-color-picker-preview"
 						style={{
 							background: value,
 						}}
@@ -57,7 +56,7 @@ class Color extends Component {
 				</div>
 				{this.state.displayPicker && (
 					<ColorPicker
-						color="#dd102d"
+						color={value}
 						onChangeComplete={this.updateValue.bind(this)}
 						disableAlpha
 					/>
