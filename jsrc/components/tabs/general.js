@@ -14,7 +14,7 @@ const {
 
 const { Component, Fragment } = wp.element;
 
-import Color from "./../controls/color";
+import Select from "./../controls/select";
 
 class GeneralSettings extends Component {
 	constructor() {
@@ -36,6 +36,7 @@ class GeneralSettings extends Component {
 	render() {
 		return (
 			<Fragment>
+				<Select />
 				<BaseControl
 					id="redirect-to-wishlist"
 					label="Redirect to wishlist"

@@ -1,6 +1,6 @@
 const { __ } = wp.i18n;
 
-const { BaseControl, Text } = wp.components;
+const { BaseControl } = wp.components;
 
 const { Component, Fragment } = wp.element;
 
@@ -28,32 +28,64 @@ class StyleSettings extends Component {
 			<Fragment>
 				<h3>{__("Wishlist Button")}</h3>
 
-				<BaseControl
-					id="wishlist-button-color"
-					label="Color"
-				>
+				<BaseControl id="wishlist-button-color" label="Color">
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl id="wishlist-button-color-hover" label="Color(hover)">
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl id="wishlist-button-bg-color" label="Background Color">
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
 				<BaseControl
-					id="wishlist-button-color-hover"
-					label="Color hover"
+					id="wishlist-button-bg-color-hover"
+					label="Background Color(hover)"
 				>
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
-                <h3>{__("Cart Button")}</h3>
-
-                <BaseControl
-					id="cart-button-color"
-					label="Color"
-				>
+				<BaseControl id="wishlist-button-border-color" label="Border Color">
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
 				<BaseControl
-					id="cart-button-color-hover"
-					label="Color hover"
+					id="wishlist-button-border-color-hover"
+					label="Border Color(hover)"
+				>
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<h3>{__("Cart Button")}</h3>
+
+				<BaseControl id="cart-button-color" label="Color">
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl id="cart-button-color-hover" label="Color(hover)">
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl id="cart-button-bg-color" label="Background Color">
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl
+					id="cart-button-bg-color-hover"
+					label="Background Color(hover)"
+				>
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl id="cart-button-border-color" label="Border Color">
+					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl
+					id="cart-button-border-color-hover"
+					label="Border Color(hover)"
 				>
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
