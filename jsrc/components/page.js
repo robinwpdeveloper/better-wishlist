@@ -12,6 +12,8 @@ const {
 
 const { Component, Fragment } = wp.element;
 
+import Color from "./controls/color";
+
 class Page extends Component {
 	constructor() {
 		super(...arguments);
@@ -105,10 +107,9 @@ class Page extends Component {
 					<PanelBody title={__("Style")} initialOpen={false}>
 						<PanelRow>
 							<BaseControl id="button-color" label="Button color">
-								<ColorPicker
-									color="#dd102d"
-									onChangeComplete={(value) => console.log(value.hex)}
-									disableAlpha
+								<Color
+									value="#dd102d"
+									onChange={(value) => console.log(value)}
 								/>
 							</BaseControl>
 						</PanelRow>

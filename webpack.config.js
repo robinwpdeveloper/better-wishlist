@@ -27,6 +27,7 @@ module.exports = {
 										pragma: "wp.element.createElement",
 									},
 								],
+								"@babel/plugin-proposal-class-properties"
 							],
 						},
 					},

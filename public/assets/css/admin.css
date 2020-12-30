@@ -33,3 +33,22 @@
         align-items: center;
         margin-bottom: 10px; }
 
+.better-wishlist-input-color {
+  position: relative; }
+  .better-wishlist-input-color .better-wishlist-input-color-swatch {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 1px;
+    cursor: pointer; }
+  .better-wishlist-input-color .better-wishlist-input-color-preview {
+    width: 18px;
+    height: 18px;
+    border-radius: 2px; }
+  .better-wishlist-input-color .components-color-picker {
+    position: absolute;
+    width: 320px;
+    height: auto;
+    background-color: #fff;
+    z-index: 99; }
+

@@ -29,10 +29,10 @@
 		.components-panel__body-toggle {
 			border-bottom: 1px solid #d6e2ed;
 			box-shadow: none;
-            
-            &:hover {
-                background-color: #fafafa;
-            }
+
+			&:hover {
+				background-color: #fafafa;
+			}
 		}
 
 		.components-panel__row {
@@ -98,5 +98,32 @@
 				// }
 			}
 		}
+	}
+}
+
+// controls - color
+.better-wishlist-input-color {
+	position: relative;
+
+	.better-wishlist-input-color-swatch {
+		background: #ffffff;
+		border: 1px solid #eee;
+		border-radius: 3px;
+		padding: 1px;
+		cursor: pointer;
+	}
+
+	.better-wishlist-input-color-preview {
+		width: 18px;
+		height: 18px;
+		border-radius: 2px;
+	}
+
+	.components-color-picker {
+		position: absolute;
+		width: 320px;
+		height: auto;
+		background-color: #fff;
+		z-index: 99;
 	}
 }

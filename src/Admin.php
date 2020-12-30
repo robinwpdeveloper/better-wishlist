@@ -38,8 +38,8 @@ class Admin
 
     public function enqueue_admin_scripts()
     {
-        wp_enqueue_style('better-wishlist-admin-style', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/admin.css', array('wp-components'));
-        wp_enqueue_script('better-wishlist-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/admin.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), BETTER_WISHLIST_PLUGIN_VERSION, true);
+        wp_enqueue_style('better-wishlist-admin-style', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/admin.css', ['wp-components']);
+        wp_enqueue_script('better-wishlist-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/admin.js', ['wp-api', 'wp-i18n', 'wp-components', 'wp-element'], BETTER_WISHLIST_PLUGIN_VERSION, true);
     }
 
     // public function init_page()
