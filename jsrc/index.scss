@@ -76,6 +76,12 @@
 		transition: border linear 0.2s, box-shadow linear 0.2s;
 	}
 
+	// range control
+	.components-range-control {
+		width: 100%;
+		max-width: 200px;
+	}
+
 	// color control
 	.components-color-picker-wrap {
 		position: relative;

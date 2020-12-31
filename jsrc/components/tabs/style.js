@@ -1,6 +1,6 @@
 const { __ } = wp.i18n;
 
-const { BaseControl } = wp.components;
+const { BaseControl, RangeControl, SelectControl } = wp.components;
 
 const { Component, Fragment } = wp.element;
 
@@ -27,6 +27,19 @@ class StyleSettings extends Component {
 		return (
 			<Fragment>
 				<h3>{__("Wishlist Button")}</h3>
+
+				<BaseControl id="wishlist-button-style" label="Style">
+					<SelectControl
+						value="default"
+						onChange={(value) => {
+							console.log(value);
+						}}
+						options={[
+							{ value: "default", label: "Theme Default" },
+							{ value: "custom", label: "Custom" },
+						]}
+					/>
+				</BaseControl>
 
 				<BaseControl id="wishlist-button-color" label="Color">
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
@@ -58,7 +71,56 @@ class StyleSettings extends Component {
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
+				<BaseControl id="wishlist-button-padding-top" label="Padding Top">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
+				</BaseControl>
+
+				<BaseControl id="wishlist-button-padding-right" label="Padding Right">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
+				</BaseControl>
+
+				<BaseControl id="wishlist-button-padding-bottom" label="Padding Bottom">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
+				</BaseControl>
+
+				<BaseControl id="wishlist-button-padding-left" label="Padding Left">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
+				</BaseControl>
+
 				<h3>{__("Cart Button")}</h3>
+
+				<BaseControl id="cart-button-style" label="Style">
+					<SelectControl
+						value="default"
+						onChange={(value) => {
+							console.log(value);
+						}}
+						options={[
+							{ value: "default", label: "Theme Default" },
+							{ value: "custom", label: "Custom" },
+						]}
+					/>
+				</BaseControl>
 
 				<BaseControl id="cart-button-color" label="Color">
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
@@ -88,6 +150,42 @@ class StyleSettings extends Component {
 					label="Border Color(hover)"
 				>
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				</BaseControl>
+
+				<BaseControl id="cart-button-padding-top" label="Padding Top">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
+				</BaseControl>
+
+				<BaseControl id="cart-button-padding-right" label="Padding Right">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
+				</BaseControl>
+
+				<BaseControl id="cart-button-padding-bottom" label="Padding Bottom">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
+				</BaseControl>
+
+				<BaseControl id="cart-button-padding-left" label="Padding Left">
+					<RangeControl
+						value={10}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={100}
+					/>
 				</BaseControl>
 			</Fragment>
 		);

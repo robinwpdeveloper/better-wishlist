@@ -36,7 +36,31 @@ class GeneralSettings extends Component {
 	render() {
 		return (
 			<Fragment>
-				<Select />
+				<BaseControl
+					id="wishlist-page"
+					label="Wishlist page"
+					help={__(
+						"Pick a page as the main Wishlist page; make sure you add the [better_wishlist] shortcode into the page content."
+					)}
+				>
+					<Select />
+				</BaseControl>
+				
+				<BaseControl
+					id="wishlist-menu"
+					label="Wishlist menu"
+					help={__("Add wishlist menu in 'my account' panel.")}
+				>
+					<ToggleControl
+						checked={this.state.redirect_to_wishlist}
+						onChange={() =>
+							this.setState({
+								redirect_to_wishlist: !this.state.redirect_to_wishlist,
+							})
+						}
+					/>
+				</BaseControl>
+				
 				<BaseControl
 					id="redirect-to-wishlist"
 					label="Redirect to wishlist"

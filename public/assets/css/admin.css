@@ -48,6 +48,9 @@
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.05);
     transition: border linear 0.2s, box-shadow linear 0.2s; }
+  .bw-settings-content .components-range-control {
+    width: 100%;
+    max-width: 200px; }
   .bw-settings-content .components-color-picker-wrap {
     position: relative; }
     .bw-settings-content .components-color-picker-wrap .components-color-picker-swatch {
