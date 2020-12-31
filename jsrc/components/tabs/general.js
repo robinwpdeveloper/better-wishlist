@@ -7,18 +7,6 @@ import Select from "./../controls/select";
 class GeneralSettings extends Component {
 	constructor() {
 		super(...arguments);
-
-		// this.state = {
-		// 	redirect_to_wishlist: false,
-		// 	redirect_to_cart: false,
-		// 	remove_from_wishlist: true,
-		// 	show_in_loop: true,
-		// 	position_in_loop: "after_cart",
-		// 	position_in_single: "after_cart",
-		// 	add_to_wishlist_text: __("Add to wishlist"),
-		// 	add_to_cart_text: __("Add to cart"),
-		// 	add_all_to_wishlist_text: __("Add all to cart"),
-		// };
 	}
 
 	updateValue(value) {
@@ -37,7 +25,14 @@ class GeneralSettings extends Component {
 						"Pick a page as the main Wishlist page; make sure you add the [better_wishlist] shortcode into the page content."
 					)}
 				>
-					<Select />
+					<Select
+						value={state.wishlist_page}
+						onChange={(newValue) =>
+							this.updateValue({
+								wishlist_page: newValue,
+							})
+						}
+					/>
 				</BaseControl>
 
 				<BaseControl

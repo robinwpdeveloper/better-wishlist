@@ -12,6 +12,7 @@ class Page extends Component {
 		super(...arguments);
 
 		this.state = {
+			wishlist_page: null,
 			wishlist_menu: true,
 			redirect_to_wishlist: false,
 			redirect_to_cart: false,
@@ -33,8 +34,6 @@ class Page extends Component {
 	}
 
 	render() {
-		console.log(this.state);
-
 		return (
 			<Fragment>
 				<div className="bw-settings-header">

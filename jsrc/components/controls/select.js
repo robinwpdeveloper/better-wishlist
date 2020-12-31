@@ -19,20 +19,28 @@ class Color extends Component {
 	}
 
 	componentDidMount() {
-		wp.apiFetch({ path: "/wp/v2/pages?per_page=-1" }).then((pages) => {
-			if (pages.length > 0) {
-				let options = [];
+		const { localStorage } = window;
+		const options = localStorage.getItem("bwpOpts");
 
-				pages.map((page) => {
-					options.push({
-						label: page.title.rendered,
-						value: page.id,
+		if (options === null) {
+			wp.apiFetch({ path: "/wp/v2/pages?per_page=-1" }).then((pages) => {
+				if (pages.length > 0) {
+					let opts = [];
+
+					pages.map((page) => {
+						opts.push({
+							label: page.title.rendered,
+							value: page.id,
+						});
 					});
-				});
 
-				this.setState({ options: options });
-			}
-		});
+					localStorage.setItem("bwpOpts", JSON.stringify(opts));
+					this.setState({ options: opts });
+				}
+			});
+		} else {
+			this.setState({ options: JSON.parse(options) });
+		}
 	}
 
 	render() {
