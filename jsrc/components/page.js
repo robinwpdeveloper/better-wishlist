@@ -1,7 +1,5 @@
 const { __ } = wp.i18n;
-
 const { TabPanel } = wp.components;
-
 const { Component, Fragment } = wp.element;
 
 import GeneralSettings from "./tabs/general";
@@ -14,6 +12,7 @@ class Page extends Component {
 		super(...arguments);
 
 		this.state = {
+			wishlist_menu: true,
 			redirect_to_wishlist: false,
 			redirect_to_cart: false,
 			remove_from_wishlist: true,
@@ -26,12 +25,21 @@ class Page extends Component {
 		};
 	}
 
+	onChange(newState) {
+		this.setState({
+			...this.state,
+			...newState,
+		});
+	}
+
 	render() {
+		console.log(this.state);
+
 		return (
 			<Fragment>
 				<div className="bw-settings-header">
 					<h2 className="bw-settings-header-title">
-						{__("Better Wishlist Settings")}
+						{__("BetterWishlist Settings")}
 					</h2>
 				</div>
 
@@ -59,7 +67,12 @@ class Page extends Component {
 					>
 						{(tab) => {
 							if (tab.name == "general") {
-								return <GeneralSettings />;
+								return (
+									<GeneralSettings
+										state={this.state}
+										onChange={this.onChange.bind(this)}
+									/>
+								);
 							} else if (tab.name == "button") {
 								return <ButtonSettings />;
 							} else if (tab.name == "custom-text") {

@@ -1,18 +1,6 @@
 const { __ } = wp.i18n;
-
-const {
-	TabPanel,
-	BaseControl,
-	Button,
-	PanelBody,
-	PanelRow,
-	ToggleControl,
-	TextControl,
-	ColorPicker,
-	SelectControl,
-} = wp.components;
-
 const { Component, Fragment } = wp.element;
+const { BaseControl, ToggleControl } = wp.components;
 
 import Select from "./../controls/select";
 
@@ -20,20 +8,26 @@ class GeneralSettings extends Component {
 	constructor() {
 		super(...arguments);
 
-		this.state = {
-			redirect_to_wishlist: false,
-			redirect_to_cart: false,
-			remove_from_wishlist: true,
-			show_in_loop: true,
-			position_in_loop: "after_cart",
-			position_in_single: "after_cart",
-			add_to_wishlist_text: __("Add to wishlist"),
-			add_to_cart_text: __("Add to cart"),
-			add_all_to_wishlist_text: __("Add all to cart"),
-		};
+		// this.state = {
+		// 	redirect_to_wishlist: false,
+		// 	redirect_to_cart: false,
+		// 	remove_from_wishlist: true,
+		// 	show_in_loop: true,
+		// 	position_in_loop: "after_cart",
+		// 	position_in_single: "after_cart",
+		// 	add_to_wishlist_text: __("Add to wishlist"),
+		// 	add_to_cart_text: __("Add to cart"),
+		// 	add_all_to_wishlist_text: __("Add all to cart"),
+		// };
+	}
+
+	updateValue(value) {
+		this.props.onChange(value);
 	}
 
 	render() {
+		const { state } = this.props;
+
 		return (
 			<Fragment>
 				<BaseControl
@@ -45,32 +39,32 @@ class GeneralSettings extends Component {
 				>
 					<Select />
 				</BaseControl>
-				
+
 				<BaseControl
 					id="wishlist-menu"
 					label="Wishlist menu"
 					help={__("Add wishlist menu in 'my account' panel.")}
 				>
 					<ToggleControl
-						checked={this.state.redirect_to_wishlist}
+						checked={state.wishlist_menu}
 						onChange={() =>
-							this.setState({
-								redirect_to_wishlist: !this.state.redirect_to_wishlist,
+							this.updateValue({
+								wishlist_menu: !state.wishlist_menu,
 							})
 						}
 					/>
 				</BaseControl>
-				
+
 				<BaseControl
 					id="redirect-to-wishlist"
 					label="Redirect to wishlist"
 					help="Redirect to wishlist page after adding a product to wishlist."
 				>
 					<ToggleControl
-						checked={this.state.redirect_to_wishlist}
+						checked={state.redirect_to_wishlist}
 						onChange={() =>
-							this.setState({
-								redirect_to_wishlist: !this.state.redirect_to_wishlist,
+							this.updateValue({
+								redirect_to_wishlist: !state.redirect_to_wishlist,
 							})
 						}
 					/>
@@ -82,10 +76,10 @@ class GeneralSettings extends Component {
 					help="Redirect to cart page after adding a product to cart."
 				>
 					<ToggleControl
-						checked={this.state.redirect_to_cart}
+						checked={state.redirect_to_cart}
 						onChange={() =>
-							this.setState({
-								redirect_to_cart: !this.state.redirect_to_cart,
+							this.updateValue({
+								redirect_to_cart: !state.redirect_to_cart,
 							})
 						}
 					/>
@@ -97,10 +91,10 @@ class GeneralSettings extends Component {
 					help="Remove from wishlist after adding a product to cart."
 				>
 					<ToggleControl
-						checked={this.state.remove_from_wishlist}
+						checked={state.remove_from_wishlist}
 						onChange={() =>
-							this.setState({
-								remove_from_wishlist: !this.state.remove_from_wishlist,
+							this.updateValue({
+								remove_from_wishlist: !state.remove_from_wishlist,
 							})
 						}
 					/>
