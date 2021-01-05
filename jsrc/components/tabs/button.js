@@ -19,21 +19,15 @@ import Color from "./../controls/color";
 class ButtonSettings extends Component {
 	constructor() {
 		super(...arguments);
+	}
 
-		this.state = {
-			redirect_to_wishlist: false,
-			redirect_to_cart: false,
-			remove_from_wishlist: true,
-			show_in_loop: true,
-			position_in_loop: "after_cart",
-			position_in_single: "after_cart",
-			add_to_wishlist_text: __("Add to wishlist"),
-			add_to_cart_text: __("Add to cart"),
-			add_all_to_wishlist_text: __("Add all to cart"),
-		};
+	updateValue(value) {
+		this.props.onChange(value);
 	}
 
 	render() {
+		const { state } = this.props;
+
 		return (
 			<Fragment>
 				<BaseControl
@@ -42,10 +36,10 @@ class ButtonSettings extends Component {
 					help="Show wishlist button in product loop."
 				>
 					<ToggleControl
-						checked={this.state.show_in_loop}
+						checked={state.show_in_loop == "yes"}
 						onChange={() =>
-							this.setState({
-								show_in_loop: !this.state.show_in_loop,
+							this.updateValue({
+								show_in_loop: state.show_in_loop == "yes" ? "no" : "yes",
 							})
 						}
 					/>
@@ -63,9 +57,9 @@ class ButtonSettings extends Component {
 								label: "After add to cart",
 							},
 						]}
-						value={this.state.position_in_loop}
+						value={state.position_in_loop}
 						onChange={(value) =>
-							this.setState({
+							this.updateValue({
 								position_in_loop: value,
 							})
 						}
@@ -84,9 +78,9 @@ class ButtonSettings extends Component {
 								label: "After add to cart",
 							},
 						]}
-						value={this.state.position_in_single}
+						value={state.position_in_single}
 						onChange={(value) =>
-							this.setState({
+							this.updateValue({
 								position_in_single: value,
 							})
 						}

@@ -45,11 +45,11 @@ class StyleSettings extends Component {
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
-				<BaseControl id="wishlist-button-color-hover" label="Color(hover)">
+				<BaseControl id="wishlist-button-bg-color" label="Background Color">
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
-				<BaseControl id="wishlist-button-bg-color" label="Background Color">
+				<BaseControl id="wishlist-button-color-hover" label="Color(hover)">
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
@@ -60,14 +60,30 @@ class StyleSettings extends Component {
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 
-				<BaseControl id="wishlist-button-border-color" label="Border Color">
-					<Color value="#cd2122" onChange={(value) => console.log(value)} />
+				<BaseControl id="wishlist-button-border-style" label="Border">
+					<SelectControl
+						value="default"
+						onChange={(value) => {
+							console.log(value);
+						}}
+						options={[
+							{ value: "none", label: "None" },
+							{ value: "solid", label: "Solid" },
+							{ value: "dashed", label: "Dashed" },
+						]}
+					/>
 				</BaseControl>
 
-				<BaseControl
-					id="wishlist-button-border-color-hover"
-					label="Border Color(hover)"
-				>
+				<BaseControl id="wishlist-button-border-width" label="Border Width">
+					<RangeControl
+						value={1}
+						onChange={(columns) => console.log(columns)}
+						min={0}
+						max={10}
+					/>
+				</BaseControl>
+
+				<BaseControl id="wishlist-button-border-color" label="Border Color">
 					<Color value="#cd2122" onChange={(value) => console.log(value)} />
 				</BaseControl>
 

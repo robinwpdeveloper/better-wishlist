@@ -41,10 +41,10 @@ class GeneralSettings extends Component {
 					help={__("Add wishlist menu in 'my account' panel.")}
 				>
 					<ToggleControl
-						checked={state.wishlist_menu}
+						checked={state.wishlist_menu == "yes"}
 						onChange={() =>
 							this.updateValue({
-								wishlist_menu: !state.wishlist_menu,
+								wishlist_menu: state.wishlist_menu == "yes" ? "no" : "yes",
 							})
 						}
 					/>
@@ -56,10 +56,11 @@ class GeneralSettings extends Component {
 					help="Redirect to wishlist page after adding a product to wishlist."
 				>
 					<ToggleControl
-						checked={state.redirect_to_wishlist}
+						checked={state.redirect_to_wishlist == "yes"}
 						onChange={() =>
 							this.updateValue({
-								redirect_to_wishlist: !state.redirect_to_wishlist,
+								redirect_to_wishlist:
+									state.redirect_to_wishlist == "yes" ? "no" : "yes",
 							})
 						}
 					/>
@@ -71,10 +72,11 @@ class GeneralSettings extends Component {
 					help="Redirect to cart page after adding a product to cart."
 				>
 					<ToggleControl
-						checked={state.redirect_to_cart}
+						checked={state.redirect_to_cart == "yes"}
 						onChange={() =>
 							this.updateValue({
-								redirect_to_cart: !state.redirect_to_cart,
+								redirect_to_cart:
+									state.redirect_to_cart == "yes" ? "no" : "yes",
 							})
 						}
 					/>

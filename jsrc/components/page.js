@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { TabPanel } = wp.components;
+const { TabPanel, Button } = wp.components;
 const { Component, Fragment } = wp.element;
 
 import GeneralSettings from "./tabs/general";
@@ -13,23 +13,78 @@ class Page extends Component {
 
 		this.state = {
 			wishlist_page: null,
-			wishlist_menu: true,
-			redirect_to_wishlist: false,
-			redirect_to_cart: false,
-			remove_from_wishlist: true,
-			show_in_loop: true,
+			wishlist_menu: 'yes',
+			redirect_to_wishlist: 'no',
+			redirect_to_cart: 'no',
+			remove_from_wishlist: 'yes',
+			show_in_loop: 'yes',
 			position_in_loop: "after_cart",
 			position_in_single: "after_cart",
 			add_to_wishlist_text: __("Add to wishlist"),
 			add_to_cart_text: __("Add to cart"),
-			add_all_to_wishlist_text: __("Add all to cart"),
+			add_all_to_cart_text: __("Add all to cart"),
+
+			// wishlist_button_style: 'default',
+			// wishlist_button_color: 'default',
+			// wishlist_button_bg: 'default',
+			// wishlist_button_hover_color: 'default',
+			// wishlist_button_hover_bg: 'default',
+			// wishlist_button_border_style: 'default',
+			// wishlist_button_border_width: 1,
+			// wishlist_button_border_color: 'default',
+			// wishlist_button_padding_top: 'default',
+			// wishlist_button_padding_right: 'default',
+			// wishlist_button_padding_bottom: 'default',
+			// wishlist_button_padding_left: 'default',
+
+			// cart_button_style: 'default',
+			// cart_button_color: 'default',
+			// cart_button_bg: 'default',
+			// cart_button_hover_color: 'default',
+			// cart_button_hover_bg: 'default',
+			// cart_button_border_style: 'default',
+			// cart_button_border_width: 1,
+			// cart_button_border_color: 'default',
+			// cart_button_padding_top: 'default',
+			// cart_button_padding_right: 'default',
+			// cart_button_padding_bottom: 'default',
+			// cart_button_padding_left: 'default',
 		};
+	}
+
+	componentDidMount() {
+		console.log(BetterWishlist.settings);
+		
+		this.setState({
+			...this.state,
+			...BetterWishlist.settings,
+		});
 	}
 
 	onChange(newState) {
 		this.setState({
 			...this.state,
 			...newState,
+		});
+	}
+
+	saveForm(ev) {
+		const settings = this.state;
+
+		jQuery.ajax({
+			type: "POST",
+			url: BetterWishlist.ajaxurl,
+			data: {
+				action: "bw_save_settings",
+				security: BetterWishlist.nonce,
+				settings,
+			},
+			success: function (response) {
+				console.log(response);
+			},
+			error: function (response) {
+				console.log(response);
+			},
 		});
 	}
 
@@ -73,14 +128,31 @@ class Page extends Component {
 									/>
 								);
 							} else if (tab.name == "button") {
-								return <ButtonSettings />;
+								return (
+									<ButtonSettings
+										state={this.state}
+										onChange={this.onChange.bind(this)}
+									/>
+								);
 							} else if (tab.name == "custom-text") {
-								return <CustomTextSettings />;
+								return (
+									<CustomTextSettings
+										state={this.state}
+										onChange={this.onChange.bind(this)}
+									/>
+								);
 							} else if (tab.name == "style") {
-								return <StyleSettings />;
+								return (
+									<StyleSettings
+										state={this.state}
+										onChange={this.onChange.bind(this)}
+									/>
+								);
 							}
 						}}
 					</TabPanel>
+
+					<Button onClick={this.saveForm.bind(this)}>{__("Save")}</Button>
 				</div>
 			</Fragment>
 		);
