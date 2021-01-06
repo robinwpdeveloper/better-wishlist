@@ -102,10 +102,15 @@
 
 		.components-color-picker {
 			position: absolute;
-			width: 320px;
+			width: 280px;
 			height: auto;
 			background-color: #fff;
+			box-shadow: 0px 0px 5px #ccc;
 			z-index: 99;
+
+			.components-base-control .components-base-control__label {
+				display: none;
+			}
 		}
 	}
 }
