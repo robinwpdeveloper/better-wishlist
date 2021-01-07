@@ -1,7 +1,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Better Wishlist\n"
+"Project-Id-Version: BetterWishlist\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-27 11:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: src/Plugin.php:44
 #, php-format
 msgid ""
-"%1$sBetter Wishlist%2$s requires %1$sWooCommerce%2$s plugin to be installed "
+"%1$sBetterWishlist%2$s requires %1$sWooCommerce%2$s plugin to be installed "
 "and activated. Please install/activate WooCommerce to continue."
 msgstr ""
 
@@ -59,7 +59,7 @@ msgstr ""
 #. page_title
 #. Name of the plugin
 #: src/Admin.php:24 src/Admin.php:25
-msgid "Better Wishlist"
+msgid "BetterWishlist"
 msgstr ""
 
 #: src/Frontend.php:350

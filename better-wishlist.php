@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Better Wishlist
+ * Plugin Name:       BetterWishlist
  * Plugin URI:        #
  * Description:       Wishlist functionality for your WooCommerce store.
  * Version:           1.0.0
