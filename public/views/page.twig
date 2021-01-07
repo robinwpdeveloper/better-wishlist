@@ -1,4 +1,4 @@
-<div class="better-wishlist-page-wrap">
+<div class="betterwishlist-page-wrap">
   {% if products %}
     <table class="shop_table cart wishlist_table wishlist_view traditional responsive">
       <thead>
@@ -30,7 +30,7 @@
               <div>
                 <a href="#"
                   data-product_id="{{ product.id }}"
-                  class="remove better-wishlist-remove-from-wishlist"
+                  class="remove betterwishlist-remove-from-wishlist"
                   title="{{ i18n.remove_this_product }}">
                   ×
                 </a>
@@ -54,7 +54,7 @@
               </span>
             </td>
             <td class="add-to-cart">
-              <a class="button better-wishlist-add-to-cart-single add_to_cart_button better-wishlist-addto-cart-button"
+              <a class="button betterwishlist-add-to-cart-single add_to_cart_button betterwishlist-addto-cart-button"
                 data-product_id="{{ product.id }}"
                 href="#">
                 {{ i18n.add_to_cart }}
@@ -67,7 +67,7 @@
     <div class="add-to-cart-multiple">
       <a href="#"
         data-products="{{ ids|join(',') }}"
-        class="button better-wishlist-add-to-cart-multiple">
+        class="button betterwishlist-add-to-cart-multiple">
         {{ i18n.add_all_to_cart }}
       </a>
     </div>

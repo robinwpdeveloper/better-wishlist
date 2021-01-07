@@ -19,7 +19,7 @@ class Frontend
 
         add_action('init', [$this, 'init']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
-        add_action('woocommerce_account_better-wishlist_endpoint', array($this, 'menu_content'));
+        add_action('woocommerce_account_betterwishlist_endpoint', array($this, 'menu_content'));
         add_action('woocommerce_after_add_to_cart_button', [$this, 'single_add_to_wishlist_button'], 10);
         add_action('woocommerce_loop_add_to_cart_link', [$this, 'archive_add_to_wishlist_button'], 10, 3);
 
@@ -51,7 +51,7 @@ class Frontend
      */
     public function init()
     {
-        add_rewrite_endpoint('better-wishlist', EP_ROOT | EP_PAGES);
+        add_rewrite_endpoint('betterwishlist', EP_ROOT | EP_PAGES);
 
         // flush rewrite rules
         if (get_transient('better_wishlist_flush_rewrite_rules') === true) {
@@ -82,27 +82,27 @@ class Frontend
                 'remove_from_wishlist' => isset($settings['remove_from_wishlist']),
                 'redirect_to_cart' => isset($settings['redirect_to_cart']),
                 'cart_page_url' => wc_get_cart_url(),
-                'wishlist_page_url' => esc_url(wc_get_account_endpoint_url('better-wishlist')),
+                'wishlist_page_url' => esc_url(wc_get_account_endpoint_url('betterwishlist')),
             ],
             'i18n' => [
-                'no_records_found' => __('No Records Found', 'better-wishlist'),
+                'no_records_found' => __('No Records Found', 'betterwishlist'),
             ],
         ]);
 
         // css
-        wp_register_style('better-wishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/' . 'better-wishlist.css', null, BETTER_WISHLIST_PLUGIN_VERSION, 'all');
+        wp_register_style('betterwishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/' . 'betterwishlist.css', null, BETTER_WISHLIST_PLUGIN_VERSION, 'all');
 
         // js
-        wp_register_script('better-wishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/' . 'better-wishlist.js', ['jquery'], BETTER_WISHLIST_PLUGIN_VERSION, true);
-        wp_localize_script('better-wishlist', 'BETTER_WISHLIST', $localize_scripts);
+        wp_register_script('betterwishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/' . 'betterwishlist.js', ['jquery'], BETTER_WISHLIST_PLUGIN_VERSION, true);
+        wp_localize_script('betterwishlist', 'BETTER_WISHLIST', $localize_scripts);
 
         // if woocommerce page, enqueue styles and scripts
         if (is_woocommerce()) {
             // enqueue styles
-            wp_enqueue_style('better-wishlist');
+            wp_enqueue_style('betterwishlist');
 
             // enqueue scripts
-            wp_enqueue_script('better-wishlist');
+            wp_enqueue_script('betterwishlist');
         }
     }
 
@@ -129,7 +129,7 @@ class Frontend
      */
     public function add_menu($items)
     {
-        $items = array_splice($items, 0, count($items) - 1) + ['better-wishlist' => __('Wishlist', 'better-wishlist')] + $items;
+        $items = array_splice($items, 0, count($items) - 1) + ['betterwishlist' => __('Wishlist', 'betterwishlist')] + $items;
 
         return $items;
     }
@@ -154,10 +154,10 @@ class Frontend
     public function shortcode($atts, $content = null)
     {
         // enqueue styles
-        wp_enqueue_style('better-wishlist');
+        wp_enqueue_style('betterwishlist');
 
         // enqueue scripts
-        wp_enqueue_script('better-wishlist');
+        wp_enqueue_script('betterwishlist');
 
         $atts = shortcode_atts([
             'per_page' => 5,
@@ -167,12 +167,12 @@ class Frontend
         ], $atts);
 
         $i18n = [
-            'product_name' => __('Product name', 'better-wishlist'),
-            'stock_status' => __('Stock Status', 'better-wishlist'),
-            'add_to_cart' => __('Add To Cart', 'better-wishlist'),
-            'add_all_to_cart' => __('Add All to Cart', 'better-wishlist'),
-            'no_records_found' => __('No Records Found', 'better-wishlist'),
-            'remove_this_product' => __('Remove this product', 'better-wishlist'),
+            'product_name' => __('Product name', 'betterwishlist'),
+            'stock_status' => __('Stock Status', 'betterwishlist'),
+            'add_to_cart' => __('Add To Cart', 'betterwishlist'),
+            'add_all_to_cart' => __('Add All to Cart', 'betterwishlist'),
+            'no_records_found' => __('No Records Found', 'betterwishlist'),
+            'remove_this_product' => __('Remove this product', 'betterwishlist'),
         ];
         $items = Plugin::instance()->model->read_list(Plugin::instance()->model->get_current_user_list());
         $products = [];
@@ -210,7 +210,7 @@ class Frontend
         }
 
         $i18n = [
-            'add_to_wishlist' => __('Add To Wishlist', 'better-wishlist'),
+            'add_to_wishlist' => __('Add To Wishlist', 'betterwishlist'),
         ];
 
         return Plugin::instance()->twig->render('button.twig', ['i18n' => $i18n, 'product_id' => $product->get_id()]);
@@ -251,7 +251,7 @@ class Frontend
         if (empty($_REQUEST['product_id'])) {
             wp_send_json_error([
                 'product_title' => '',
-                'message' => __('Product ID is should not be empty.', 'better-wishlist'),
+                'message' => __('Product ID is should not be empty.', 'betterwishlist'),
             ]);
         }
 
@@ -262,7 +262,7 @@ class Frontend
         if ($already_in_wishlist) {
             wp_send_json_error([
                 'product_title' => get_the_title($product_id),
-                'message' => __('already exists in wishlist.', 'better-wishlist'),
+                'message' => __('already exists in wishlist.', 'betterwishlist'),
             ]);
         }
 
@@ -271,7 +271,7 @@ class Frontend
 
         wp_send_json_success([
             'product_title' => get_the_title($product_id),
-            'message' => __('added in wishlist.', 'better-wishlist'),
+            'message' => __('added in wishlist.', 'betterwishlist'),
         ]);
     }
 
@@ -287,7 +287,7 @@ class Frontend
         if (empty($_REQUEST['product_id'])) {
             wp_send_json_error([
                 'product_title' => '',
-                'message' => __('Product ID is should not be empty.', 'better-wishlist'),
+                'message' => __('Product ID is should not be empty.', 'betterwishlist'),
             ]);
         }
 
@@ -297,13 +297,13 @@ class Frontend
         if (!$removed) {
             wp_send_json_error([
                 'product_title' => get_the_title($product_id),
-                'message' => __('couldn\'t be removed.', 'better-wishlist'),
+                'message' => __('couldn\'t be removed.', 'betterwishlist'),
             ]);
         }
 
         wp_send_json_success([
             'product_title' => get_the_title($product_id),
-            'message' => __('removed from wishlist.', 'better-wishlist'),
+            'message' => __('removed from wishlist.', 'betterwishlist'),
         ]);
     }
 
@@ -319,7 +319,7 @@ class Frontend
         if (empty($_REQUEST['product_id'])) {
             wp_send_json_error([
                 'product_title' => '',
-                'message' => __('Product ID is should not be empty.', 'better-wishlist'),
+                'message' => __('Product ID is should not be empty.', 'betterwishlist'),
             ]);
         }
 
@@ -341,13 +341,13 @@ class Frontend
 
             wp_send_json_success([
                 'product_title' => get_the_title($product_id),
-                'message' => __('added in cart.', 'better-wishlist'),
+                'message' => __('added in cart.', 'betterwishlist'),
             ]);
         }
 
         wp_send_json_error([
             'product_title' => get_the_title($product_id),
-            'message' => __('couldn\'t be added in cart.', 'better-wishlist'),
+            'message' => __('couldn\'t be added in cart.', 'betterwishlist'),
         ]);
     }
 
@@ -363,7 +363,7 @@ class Frontend
         if (empty($_REQUEST['products'])) {
             wp_send_json_error([
                 'product_title' => '',
-                'message' => __('Product ID is should not be empty.', 'better-wishlist'),
+                'message' => __('Product ID is should not be empty.', 'betterwishlist'),
             ]);
         }
 
@@ -378,8 +378,8 @@ class Frontend
         }
 
         wp_send_json_success([
-            'product_title' => __('All items', 'better-wishlist'),
-            'message' => __('added in cart.', 'better-wishlist'),
+            'product_title' => __('All items', 'betterwishlist'),
+            'message' => __('added in cart.', 'betterwishlist'),
         ]);
     }
 }

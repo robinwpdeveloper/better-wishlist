@@ -178,7 +178,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _con
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ \"./jsrc/index.scss\");\n/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _components_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/page */ \"./jsrc/components/page.js\");\nvar render = wp.element.render;\n\n\nrender(wp.element.createElement(_components_page__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null), document.getElementById(\"better-wishlist-admin\"));\n\n//# sourceURL=webpack:///./jsrc/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ \"./jsrc/index.scss\");\n/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _components_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/page */ \"./jsrc/components/page.js\");\nvar render = wp.element.render;\n\n\nrender(wp.element.createElement(_components_page__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null), document.getElementById(\"betterwishlist-admin\"));\n\n//# sourceURL=webpack:///./jsrc/index.js?");
 
 /***/ }),
 

@@ -95,7 +95,7 @@ class Model
 
         $values = [
             0,
-            __('Wishlist', 'better-wishlist'),
+            __('Wishlist', 'betterwishlist'),
             '',
             uniqid(),
             0,

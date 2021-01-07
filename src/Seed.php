@@ -94,7 +94,7 @@ class Seed
 
         if (empty($post)) {
             $post_id = wp_insert_post(array(
-                'post_title' => __('Wishlist', 'better-wishlist'),
+                'post_title' => __('Wishlist', 'betterwishlist'),
                 'post_type' => 'page',
                 'post_status' => 'publish',
                 'post_author' => get_current_user_id(),

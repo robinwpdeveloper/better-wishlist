@@ -5,20 +5,20 @@
 		var message = response.product_title
 			? `<strong>${response.product_title}</strong> ${response.message}`
 			: response.message;
-		var template = `<div class="better-wishlist-notification notification-${uid} ${cssClass}">
+		var template = `<div class="betterwishlist-notification notification-${uid} ${cssClass}">
 			<p class="message">${message}</p>
 		</div>`;
 
 		// insert
-		if (document.querySelector(".better-wishlist-notification-wrap") === null) {
+		if (document.querySelector(".betterwishlist-notification-wrap") === null) {
 			document.body.insertAdjacentHTML(
 				"beforeend",
-				`<div class="better-wishlist-notification-wrap"></div>`
+				`<div class="betterwishlist-notification-wrap"></div>`
 			);
 		}
 
 		document
-			.querySelector(".better-wishlist-notification-wrap")
+			.querySelector(".betterwishlist-notification-wrap")
 			.insertAdjacentHTML("beforeend", template);
 
 		// remove
@@ -29,7 +29,7 @@
 
 	// create notice
 	function createNotice(response) {
-		var pageWrap = document.querySelector(".better-wishlist-page-wrap");
+		var pageWrap = document.querySelector(".betterwishlist-page-wrap");
 		var noticeWrap = document.querySelector(".woocommerce-notices-wrapper");
 		var message = response.product_title
 			? `<strong>${response.product_title}</strong> ${response.message}`
@@ -49,7 +49,7 @@
 
 	$(document).ready(function () {
 		// add to wishlist
-		$(document).on("click", ".better-wishlist-add-to-wishlist", function (e) {
+		$(document).on("click", ".betterwishlist-add-to-wishlist", function (e) {
 			e.preventDefault();
 
 			var productID = $(this).data("product-id");
@@ -84,11 +84,11 @@
 		// remove from wishlist
 		$(document).on(
 			"click",
-			".better-wishlist-remove-from-wishlist",
+			".betterwishlist-remove-from-wishlist",
 			function (e) {
 				e.preventDefault();
 
-				var pageWrap = $(".better-wishlist-page-wrap");
+				var pageWrap = $(".betterwishlist-page-wrap");
 				var table = $(".wishlist_table");
 				var productID = $(this).data("product_id");
 				var productRow = $("#wishlist-row-" + productID, table);
@@ -129,11 +129,11 @@
 		// add to cart
 		$(document).on(
 			"click",
-			".better-wishlist-add-to-cart-single",
+			".betterwishlist-add-to-cart-single",
 			function (e) {
 				e.preventDefault();
 
-				var pageWrap = $(".better-wishlist-page-wrap");
+				var pageWrap = $(".betterwishlist-page-wrap");
 				var table = $(".wishlist_table");
 				var productID = $(this).data("product_id");
 				var productRow = $("#wishlist-row-" + productID, table);
@@ -180,11 +180,11 @@
 		// add to cart - multiple
 		$(document).on(
 			"click",
-			".better-wishlist-add-to-cart-multiple",
+			".betterwishlist-add-to-cart-multiple",
 			function (e) {
 				e.preventDefault();
 
-				var pageWrap = $(".better-wishlist-page-wrap");
+				var pageWrap = $(".betterwishlist-page-wrap");
 				var products = $(this).data("products").toString().split(",");
 
 				$.ajax({

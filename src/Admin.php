@@ -19,10 +19,10 @@ class Admin
     {
         $page_hook_suffix = add_submenu_page(
             'woocommerce',
-            __('BetterWishlist', 'better-wishlist'),
-            __('BetterWishlist', 'better-wishlist'),
+            __('BetterWishlist', 'betterwishlist'),
+            __('BetterWishlist', 'betterwishlist'),
             'manage_options',
-            'better-wishlist',
+            'betterwishlist',
             [$this, 'create_admin_page'],
         );
 
@@ -31,14 +31,14 @@ class Admin
 
     public function create_admin_page()
     {
-        echo '<div id="better-wishlist-admin"></div>';
+        echo '<div id="betterwishlist-admin"></div>';
     }
 
     public function enqueue_admin_scripts()
     {
-        wp_enqueue_style('better-wishlist-admin-style', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/admin.css', ['wp-components']);
-        wp_enqueue_script('better-wishlist-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/admin.js', ['wp-api', 'wp-i18n', 'wp-components', 'wp-element'], BETTER_WISHLIST_PLUGIN_VERSION, true);
-        wp_localize_script('better-wishlist-admin-script', 'BetterWishlist', [
+        wp_enqueue_style('betterwishlist-admin-style', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/admin.css', ['wp-components']);
+        wp_enqueue_script('betterwishlist-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/admin.js', ['wp-api', 'wp-i18n', 'wp-components', 'wp-element'], BETTER_WISHLIST_PLUGIN_VERSION, true);
+        wp_localize_script('betterwishlist-admin-script', 'BetterWishlist', [
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('betterwishlist'),
             'settings' => get_option('bw_settings'),

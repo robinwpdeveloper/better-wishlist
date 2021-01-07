@@ -6,19 +6,19 @@
     'aliases' => 
     array (
     ),
-    'reference' => '80e49d21509da302443f0043ab8f5a60a024d3da',
-    'name' => 'gadgetlife/better-wishlist',
+    'reference' => '419e43922ee2f4d2d36d75a03f40d550c7522ff5',
+    'name' => 'gadgetlife/betterwishlist',
   ),
   'versions' => 
   array (
-    'gadgetlife/better-wishlist' => 
+    'gadgetlife/betterwishlist' => 
     array (
       'pretty_version' => 'dev-master',
       'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => '80e49d21509da302443f0043ab8f5a60a024d3da',
+      'reference' => '419e43922ee2f4d2d36d75a03f40d550c7522ff5',
     ),
     'symfony/polyfill-ctype' => 
     array (
@@ -40,12 +40,12 @@
     ),
     'twig/twig' => 
     array (
-      'pretty_version' => 'v2.14.1',
-      'version' => '2.14.1.0',
+      'pretty_version' => 'v2.14.3',
+      'version' => '2.14.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5eb9ac5dfdd20c3f59495c22841adc5da980d312',
+      'reference' => '8bc568d460d88b25c00c046256ec14a787ea60d9',
     ),
   ),
 );
