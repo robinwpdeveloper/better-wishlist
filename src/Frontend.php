@@ -19,7 +19,9 @@ class Frontend
             return;
         }
 
-        $this->settings = get_option('bw_settings');
+        $this->settings = wp_parse_args(get_option('bw_settings'), [
+            'position_in_single' => 'after_add_to_cart',
+        ]);
 
         add_action('init', [$this, 'init']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);

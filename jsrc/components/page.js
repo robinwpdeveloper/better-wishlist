@@ -23,7 +23,6 @@ class Page extends Component {
 			add_to_wishlist_text: __("Add to wishlist"),
 			add_to_cart_text: __("Add to cart"),
 			add_all_to_cart_text: __("Add all to cart"),
-
 			wishlist_button_style: "default",
 			wishlist_button_color: "#ffffff",
 			wishlist_button_background: "default",
@@ -36,7 +35,6 @@ class Page extends Component {
 			wishlist_button_padding_right: 0,
 			wishlist_button_padding_bottom: 0,
 			wishlist_button_padding_left: 0,
-
 			cart_button_style: "default",
 			cart_button_color: "#ffffff",
 			cart_button_background: "default",
