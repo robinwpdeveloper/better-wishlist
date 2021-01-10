@@ -64,7 +64,7 @@
 				},
 				success: function (response) {
 					if (response.success) {
-						if (BETTER_WISHLIST.settings.redirect_to_wishlist !== false) {
+						if (BETTER_WISHLIST.settings.redirect_to_wishlist == "yes") {
 							window.location.replace(
 								BETTER_WISHLIST.settings.wishlist_page_url
 							);
@@ -127,55 +127,51 @@
 		);
 
 		// add to cart
-		$(document).on(
-			"click",
-			".betterwishlist-add-to-cart-single",
-			function (e) {
-				e.preventDefault();
+		$(document).on("click", ".betterwishlist-add-to-cart-single", function (e) {
+			e.preventDefault();
 
-				var pageWrap = $(".betterwishlist-page-wrap");
-				var table = $(".wishlist_table");
-				var productID = $(this).data("product_id");
-				var productRow = $("#wishlist-row-" + productID, table);
+			var pageWrap = $(".betterwishlist-page-wrap");
+			var table = $(".wishlist_table");
+			var productID = $(this).data("product_id");
+			var productRow = $("#wishlist-row-" + productID, table);
 
-				$.ajax({
-					type: "POST",
-					url: BETTER_WISHLIST.ajax_url,
-					data: {
-						action: BETTER_WISHLIST.actions.add_to_cart_single,
-						security: BETTER_WISHLIST.nonce,
-						product_id: productID,
-					},
-					success: function (response) {
-						if (response.success) {
-							if (BETTER_WISHLIST.settings.redirect_to_cart !== false) {
-								window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
-							} else {
-								createNotification("success", response.data);
+			$.ajax({
+				type: "POST",
+				url: BETTER_WISHLIST.ajax_url,
+				data: {
+					action: BETTER_WISHLIST.actions.add_to_cart_single,
+					security: BETTER_WISHLIST.nonce,
+					product_id: productID,
+				},
+				success: function (response) {
+					if (response.success) {
+						if (BETTER_WISHLIST.settings.redirect_to_cart == "yes") {
+							window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
+						} else {
+							createNotification("success", response.data);
 
-								if (BETTER_WISHLIST.settings.remove_from_wishlist) {
-									productRow.remove();
+							if (BETTER_WISHLIST.settings.remove_from_wishlist) {
+								productRow.remove();
 
-									if ($("tr.wishlist-row", table).length < 1) {
-										pageWrap.empty();
-										pageWrap.html(
-											'<div class="no-record-message">' +
-												BETTER_WISHLIST.i18n.no_records_found +
-												"</div>"
-										);
-									}
+								if ($("tr.wishlist-row", table).length < 1) {
+									pageWrap.empty();
+									pageWrap.html(
+										'<div class="no-record-message">' +
+											BETTER_WISHLIST.i18n.no_records_found +
+											"</div>"
+									);
 								}
 							}
-						} else {
-							createNotification("error", response.data);
 						}
-					},
-					error: function (response) {
-						console.log(response);
-					},
-				});
-			}
-		);
+					} else {
+						createNotification("error", response.data);
+					}
+				},
+				error: function (response) {
+					console.log(response);
+				},
+			});
+		});
 
 		// add to cart - multiple
 		$(document).on(
@@ -197,7 +193,7 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							if (BETTER_WISHLIST.settings.redirect_to_cart !== false) {
+							if (BETTER_WISHLIST.settings.redirect_to_cart == "yes") {
 								window.location.replace(BETTER_WISHLIST.settings.cart_page_url);
 							} else {
 								createNotification("success", response.data);

@@ -20,7 +20,7 @@ class Seed
         $this->create_tables();
 
         // save default settings
-        if (get_option('better_wishlist_settings') === false) {
+        if (get_option('bw_settings') === false) {
             update_option('bw_settings', [
                 'wishlist_page' => null,
                 'wishlist_menu' => 'yes',

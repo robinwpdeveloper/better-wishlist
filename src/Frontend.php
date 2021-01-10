@@ -9,6 +9,8 @@ if (!defined('ABSPATH')) {
 
 class Frontend
 {
+    protected $settings;
+
     public function __construct()
     {
         include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -16,6 +18,8 @@ class Frontend
         if (!is_plugin_active('woocommerce/woocommerce.php')) {
             return;
         }
+
+        $this->settings = get_option('bw_settings');
 
         add_action('init', [$this, 'init']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
@@ -51,7 +55,9 @@ class Frontend
      */
     public function init()
     {
-        add_rewrite_endpoint('betterwishlist', EP_ROOT | EP_PAGES);
+        if ($this->settings['wishlist_menu'] == 'yes') {
+            add_rewrite_endpoint('betterwishlist', EP_ROOT | EP_PAGES);
+        }
 
         // flush rewrite rules
         if (get_transient('better_wishlist_flush_rewrite_rules') === true) {
@@ -82,7 +88,7 @@ class Frontend
                 'remove_from_wishlist' => $settings['remove_from_wishlist'],
                 'redirect_to_cart' => $settings['redirect_to_cart'],
                 'cart_page_url' => wc_get_cart_url(),
-                'wishlist_page_url' => esc_url(is_user_logged_in() ? wc_get_account_endpoint_url('betterwishlist') : get_the_permalink($settings['wishlist_page'])),
+                'wishlist_page_url' => esc_url(is_user_logged_in() && $this->settings['wishlist_menu'] == 'yes' ? wc_get_account_endpoint_url('betterwishlist') : get_the_permalink($settings['wishlist_page'])),
             ],
             'i18n' => [
                 'no_records_found' => __('No Records Found', 'betterwishlist'),
@@ -129,6 +135,10 @@ class Frontend
      */
     public function add_menu($items)
     {
+        if ($this->settings['wishlist_menu'] != 'yes') {
+            return $items;
+        }
+
         $items = array_splice($items, 0, count($items) - 1) + ['betterwishlist' => __('Wishlist', 'betterwishlist')] + $items;
 
         return $items;
@@ -325,7 +335,6 @@ class Frontend
 
         $product_id = intval($_REQUEST['product_id']);
         $product = wc_get_product($product_id);
-        $settings = get_option('better_wishlist_settings');
 
         // add to cart
         if ($product->is_type('variable')) {
@@ -335,7 +344,7 @@ class Frontend
         }
 
         if ($add_to_cart) {
-            if (isset($settings['remove_from_wishlist'])) {
+            if ($this->settings['remove_from_wishlist'] == 'yes') {
                 Plugin::instance()->model->delete_item($product_id);
             }
 
@@ -367,12 +376,10 @@ class Frontend
             ]);
         }
 
-        $settings = get_option('better_wishlist_settings');
-
         foreach ($_REQUEST['products'] as $product_id) {
             WC()->cart->add_to_cart($product_id, 1);
 
-            if (isset($settings['remove_from_wishlist'])) {
+            if ($this->settings['remove_from_wishlist'] == 'yes') {
                 Plugin::instance()->model->delete_item($product_id);
             }
         }
