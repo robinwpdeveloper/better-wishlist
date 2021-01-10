@@ -45,36 +45,38 @@ class ButtonSettings extends Component {
 					/>
 				</BaseControl>
 
-				<BaseControl id="loop-position" label="Position in loop">
-					<SelectControl
-						options={[
-							{
-								value: "before_cart",
-								label: "Before add to cart",
-							},
-							{
-								value: "after_cart",
-								label: "After add to cart",
-							},
-						]}
-						value={state.position_in_loop}
-						onChange={(value) =>
-							this.updateValue({
-								position_in_loop: value,
-							})
-						}
-					/>
-				</BaseControl>
+				{state.show_in_loop == "yes" && (
+					<BaseControl id="loop-position" label="Position in loop">
+						<SelectControl
+							options={[
+								{
+									value: "before_add_to_cart",
+									label: "Before add to cart",
+								},
+								{
+									value: "after_add_to_cart",
+									label: "After add to cart",
+								},
+							]}
+							value={state.position_in_loop}
+							onChange={(value) =>
+								this.updateValue({
+									position_in_loop: value,
+								})
+							}
+						/>
+					</BaseControl>
+				)}
 
 				<BaseControl id="single-position" label="Position in product page">
 					<SelectControl
 						options={[
 							{
-								value: "before_cart",
+								value: "before_add_to_cart",
 								label: "Before add to cart",
 							},
 							{
-								value: "after_cart",
+								value: "after_add_to_cart",
 								label: "After add to cart",
 							},
 						]}

@@ -24,7 +24,7 @@ class Frontend
         add_action('init', [$this, 'init']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('woocommerce_account_betterwishlist_endpoint', array($this, 'menu_content'));
-        add_action('woocommerce_after_add_to_cart_button', [$this, 'single_add_to_wishlist_button'], 10);
+        add_action("woocommerce_{$this->settings['position_in_single']}_button", [$this, 'single_add_to_wishlist_button'], 10);
         add_action('woocommerce_loop_add_to_cart_link', [$this, 'archive_add_to_wishlist_button'], 10, 3);
 
         // ajax
@@ -179,8 +179,8 @@ class Frontend
         $i18n = [
             'product_name' => __('Product name', 'betterwishlist'),
             'stock_status' => __('Stock Status', 'betterwishlist'),
-            'add_to_cart' => __('Add To Cart', 'betterwishlist'),
-            'add_all_to_cart' => __('Add All to Cart', 'betterwishlist'),
+            'add_to_cart' => $this->settings['add_to_cart_text'],
+            'add_all_to_cart' => $this->settings['add_all_to_cart_text'],
             'no_records_found' => __('No Records Found', 'betterwishlist'),
             'remove_this_product' => __('Remove this product', 'betterwishlist'),
         ];
@@ -220,7 +220,7 @@ class Frontend
         }
 
         $i18n = [
-            'add_to_wishlist' => __('Add To Wishlist', 'betterwishlist'),
+            'add_to_wishlist' => $this->settings['add_to_wishlist_text'],
         ];
 
         return Plugin::instance()->twig->render('button.twig', ['i18n' => $i18n, 'product_id' => $product->get_id()]);
@@ -246,6 +246,14 @@ class Frontend
      */
     public function archive_add_to_wishlist_button($add_to_cart_html, $product, $args)
     {
+        if ($this->settings['show_in_loop'] == 'no') {
+            return $add_to_cart_html;
+        }
+
+        if ($this->settings['position_in_loop'] == 'before_add_to_cart') {
+            return $this->add_to_wishlist_button() . $add_to_cart_html;
+        }
+
         return $add_to_cart_html . $this->add_to_wishlist_button();
     }
 
