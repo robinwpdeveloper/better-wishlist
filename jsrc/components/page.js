@@ -13,38 +13,38 @@ class Page extends Component {
 
 		this.state = {
 			wishlist_page: null,
-			wishlist_menu: 'yes',
-			redirect_to_wishlist: 'no',
-			redirect_to_cart: 'no',
-			remove_from_wishlist: 'yes',
-			show_in_loop: 'yes',
+			wishlist_menu: "yes",
+			redirect_to_wishlist: "no",
+			redirect_to_cart: "no",
+			remove_from_wishlist: "yes",
+			show_in_loop: "yes",
 			position_in_loop: "after_cart",
 			position_in_single: "after_cart",
 			add_to_wishlist_text: __("Add to wishlist"),
 			add_to_cart_text: __("Add to cart"),
 			add_all_to_cart_text: __("Add all to cart"),
 
-			wishlist_button_style: 'default',
-			wishlist_button_color: '#ffffff',
-			wishlist_button_background: 'default',
-			wishlist_button_hover_color: 'default',
-			wishlist_button_hover_background: 'default',
-			wishlist_button_border_style: 'none',
+			wishlist_button_style: "default",
+			wishlist_button_color: "#ffffff",
+			wishlist_button_background: "default",
+			wishlist_button_hover_color: "default",
+			wishlist_button_hover_background: "default",
+			wishlist_button_border_style: "none",
 			wishlist_button_border_width: 1,
-			wishlist_button_border_color: 'default',
+			wishlist_button_border_color: "default",
 			wishlist_button_padding_top: 0,
 			wishlist_button_padding_right: 0,
 			wishlist_button_padding_bottom: 0,
 			wishlist_button_padding_left: 0,
 
-			cart_button_style: 'default',
-			cart_button_color: '#ffffff',
-			cart_button_background: 'default',
-			cart_button_hover_color: 'default',
-			cart_button_hover_background: 'default',
-			cart_button_border_style: 'none',
+			cart_button_style: "default",
+			cart_button_color: "#ffffff",
+			cart_button_background: "default",
+			cart_button_hover_color: "default",
+			cart_button_hover_background: "default",
+			cart_button_border_style: "none",
 			cart_button_border_width: 1,
-			cart_button_border_color: 'default',
+			cart_button_border_color: "default",
 			cart_button_padding_top: 0,
 			cart_button_padding_right: 0,
 			cart_button_padding_bottom: 0,
@@ -56,6 +56,24 @@ class Page extends Component {
 		this.setState({
 			...this.state,
 			...BetterWishlist.settings,
+		});
+
+		// get wp page list
+		const { localStorage } = window;
+
+		wp.apiFetch({ path: "/wp/v2/pages?per_page=-1" }).then((pages) => {
+			if (pages.length > 0) {
+				let opts = [];
+
+				pages.map((page) => {
+					opts.push({
+						label: page.title.rendered,
+						value: page.id,
+					});
+				});
+
+				localStorage.setItem("bwpOpts", JSON.stringify(opts));
+			}
 		});
 	}
 

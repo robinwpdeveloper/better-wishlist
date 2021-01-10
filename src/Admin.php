@@ -37,7 +37,7 @@ class Admin
     public function enqueue_admin_scripts()
     {
         wp_enqueue_style('betterwishlist-admin-style', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/admin.css', ['wp-components']);
-        wp_enqueue_script('betterwishlist-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/admin.js', ['wp-api', 'wp-i18n', 'wp-components', 'wp-element'], BETTER_WISHLIST_PLUGIN_VERSION, true);
+        wp_enqueue_script('betterwishlist-admin-script', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/js/admin.js', ['wp-api', 'wp-api-fetch', 'wp-i18n', 'wp-components', 'wp-element'], BETTER_WISHLIST_PLUGIN_VERSION, true);
         wp_localize_script('betterwishlist-admin-script', 'BetterWishlist', [
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('betterwishlist'),

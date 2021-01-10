@@ -63,7 +63,9 @@ class Plugin extends Singleton
 
     public function add_display_status_on_page($states, $post)
     {
-        if (get_option('better_wishlist_page_id') == $post->ID) {
+        $settings = get_option('bw_settings');
+        
+        if ($settings['wishlist_page'] == $post->ID) {
             $post_status_object = get_post_status_object($post->post_status);
 
             /* Checks if the label exists */

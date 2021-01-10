@@ -20,27 +20,8 @@ class Color extends Component {
 
 	componentDidMount() {
 		const { localStorage } = window;
-		const options = localStorage.getItem("bwpOpts");
 
-		if (options === null) {
-			wp.apiFetch({ path: "/wp/v2/pages?per_page=-1" }).then((pages) => {
-				if (pages.length > 0) {
-					let opts = [];
-
-					pages.map((page) => {
-						opts.push({
-							label: page.title.rendered,
-							value: page.id,
-						});
-					});
-
-					localStorage.setItem("bwpOpts", JSON.stringify(opts));
-					this.setState({ options: opts });
-				}
-			});
-		} else {
-			this.setState({ options: JSON.parse(options) });
-		}
+		this.setState({ options: JSON.parse(localStorage.getItem("bwpOpts")) });
 	}
 
 	render() {
