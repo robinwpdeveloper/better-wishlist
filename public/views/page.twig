@@ -54,7 +54,7 @@
               </span>
             </td>
             <td class="add-to-cart">
-              <a class="button betterwishlist-add-to-cart-single add_to_cart_button betterwishlist-addto-cart-button"
+              <a class="button betterwishlist-add-to-cart betterwishlist-add-to-cart-single add_to_cart_button"
                 data-product_id="{{ product.id }}"
                 href="#">
                 {{ i18n.add_to_cart }}
@@ -67,7 +67,7 @@
     <div class="add-to-cart-multiple">
       <a href="#"
         data-products="{{ ids|join(',') }}"
-        class="button betterwishlist-add-to-cart-multiple">
+        class="button betterwishlist-add-to-cart betterwishlist-add-to-cart-multiple">
         {{ i18n.add_all_to_cart }}
       </a>
     </div>

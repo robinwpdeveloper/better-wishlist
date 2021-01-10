@@ -74,7 +74,7 @@ class Frontend
     public function enqueue_scripts()
     {
         $settings = get_option('bw_settings');
-        $localize_scripts = apply_filters('better_wishlist_localize_script', [
+        $localize_scripts = [
             'ajax_url' => admin_url('admin-ajax.php', 'relative'),
             'nonce' => wp_create_nonce('better_wishlist_nonce'),
             'actions' => [
@@ -93,7 +93,7 @@ class Frontend
             'i18n' => [
                 'no_records_found' => __('No Records Found', 'betterwishlist'),
             ],
-        ]);
+        ];
 
         // css
         wp_register_style('betterwishlist', BETTER_WISHLIST_PLUGIN_URL . 'public/assets/css/' . 'betterwishlist.css', null, BETTER_WISHLIST_PLUGIN_VERSION, 'all');
@@ -103,9 +103,48 @@ class Frontend
         wp_localize_script('betterwishlist', 'BETTER_WISHLIST', $localize_scripts);
 
         // if woocommerce page, enqueue styles and scripts
-        if (is_woocommerce()) {
+        if (is_woocommerce() || is_account_page() || (is_page() && has_shortcode(get_the_content(), 'better_wishlist'))) {
+            $css = '';
+
+            if ($this->settings['wishlist_button_style'] == 'custom') {
+                $css .= '.betterwishlist-add-to-wishlist {
+                    color: ' . $this->settings['wishlist_button_color'] . ' !important;
+                    background-color: ' . $this->settings['wishlist_button_background'] . ' !important;
+                    border-style: ' . $this->settings['wishlist_button_border_style'] . ' !important;
+                    border-width: ' . $this->settings['wishlist_button_border_width'] . 'px !important;
+                    border-color: ' . $this->settings['wishlist_button_border_color'] . ' !important;
+                    padding-top: ' . $this->settings['wishlist_button_padding_top'] . 'px !important;
+                    padding-right: ' . $this->settings['wishlist_button_padding_right'] . 'px !important;
+                    padding-bottom: ' . $this->settings['wishlist_button_padding_bottom'] . 'px !important;
+                    padding-left: ' . $this->settings['wishlist_button_padding_left'] . 'px !important;
+                }
+                .betterwishlist-add-to-wishlist:hover {
+                    color: ' . $this->settings['wishlist_button_hover_color'] . ' !important;
+                    background-color: ' . $this->settings['wishlist_button_hover_background'] . ' !important;
+                }';
+            }
+
+            if ($this->settings['cart_button_style'] == 'custom') {
+                $css .= '.betterwishlist-add-to-cart {
+                    color: ' . $this->settings['cart_button_color'] . ' !important;
+                    background-color: ' . $this->settings['cart_button_background'] . ' !important;
+                    border-style: ' . $this->settings['cart_button_border_style'] . ' !important;
+                    border-width: ' . $this->settings['cart_button_border_width'] . 'px !important;
+                    border-color: ' . $this->settings['cart_button_border_color'] . ' !important;
+                    padding-top: ' . $this->settings['cart_button_padding_top'] . 'px !important;
+                    padding-right: ' . $this->settings['cart_button_padding_right'] . 'px !important;
+                    padding-bottom: ' . $this->settings['cart_button_padding_bottom'] . 'px !important;
+                    padding-left: ' . $this->settings['cart_button_padding_left'] . 'px !important;
+                }
+                .betterwishlist-add-to-cart:hover {
+                    color: ' . $this->settings['cart_button_hover_color'] . ' !important;
+                    background-color: ' . $this->settings['cart_button_hover_background'] . ' !important;
+                }';
+            }
+
             // enqueue styles
             wp_enqueue_style('betterwishlist');
+            wp_add_inline_style('betterwishlist', $css);
 
             // enqueue scripts
             wp_enqueue_script('betterwishlist');
@@ -163,12 +202,6 @@ class Frontend
      */
     public function shortcode($atts, $content = null)
     {
-        // enqueue styles
-        wp_enqueue_style('betterwishlist');
-
-        // enqueue scripts
-        wp_enqueue_script('betterwishlist');
-
         $atts = shortcode_atts([
             'per_page' => 5,
             'current_page' => 1,
