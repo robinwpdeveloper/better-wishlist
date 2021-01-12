@@ -166,7 +166,9 @@ class Page extends Component {
 						}}
 					</TabPanel>
 
-					<Button onClick={this.saveForm.bind(this)}>{__("Save")}</Button>
+					<div className="bw-settings-footer">
+						<Button onClick={this.saveForm.bind(this)}>{__("Save")}</Button>
+					</div>
 				</div>
 			</Fragment>
 		);

@@ -73,3 +73,12 @@
       .bw-settings-content .components-color-picker-wrap .components-color-picker .components-base-control .components-base-control__label {
         display: none; }
 
+.bw-settings-footer {
+  background-color: #ffffff;
+  padding: 10px 20px 20px; }
+  .bw-settings-footer button {
+    color: #ffffff;
+    background-color: #17c9a2; }
+    .bw-settings-footer button:hover {
+      color: #ffffff; }
+
