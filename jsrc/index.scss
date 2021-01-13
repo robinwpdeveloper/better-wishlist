@@ -7,12 +7,15 @@
 	height: 60px;
 	background-color: #fff;
 	box-shadow: 0 1px 0 rgba(213, 213, 213, 0.5), 0 1px 2px #eee;
+	margin: 25px;
+	border-radius: 5px;
 }
 .bw-settings-header-title {
-	font-size: 14px;
-	font-weight: 600;
+	font-size: 16px;
+	font-weight: 700;
 	line-height: 60px;
 	text-transform: capitalize;
+	color: #545454;
 	margin: 0;
 	padding-left: 25px;
 }
@@ -22,11 +25,15 @@
 	margin: 25px;
 
 	// tabs panel
+	.components-tab-panel__tabs {
+		margin-bottom: 25px;
+	}
+
 	.components-tab-panel__tabs-item {
-		color: #516378;
+		color: #4e4e4e;
 		font-size: 14px;
 		font-weight: 600;
-		background-color: #f8fafb;
+		background-color: #fafafa;
 		box-shadow: none;
 
 		&.is-active {
