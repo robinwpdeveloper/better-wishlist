@@ -7,6 +7,11 @@ import ButtonSettings from "./tabs/button";
 import CustomTextSettings from "./tabs/text";
 import StyleSettings from "./tabs/style";
 
+import GeneralIcon from "../icons/general.svg";
+import ButtonIcon from "../icons/button.svg";
+import TextIcon from "../icons/custom-text.svg";
+import StyleIcon from "../icons/style.svg";
+
 class Page extends Component {
 	constructor() {
 		super(...arguments);
@@ -115,20 +120,28 @@ class Page extends Component {
 					<TabPanel
 						tabs={[
 							{
+								icon: GeneralIcon,
 								name: "general",
 								title: __("General"),
+								className: "tab-general"
 							},
 							{
+								icon: ButtonIcon,
 								name: "button",
 								title: __("Button"),
+								className: "tab-button"
 							},
 							{
+								icon: TextIcon,
 								name: "custom-text",
 								title: __("Custom Text"),
+								className: "tab-custom-text"
 							},
 							{
+								icon: StyleIcon,
 								name: "style",
 								title: __("Style"),
+								className: "tab-style"
 							},
 						]}
 						initialTabName="general"

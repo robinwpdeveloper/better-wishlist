@@ -2,35 +2,64 @@
   padding-left: 0; }
 
 .bw-settings-header {
-  height: 60px;
+  height: 70px;
   background-color: #fff;
-  box-shadow: 0 1px 0 rgba(213, 213, 213, 0.5), 0 1px 2px #eee;
-  margin: 25px;
-  border-radius: 5px; }
-
-.bw-settings-header-title {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 60px;
-  text-transform: capitalize;
-  color: #545454;
-  margin: 0;
-  padding-left: 25px; }
+  margin: 20px;
+  border-radius: 10px;
+  border: 1px solid #ebebeb; }
+  .bw-settings-header .bw-settings-header-title {
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 70px;
+    text-transform: capitalize;
+    color: #3f3f3f;
+    margin: 0;
+    padding-left: 25px; }
 
 .bw-settings-content {
   margin: 25px; }
   .bw-settings-content .components-tab-panel__tabs {
     margin-bottom: 25px; }
   .bw-settings-content .components-tab-panel__tabs-item {
-    color: #4e4e4e;
-    font-size: 14px;
+    color: #252525;
+    font-size: 15px;
     font-weight: 600;
     background-color: #fafafa;
-    box-shadow: none; }
-    .bw-settings-content .components-tab-panel__tabs-item.is-active {
-      background-color: #fff;
-      border: none;
-      border-top: 2px solid #17c9a2; }
+    box-shadow: none;
+    border: 1px solid #e1e1e1;
+    height: 53px;
+    width: 130px;
+    margin-right: 10px;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    padding-left: 30px; }
+    .bw-settings-content .components-tab-panel__tabs-item:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      background-repeat: no-repeat;
+      left: 18px;
+      top: 18px; }
+    .bw-settings-content .components-tab-panel__tabs-item.tab-general:before {
+      background-image: url("data:image/svg+xml,%3c!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3e %3csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'%3e %3cstyle type='text/css'%3e .st0%7bfill:%239D9D9D;%7d %3c/style%3e %3cg%3e %3cpath class='st0' d='M98.5,44.6c-0.2-1.4-1.8-2.4-3.1-2.4c-4.5,0-8.4-2.6-10.1-6.7c-1.7-4.2-0.6-9,2.7-12.1c1-1,1.2-2.6,0.3-3.7 c-2.3-2.9-4.9-5.5-7.7-7.8c-1.1-0.9-2.7-0.8-3.7,0.3c-2.9,3.2-8.1,4.4-12.2,2.7c-4.2-1.8-6.8-6-6.6-10.6c0.1-1.4-1-2.7-2.4-2.8 c-3.6-0.4-7.3-0.4-11,0c-1.4,0.2-2.5,1.4-2.4,2.8c0.2,4.5-2.5,8.7-6.7,10.4c-4,1.6-9.2,0.4-12.1-2.7c-1-1.1-2.6-1.2-3.7-0.3 c-2.9,2.3-5.6,4.9-7.9,7.8c-0.9,1.1-0.8,2.7,0.3,3.7c3.4,3.1,4.5,8,2.7,12.2c-1.7,4-5.8,6.6-10.6,6.6c-1.5,0-2.6,1-2.8,2.4 c-0.4,3.7-0.4,7.4,0,11.1c0.2,1.4,1.8,2.4,3.2,2.4c4.2-0.1,8.3,2.5,10,6.7c1.7,4.2,0.6,9-2.7,12.1c-1,1-1.2,2.6-0.3,3.7 c2.3,2.9,4.9,5.5,7.7,7.8c1.1,0.9,2.7,0.8,3.7-0.3c2.9-3.2,8.1-4.4,12.2-2.7c4.2,1.8,6.9,6,6.6,10.6c-0.1,1.4,1,2.7,2.4,2.8 c1.9,0.2,3.7,0.3,5.6,0.3c1.8,0,3.6-0.1,5.4-0.3c1.4-0.2,2.5-1.4,2.4-2.8c-0.2-4.5,2.5-8.7,6.7-10.4c4-1.6,9.2-0.4,12.1,2.7 c1,1,2.6,1.2,3.7,0.3c2.9-2.3,5.6-4.9,7.9-7.8c0.9-1.1,0.8-2.7-0.3-3.7c-3.4-3.1-4.5-8-2.7-12.2c1.7-4,5.7-6.6,10-6.6l0.6,0 c1.4,0.1,2.7-1,2.9-2.4C98.9,52,98.9,48.3,98.5,44.6z M74.1,64.4c-0.2,0.3-0.4,0.6-0.6,0.9l-10-10c0.8-1.8,1.2-3.7,1.2-5.7 c0-3.9-1.5-7.6-4.3-10.3C57.7,36.5,54,35,50.1,35c-1.3,0-2.6,0.2-3.9,0.5c-0.6,0.2-1,0.6-1.1,1.2c-0.1,0.6,0,1.1,0.5,1.6 c0,0,5.2,5.2,6.9,6.9c0.2,0.2,0.2,0.6,0.2,0.8l0,0.1c-0.2,1.9-0.5,4.2-0.8,5.1c0,0-0.1,0.1-0.1,0.1c0,0-0.1,0.1-0.1,0.1 c-0.9,0.3-3.2,0.6-5.1,0.8l0,0l-0.1,0c0,0,0,0-0.1,0c-0.2,0-0.5-0.1-0.8-0.3c-1.8-1.8-6.8-6.7-6.8-6.7c-0.4-0.4-0.9-0.5-1.2-0.5 c-0.7,0-1.3,0.5-1.5,1.2c-1.4,5,0.1,10.5,3.8,14.2c2.8,2.8,6.4,4.3,10.3,4.3c2,0,3.9-0.4,5.7-1.2l10.1,10.1 c-0.2,0.1-0.3,0.2-0.5,0.3l-0.3,0.2c-4.5,2.9-9.9,4.5-15.7,4.4c-14.9-0.3-27.1-12.4-27.5-27.2c-0.5-16.2,12.8-29.5,29-29 c15,0.5,27.2,13,27.2,28C78.1,55.2,76.7,60.2,74.1,64.4z'/%3e %3c/g%3e %3c/svg%3e"); }
+    .bw-settings-content .components-tab-panel__tabs-item.tab-button:before {
+      background-image: url("data:image/svg+xml,%3c!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3e %3csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'%3e %3cstyle type='text/css'%3e .st0%7bfill:%239D9D9D;%7d %3c/style%3e %3cpath class='st0' d='M35.9,53.8c-4.8,0-8.6,3.9-8.6,8.6v14.4c0,12.7,10.3,23.2,23,23.2s23-10.5,23-23.2V66.6c0-3.7-2.4-7-5.9-8.2 l-11.4-3.8V33.3c0-3.2-2.6-5.8-5.8-5.8c-3.2,0-5.8,2.6-5.8,5.8v37.8c0,1.6-1.3,2.9-2.9,2.9c-1.6,0-2.9-1.3-2.9-2.9V53.8H35.9z M35.9,53.8'/%3e %3cpath class='st0' d='M50.3,17.4c8,0,14.5,6.5,14.5,14.5v10.2h14.2c11.1,0,20.3-9,20.3-20.1S90.2,1.8,79.1,1.8H21.4 c-11.1,0-20.1,9-20.1,20.1s9,20.1,20.1,20.1h14.4V31.9C35.8,23.9,42.3,17.4,50.3,17.4z'/%3e %3c/svg%3e"); }
+    .bw-settings-content .components-tab-panel__tabs-item.tab-custom-text {
+      width: 160px; }
+      .bw-settings-content .components-tab-panel__tabs-item.tab-custom-text:before {
+        background-image: url("data:image/svg+xml,%3c!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3e %3csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'%3e %3cstyle type='text/css'%3e .st0%7bfill:%239D9D9D;%7d %3c/style%3e %3cpath class='st0' d='M81.4,64.3c-1.3,0-2.7,0.2-4.3,0.6L61.7,50.5L77,35.1l0,0c5.8,1.5,12.1-0.1,16.3-4.4c3.7-3.7,5.5-9.1,4.8-14.3 c-0.2-1.1-0.9-1.9-1.9-2.3c-1-0.3-2.1-0.1-2.9,0.7l-4,4c-2.1,2.1-5.8,2.1-8,0c-2.2-2.2-2.2-5.8,0-8l4-4c0.8-0.8,1-1.9,0.7-2.9 c-0.3-1-1.2-1.7-2.3-1.9c-5.3-0.7-10.6,1-14.3,4.8c-4.3,4.3-5.9,10.5-4.4,16.3L50.2,38L35.4,23C36.9,17.2,35.2,11,31,6.7 c-6.4-6.4-17.5-6.4-23.9,0c-6.6,6.6-6.6,17.3,0,23.9c4.2,4.2,10.5,5.9,16.3,4.4l14.9,15L23.4,64.9l0,0c-5.8-1.5-12.1,0.1-16.3,4.4 C3.3,73,1.6,78.3,2.3,83.6c0.2,1.1,0.9,1.9,1.9,2.3c1,0.3,2.1,0.1,2.9-0.7l4-4c2.1-2.1,5.8-2.1,8,0c2.2,2.2,2.2,5.8,0,8l-4,4 c-0.8,0.8-1,1.9-0.7,2.9c0.3,1,1.2,1.7,2.3,1.9c5.2,0.7,10.5-1,14.3-4.8c4.3-4.3,5.9-10.5,4.4-16.3l14.4-14.4l15.4,14.4 c-0.4,1.6-0.6,3-0.6,4.3c0,9.3,7.6,16.9,16.9,16.9c9.3,0,16.9-7.6,16.9-16.9C98.3,71.9,90.7,64.3,81.4,64.3z M28,17.8l-1.7,6.3 c-0.3,1-1,1.7-2,2l-6.3,1.7c-0.9,0.3-2,0-2.7-0.7l-4.6-4.6c-0.7-0.7-1-1.8-0.7-2.7l1.7-6.3c0.3-1,1-1.7,2-2L20,9.8 c1-0.3,2,0,2.7,0.7l4.6,4.6C28,15.8,28.3,16.8,28,17.8z M90.7,80.6L89,86.9c-0.3,1-1,1.7-2,2l-6.3,1.7c-0.9,0.3-2,0-2.7-0.7 l-4.6-4.6c-0.7-0.7-1-1.8-0.7-2.7l1.7-6.3c0.3-1,1-1.7,2-2l6.3-1.7c1-0.3,2,0,2.7,0.7l4.6,4.6C90.6,78.6,90.9,79.6,90.7,80.6z'/%3e %3c/svg%3e"); }
+    .bw-settings-content .components-tab-panel__tabs-item.tab-style {
+      padding-left: 10px; }
+      .bw-settings-content .components-tab-panel__tabs-item.tab-style:before {
+        background-image: url("data:image/svg+xml,%3c!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3e %3csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'%3e %3cstyle type='text/css'%3e .st0%7bfill:%239D9D9D;%7d %3c/style%3e %3cg%3e %3cpath class='st0' d='M97.7,39.4c1.3-1.3,1.3-3.4,0-4.7l-5-5c-1.1-1.1-2.9-1.3-4.2-0.4l-10.4,7.1l7-10.5c0.9-1.3,0.7-3.1-0.4-4.2 L73.9,11c-1-1-2.5-1.3-3.8-0.6l-1.9,0.9l0.9-2c0.6-1.3,0.3-2.7-0.7-3.7l-3.4-3.4c-1.3-1.3-3.4-1.3-4.7,0L34.3,28.4l37.2,37.2 L97.7,39.4z M97.7,39.4'/%3e %3cpath class='st0' d='M29.4,33.3l-7.6,7.6c-0.6,0.6-1,1.5-1,2.3c0,0.9,0.3,1.7,1,2.3l7.2,7.2c1.4,1.4,2.1,3.3,1.8,5.3 c-0.2,2-1.3,3.7-2.9,4.7C6.7,76.2,4.7,78.2,4.1,78.9c-4.7,4.7-4.7,12.2,0,16.9c4.7,4.7,12.2,4.6,16.9,0c0.6-0.6,2.6-2.6,16.1-23.8 c1.1-1.7,2.8-2.7,4.7-2.9c2-0.2,3.9,0.5,5.3,1.8l7.2,7.2c1.3,1.3,3.4,1.3,4.7,0l7.6-7.6L29.4,33.3z M16,90.4 c-1.8,1.8-4.8,1.8-6.6,0c-1.8-1.8-1.8-4.8,0-6.6c1.8-1.8,4.8-1.8,6.6,0C17.9,85.6,17.9,88.6,16,90.4L16,90.4z M16,90.4'/%3e %3c/g%3e %3c/svg%3e"); }
+    .bw-settings-content .components-tab-panel__tabs-item.is-active:before {
+      right: auto;
+      bottom: auto;
+      left: 18px;
+      top: 18px; }
     .bw-settings-content .components-tab-panel__tabs-item:focus {
       box-shadow: none; }
   .bw-settings-content .components-tab-panel__tab-content {
