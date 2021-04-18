@@ -1,7 +1,6 @@
 #wpcontent {
 	padding-left: 0;
 }
-
 // header
 .bw-settings-header {
 	height: 70px;
@@ -12,7 +11,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
 	.save-button {
 		font-size: 15px;
 		color: #fff;
@@ -21,7 +19,6 @@
 		margin: 10px;
 		border-radius: 8px;
 	}
-
 	.bw-settings-header-title {
 		font-size: 23px;
 		font-weight: 500;
@@ -32,16 +29,13 @@
 		padding-left: 25px;
 	}
 }
-
 // content
 .bw-settings-content {
 	margin: 25px;
-
 	// tabs panel
 	.components-tab-panel__tabs {
 		margin-bottom: 25px;
 	}
-
 	.components-tab-panel__tabs-item {
 		color: rgb(37, 37, 37);
 		font-size: 15px;
@@ -73,7 +67,6 @@
 		}
 		&.tab-custom-text {
 			width: 160px;
-
 			&:before {
 				background-image: url("./icons/custom-text.svg");
 			}
@@ -83,7 +76,6 @@
 				background-image: url("./icons/style.svg");
 			}
 		}
-
 		&.is-active {
 			color: #fff;
 			background-color: #5d21f4;
@@ -95,7 +87,6 @@
 			}
 			&.tab-custom-text {
 				width: 160px;
-	
 				&:before {
 					background-image: url("./icons/white/custom-text.svg");
 				}
@@ -128,20 +119,16 @@
 				transform: rotate(45deg);
 			}
 		}
-
 		&:focus {
 			box-shadow: none;
 		}
 	}
-
 	.components-tab-panel__tab-content {
 		background-color: #ffffff;
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
 		padding: 30px 20px 20px;
-
 		> .components-base-control {
 			margin-bottom: 20px;
-
 			.components-base-control__help {
 				margin-left: 240px;
 				border-bottom: 1px solid #d7d7d7;
@@ -149,25 +136,21 @@
 			}
 		}
 	}
-
 	// base control
 	.components-base-control {
 		.components-base-control__field {
 			display: flex;
 		}
-
 		.components-base-control__label {
 			min-width: 240px;
 			font-size: 14px;
 			font-weight: 600;
 			margin-bottom: 0;
 		}
-
 		.components-base-control__help {
 			margin-left: 240px;
 		}
 	}
-
 	// text control
 	.components-text-control__input {
 		background-color: #f2f2f2;
@@ -177,7 +160,6 @@
 		padding: 14px;
 		border-radius: 5px;
 	}
-
 	.components-input-control__container select.components-select-control__input {
 		height: auto;
 		padding-left: 14px;
@@ -191,17 +173,14 @@
 			border: none;
 		}
 	}
-
 	// range control
 	.components-range-control {
 		width: 100%;
 		max-width: 200px;
 	}
-
 	// color control
 	.components-color-picker-wrap {
 		position: relative;
-
 		.components-color-picker-swatch {
 			background: #ffffff;
 			border: 1px solid #eee;
@@ -209,13 +188,11 @@
 			padding: 1px;
 			cursor: pointer;
 		}
-
 		.components-color-picker-preview {
 			width: 18px;
 			height: 18px;
 			border-radius: 2px;
 		}
-
 		.components-color-picker {
 			position: absolute;
 			width: 280px;
@@ -223,49 +200,34 @@
 			background-color: #fff;
 			box-shadow: 0px 0px 5px #ccc;
 			z-index: 99;
-
 			.components-base-control .components-base-control__label {
 				display: none;
 			}
 		}
 	}
-
 	.components-form-toggle {
-		.components-form-toggle__track {
-			background-color: #e5e1e1;
-			border: 1px solid transparent;
-		}
-		.components-form-toggle__thumb {
-			background-color: #ffffff;
-			border: 5px solid #ffffff;
-		}
 		&.is-checked {
 			.components-form-toggle__track {
 				background-color: #5d21f4;
 			}
 		}
 	}
-
 	.components-text-control__input:focus, .components-text-control__input[type=color]:focus, .components-text-control__input[type=date]:focus, .components-text-control__input[type=datetime-local]:focus, .components-text-control__input[type=datetime]:focus, .components-text-control__input[type=email]:focus, .components-text-control__input[type=month]:focus, .components-text-control__input[type=number]:focus, .components-text-control__input[type=password]:focus, .components-text-control__input[type=tel]:focus, .components-text-control__input[type=text]:focus, .components-text-control__input[type=time]:focus, .components-text-control__input[type=url]:focus, .components-text-control__input[type=week]:focus {
 		border-color: #5d21f4;
 	}
 }
-
 // footer
 .bw-settings-footer {
 	background-color: #ffffff;
 	padding: 10px 20px 20px;
-
 	button {
 		color: #ffffff;
 		background-color: #17c9a2;
-
 		&:hover {
 			color: #ffffff;
 		}
 	}
 }
-
 p#loop-position__help,
 p#single-position__help,
 p#add-to-wishlist-text__help,
@@ -274,10 +236,86 @@ p#add-all-to-cart-text__help {
     text-indent: -999999px;
     padding: 0;
 }
-
-
-.wishlist-button-custom-style-wrap,
+.bw-settings-content .components-color-picker-wrap .components-color-picker-swatch {
+	border: 3px solid #fff;
+}
+.wishlist-button-custom-style-wrap {
+	.components-color-picker-wrap {
+		width: 100%;
+		background: #f8f8f8;
+		padding: 12px 15px;
+		border-bottom: 1px solid #e6e6e6;
+		.components-color-picker-swatch {
+			width: 18px;
+		}
+	}
+	.components-base-control__field  {
+		margin-bottom: 0;
+		align-items: center;
+	}
+	label + .components-base-control {
+		width: 100%;
+		background: #f8f8f8;
+		padding: 12px 15px;
+		border-bottom: 1px solid #e6e6e6;
+		.components-base-control__field {
+			width: 100px;
+		}
+		&.components-range-control {
+			max-width: 100%;
+			.components-base-control__field {
+				width: 200px;
+			}
+		}
+	}
+}
 .addtocart-button-custom-style-wrap {
-	background-color: #f8f8f8;
-	padding: 15px 15px 10px;
+	.components-base-control__field .components-color-picker-wrap {
+		width: 100%;
+		background: #f8f8f8;
+		padding: 12px 15px;
+		border-bottom: 1px solid #e6e6e6;
+		.components-color-picker-swatch {
+			width: 18px;
+		}
+	}
+	.components-base-control__field  {
+		margin-bottom: 0;
+		align-items: center;
+	}
+	label + .components-base-control {
+		width: 100%;
+		background: #f8f8f8;
+		padding: 12px 15px;
+		border-bottom: 1px solid #e6e6e6;
+		.components-base-control__field {
+			width: 100px;
+		}
+		&.components-range-control {
+			max-width: 100%;
+			.components-base-control__field {
+				width: 200px;
+				.components-range-control__track {
+					color: #5d21f4;
+				}
+			}
+		}
+	}
+}
+#tab-panel-0-style-view {
+	.components-select-control__input {
+		padding-top: 11px;
+		padding-bottom: 11px;
+		border-radius: 3px;
+		border: 1px solid #d7d7d7;
+		outline: none;
+		background: #fbfbfb;
+		&:focus {
+			background: #f8f5ff;
+			border: 1px solid #5d21f4;
+		}
+	}
+	.components-select-control__input ~ .components-input-control__backdrop  {
+		border-color: transparent;
+	}
 }
