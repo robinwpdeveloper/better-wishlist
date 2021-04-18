@@ -2,6 +2,9 @@ const { __ } = wp.i18n;
 const { TabPanel, Button } = wp.components;
 const { Component, Fragment } = wp.element;
 
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+
 import GeneralSettings from "./tabs/general";
 import ButtonSettings from "./tabs/button";
 import CustomTextSettings from "./tabs/text";
@@ -89,6 +92,10 @@ class Page extends Component {
 
 	saveForm(ev) {
 		const settings = this.state;
+		const thisButton = ev.target;
+		ev.preventDefault();
+
+		thisButton.classList.add("saving");
 
 		jQuery.ajax({
 			type: "POST",
@@ -98,8 +105,25 @@ class Page extends Component {
 				security: BetterWishlist.nonce,
 				settings,
 			},
+			beforeSend: function () {
+				thisButton.innerHTML = `<svg id="bw-spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><circle cx="24" cy="4" r="4" fill="#fff"/><circle cx="12.19" cy="7.86" r="3.7" fill="#fffbf2"/><circle cx="5.02" cy="17.68" r="3.4" fill="#fef7e4"/><circle cx="5.02" cy="30.32" r="3.1" fill="#fef3d7"/><circle cx="12.19" cy="40.14" r="2.8" fill="#feefc9"/><circle cx="24" cy="44" r="2.5" fill="#feebbc"/><circle cx="35.81" cy="40.14" r="2.2" fill="#fde7af"/><circle cx="42.98" cy="30.32" r="1.9" fill="#fde3a1"/><circle cx="42.98" cy="17.68" r="1.6" fill="#fddf94"/><circle cx="35.81" cy="7.86" r="1.3" fill="#fcdb86"/></svg> &nbsp;<span>${__(
+					"Saving Data..",
+					"betterwishlist"
+				)}</span>`;
+			},
 			success: function (response) {
-				console.log(response);
+				thisButton.innerHTML = __("Save Settings", "betterwishlist");
+				setTimeout(function () {
+					Swal.fire({
+						type: "success",
+						icon: "success",
+						title: __("Settings Saved!", "betterwishlist"),
+						footer: __("Have Fun :-)", "betterwishlist"),
+						showConfirmButton: false,
+						timer: 2000,
+					});
+					thisButton.classList.remove("saving");
+				}, 500);
 			},
 			error: function (response) {
 				console.log(response);
