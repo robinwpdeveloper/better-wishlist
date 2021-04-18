@@ -158,6 +158,12 @@
       z-index: 99; }
       .bw-settings-content .components-color-picker-wrap .components-color-picker .components-base-control .components-base-control__label {
         display: none; }
+  .bw-settings-content .components-form-toggle .components-form-toggle__track {
+    background-color: #e5e1e1;
+    border: 1px solid transparent; }
+  .bw-settings-content .components-form-toggle .components-form-toggle__thumb {
+    background-color: #ffffff;
+    border: 5px solid #ffffff; }
   .bw-settings-content .components-form-toggle.is-checked .components-form-toggle__track {
     background-color: #5d21f4; }
   .bw-settings-content .components-text-control__input:focus, .bw-settings-content .components-text-control__input[type=color]:focus, .bw-settings-content .components-text-control__input[type=date]:focus, .bw-settings-content .components-text-control__input[type=datetime-local]:focus, .bw-settings-content .components-text-control__input[type=datetime]:focus, .bw-settings-content .components-text-control__input[type=email]:focus, .bw-settings-content .components-text-control__input[type=month]:focus, .bw-settings-content .components-text-control__input[type=number]:focus, .bw-settings-content .components-text-control__input[type=password]:focus, .bw-settings-content .components-text-control__input[type=tel]:focus, .bw-settings-content .components-text-control__input[type=text]:focus, .bw-settings-content .components-text-control__input[type=time]:focus, .bw-settings-content .components-text-control__input[type=url]:focus, .bw-settings-content .components-text-control__input[type=week]:focus {

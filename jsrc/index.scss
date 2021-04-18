@@ -231,6 +231,14 @@
 	}
 
 	.components-form-toggle {
+		.components-form-toggle__track {
+			background-color: #e5e1e1;
+			border: 1px solid transparent;
+		}
+		.components-form-toggle__thumb {
+			background-color: #ffffff;
+			border: 5px solid #ffffff;
+		}
 		&.is-checked {
 			.components-form-toggle__track {
 				background-color: #5d21f4;
@@ -267,32 +275,6 @@ p#add-all-to-cart-text__help {
     padding: 0;
 }
 
-// label + .components-base-control {
-//     border-bottom: 1px solid #d7d7d7;
-//     display: block;
-//     width: 100%;
-// }
-
-// label + .components-base-control > div {width: 200px;padding-bottom: 20px;}
-
-
-
-// #tab-panel-0-style-view {
-// 	.components-color-picker-wrap {
-// 		width: 100%;
-// 		background-color: #f8f8f8;
-// 	}
-	
-// 	.components-color-picker-swatch {
-// 		width: 18px;
-// 	}
-// 	.components-base-control {
-// 		margin-bottom: 0;
-// 	}
-// 	.components-base-control__field {
-// 		margin-bottom: 0;
-// 	}
-// }
 
 .wishlist-button-custom-style-wrap,
 .addtocart-button-custom-style-wrap {
