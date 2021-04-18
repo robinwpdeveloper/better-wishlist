@@ -121,22 +121,35 @@
     box-shadow: none;
     border: 1px solid rgba(0, 0, 0, 0.05);
     transition: border linear 0.2s, box-shadow linear 0.2s;
-    padding: 14px;
+    padding: 11px 14px;
     border-radius: 5px; }
   .bw-settings-content .components-input-control__container select.components-select-control__input {
     height: auto;
     padding-left: 14px;
     padding-right: 34px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    border-radius: 5px; }
+    padding-top: 11px;
+    padding-bottom: 11px;
+    border-radius: 3px;
+    border: 1px solid #d7d7d7;
+    outline: none;
+    background: #fbfbfb; }
     .bw-settings-content .components-input-control__container select.components-select-control__input:focus {
-      outline: none;
-      box-shadow: 0 0 0 !important;
-      border: none; }
+      background: #f8f5ff;
+      border: 1px solid #5d21f4; }
+    .bw-settings-content .components-input-control__container select.components-select-control__input ~ .components-input-control__backdrop {
+      border-color: transparent; }
+    .bw-settings-content .components-input-control__container select.components-select-control__input:focus {
+      background: #f8f5ff;
+      border: 1px solid #5d21f4; }
   .bw-settings-content .components-range-control {
     width: 100%;
     max-width: 200px; }
+    .bw-settings-content .components-range-control .components-range-control__wrapper span.css-ckoo7b-Thumb, .bw-settings-content .components-range-control .components-range-control__wrapper span.css-ln2ltz-Thumb {
+      box-shadow: none;
+      border: 0px solid;
+      background: #5d21f4;
+      height: 17px;
+      width: 17px; }
   .bw-settings-content .components-color-picker-wrap {
     position: relative; }
     .bw-settings-content .components-color-picker-wrap .components-color-picker-swatch {
@@ -158,6 +171,12 @@
       z-index: 99; }
       .bw-settings-content .components-color-picker-wrap .components-color-picker .components-base-control .components-base-control__label {
         display: none; }
+  .bw-settings-content .components-form-toggle .components-form-toggle__track {
+    background-color: #e5e1e1;
+    border: 1px solid transparent; }
+  .bw-settings-content .components-form-toggle .components-form-toggle__thumb {
+    background-color: #ffffff;
+    border: 5px solid #ffffff; }
   .bw-settings-content .components-form-toggle.is-checked .components-form-toggle__track {
     background-color: #5d21f4; }
   .bw-settings-content .components-text-control__input:focus, .bw-settings-content .components-text-control__input[type=color]:focus, .bw-settings-content .components-text-control__input[type=date]:focus, .bw-settings-content .components-text-control__input[type=datetime-local]:focus, .bw-settings-content .components-text-control__input[type=datetime]:focus, .bw-settings-content .components-text-control__input[type=email]:focus, .bw-settings-content .components-text-control__input[type=month]:focus, .bw-settings-content .components-text-control__input[type=number]:focus, .bw-settings-content .components-text-control__input[type=password]:focus, .bw-settings-content .components-text-control__input[type=tel]:focus, .bw-settings-content .components-text-control__input[type=text]:focus, .bw-settings-content .components-text-control__input[type=time]:focus, .bw-settings-content .components-text-control__input[type=url]:focus, .bw-settings-content .components-text-control__input[type=week]:focus {
@@ -207,6 +226,25 @@ p#add-all-to-cart-text__help {
     .wishlist-button-custom-style-wrap label + .components-base-control.components-range-control .components-base-control__field {
       width: 200px; }
 
+.wishlist-button-custom-style-wrap label + .components-base-control,
+.addtocart-button-custom-style-wrap label + .components-base-control {
+  width: 100%;
+  background: #f8f8f8;
+  padding: 12px 15px;
+  border-bottom: 1px solid #e6e6e6; }
+  .wishlist-button-custom-style-wrap label + .components-base-control .components-base-control__field,
+  .addtocart-button-custom-style-wrap label + .components-base-control .components-base-control__field {
+    width: 100px; }
+  .wishlist-button-custom-style-wrap label + .components-base-control.components-range-control,
+  .addtocart-button-custom-style-wrap label + .components-base-control.components-range-control {
+    max-width: 100%; }
+    .wishlist-button-custom-style-wrap label + .components-base-control.components-range-control .components-base-control__field,
+    .addtocart-button-custom-style-wrap label + .components-base-control.components-range-control .components-base-control__field {
+      width: 200px; }
+      .wishlist-button-custom-style-wrap label + .components-base-control.components-range-control .components-base-control__field .components-range-control__track,
+      .addtocart-button-custom-style-wrap label + .components-base-control.components-range-control .components-base-control__field .components-range-control__track {
+        color: #5d21f4; }
+
 .addtocart-button-custom-style-wrap .components-base-control__field .components-color-picker-wrap {
   width: 100%;
   background: #f8f8f8;
@@ -218,32 +256,4 @@ p#add-all-to-cart-text__help {
 .addtocart-button-custom-style-wrap .components-base-control__field {
   margin-bottom: 0;
   align-items: center; }
-
-.addtocart-button-custom-style-wrap label + .components-base-control {
-  width: 100%;
-  background: #f8f8f8;
-  padding: 12px 15px;
-  border-bottom: 1px solid #e6e6e6; }
-  .addtocart-button-custom-style-wrap label + .components-base-control .components-base-control__field {
-    width: 100px; }
-  .addtocart-button-custom-style-wrap label + .components-base-control.components-range-control {
-    max-width: 100%; }
-    .addtocart-button-custom-style-wrap label + .components-base-control.components-range-control .components-base-control__field {
-      width: 200px; }
-      .addtocart-button-custom-style-wrap label + .components-base-control.components-range-control .components-base-control__field .components-range-control__track {
-        color: #5d21f4; }
-
-#tab-panel-0-style-view .components-select-control__input {
-  padding-top: 11px;
-  padding-bottom: 11px;
-  border-radius: 3px;
-  border: 1px solid #d7d7d7;
-  outline: none;
-  background: #fbfbfb; }
-  #tab-panel-0-style-view .components-select-control__input:focus {
-    background: #f8f5ff;
-    border: 1px solid #5d21f4; }
-
-#tab-panel-0-style-view .components-select-control__input ~ .components-input-control__backdrop {
-  border-color: transparent; }
 

@@ -157,26 +157,48 @@
 		box-shadow: none;
 		border: 1px solid rgba(0, 0, 0, 0.05);
 		transition: border linear 0.2s, box-shadow linear 0.2s;
-		padding: 14px;
+		padding: 11px 14px;
 		border-radius: 5px;
 	}
 	.components-input-control__container select.components-select-control__input {
 		height: auto;
 		padding-left: 14px;
 		padding-right: 34px;
-		padding-top: 14px;
-		padding-bottom: 14px;
-		border-radius: 5px;
+		
+		padding-top: 11px;
+		padding-bottom: 11px;
+		border-radius: 3px;
+		border: 1px solid #d7d7d7;
+		outline: none;
+		background: #fbfbfb;
 		&:focus {
-			outline: none;
-			box-shadow: 0 0 0 !important;
-			border: none;
+			background: #f8f5ff;
+			border: 1px solid #5d21f4;
+		}
+
+		& ~ .components-input-control__backdrop  {
+			border-color: transparent;
+		}
+		&:focus {
+			background: #f8f5ff;
+			border: 1px solid #5d21f4;
 		}
 	}
+
 	// range control
 	.components-range-control {
 		width: 100%;
 		max-width: 200px;
+
+		.components-range-control__wrapper {
+			span.css-ckoo7b-Thumb, span.css-ln2ltz-Thumb {
+				box-shadow: none;
+				border: 0px solid;
+				background: #5d21f4;
+				height: 17px;
+				width: 17px;
+			}
+		}
 	}
 	// color control
 	.components-color-picker-wrap {
@@ -205,13 +227,23 @@
 			}
 		}
 	}
+
 	.components-form-toggle {
+		.components-form-toggle__track {
+			background-color: #e5e1e1;
+			border: 1px solid transparent;
+		}
+		.components-form-toggle__thumb {
+			background-color: #ffffff;
+			border: 5px solid #ffffff;
+		}
 		&.is-checked {
 			.components-form-toggle__track {
 				background-color: #5d21f4;
 			}
 		}
 	}
+
 	.components-text-control__input:focus, .components-text-control__input[type=color]:focus, .components-text-control__input[type=date]:focus, .components-text-control__input[type=datetime-local]:focus, .components-text-control__input[type=datetime]:focus, .components-text-control__input[type=email]:focus, .components-text-control__input[type=month]:focus, .components-text-control__input[type=number]:focus, .components-text-control__input[type=password]:focus, .components-text-control__input[type=tel]:focus, .components-text-control__input[type=text]:focus, .components-text-control__input[type=time]:focus, .components-text-control__input[type=url]:focus, .components-text-control__input[type=week]:focus {
 		border-color: #5d21f4;
 	}
@@ -269,20 +301,9 @@ p#add-all-to-cart-text__help {
 		}
 	}
 }
+
+.wishlist-button-custom-style-wrap,
 .addtocart-button-custom-style-wrap {
-	.components-base-control__field .components-color-picker-wrap {
-		width: 100%;
-		background: #f8f8f8;
-		padding: 12px 15px;
-		border-bottom: 1px solid #e6e6e6;
-		.components-color-picker-swatch {
-			width: 18px;
-		}
-	}
-	.components-base-control__field  {
-		margin-bottom: 0;
-		align-items: center;
-	}
 	label + .components-base-control {
 		width: 100%;
 		background: #f8f8f8;
@@ -302,20 +323,18 @@ p#add-all-to-cart-text__help {
 		}
 	}
 }
-#tab-panel-0-style-view {
-	.components-select-control__input {
-		padding-top: 11px;
-		padding-bottom: 11px;
-		border-radius: 3px;
-		border: 1px solid #d7d7d7;
-		outline: none;
-		background: #fbfbfb;
-		&:focus {
-			background: #f8f5ff;
-			border: 1px solid #5d21f4;
+.addtocart-button-custom-style-wrap {
+	.components-base-control__field .components-color-picker-wrap {
+		width: 100%;
+		background: #f8f8f8;
+		padding: 12px 15px;
+		border-bottom: 1px solid #e6e6e6;
+		.components-color-picker-swatch {
+			width: 18px;
 		}
 	}
-	.components-select-control__input ~ .components-input-control__backdrop  {
-		border-color: transparent;
+	.components-base-control__field  {
+		margin-bottom: 0;
+		align-items: center;
 	}
 }
