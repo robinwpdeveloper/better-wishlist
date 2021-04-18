@@ -33,20 +33,23 @@ class ButtonSettings extends Component {
 				<BaseControl
 					id="show-in-loop"
 					label="Show in loop"
-					help="Show wishlist button in product loop."
-				>
+					help="Show wishlist button in product loop.">
 					<ToggleControl
 						checked={state.show_in_loop == "yes"}
 						onChange={() =>
 							this.updateValue({
-								show_in_loop: state.show_in_loop == "yes" ? "no" : "yes",
+								show_in_loop:
+									state.show_in_loop == "yes" ? "no" : "yes",
 							})
 						}
 					/>
 				</BaseControl>
 
 				{state.show_in_loop == "yes" && (
-					<BaseControl id="loop-position" label="Position in loop">
+					<BaseControl
+						id="loop-position"
+						label="Position in loop"
+						help="Set button position on the loop.">
 						<SelectControl
 							options={[
 								{
@@ -68,7 +71,10 @@ class ButtonSettings extends Component {
 					</BaseControl>
 				)}
 
-				<BaseControl id="single-position" label="Position in product page">
+				<BaseControl
+					id="single-position"
+					label="Position in product page"
+					help="Set button position on the loop.">
 					<SelectControl
 						options={[
 							{

@@ -114,6 +114,11 @@ class Page extends Component {
 					<h2 className="bw-settings-header-title">
 						{__("BetterWishlist Settings")}
 					</h2>
+					<Button
+						className="save-button"
+						onClick={this.saveForm.bind(this)}>
+						{__("Save Settings")}
+					</Button>
 				</div>
 
 				<div className="bw-settings-content">
@@ -123,29 +128,28 @@ class Page extends Component {
 								icon: GeneralIcon,
 								name: "general",
 								title: __("General"),
-								className: "tab-general"
+								className: "tab-general",
 							},
 							{
 								icon: ButtonIcon,
 								name: "button",
 								title: __("Button"),
-								className: "tab-button"
+								className: "tab-button",
 							},
 							{
 								icon: TextIcon,
 								name: "custom-text",
 								title: __("Custom Text"),
-								className: "tab-custom-text"
+								className: "tab-custom-text",
 							},
 							{
 								icon: StyleIcon,
 								name: "style",
 								title: __("Style"),
-								className: "tab-style"
+								className: "tab-style",
 							},
 						]}
-						initialTabName="general"
-					>
+						initialTabName="general">
 						{(tab) => {
 							if (tab.name == "general") {
 								return (
@@ -178,10 +182,6 @@ class Page extends Component {
 							}
 						}}
 					</TabPanel>
-
-					<div className="bw-settings-footer">
-						<Button onClick={this.saveForm.bind(this)}>{__("Save")}</Button>
-					</div>
 				</div>
 			</Fragment>
 		);

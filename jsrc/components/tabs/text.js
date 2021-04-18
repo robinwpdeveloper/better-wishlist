@@ -30,7 +30,10 @@ class CustomTextSettings extends Component {
 
 		return (
 			<Fragment>
-				<BaseControl id="add-to-wishlist-text" label="Add to wishlist">
+				<BaseControl
+					id="add-to-wishlist-text"
+					label="Add to wishlist"
+					help="Change button text">
 					<TextControl
 						value={state.add_to_wishlist_text}
 						onChange={(value) =>
@@ -41,7 +44,10 @@ class CustomTextSettings extends Component {
 					/>
 				</BaseControl>
 
-				<BaseControl id="add-to-cart-text" label="Add to cart">
+				<BaseControl
+					id="add-to-cart-text"
+					label="Add to cart"
+					help="Change button text">
 					<TextControl
 						value={state.add_to_cart_text}
 						onChange={(value) =>
@@ -52,7 +58,10 @@ class CustomTextSettings extends Component {
 					/>
 				</BaseControl>
 
-				<BaseControl id="add-all-to-cart-text" label="Add all to cart">
+				<BaseControl
+					id="add-all-to-cart-text"
+					label="Add all to cart"
+					help="Change button text">
 					<TextControl
 						value={state.add_all_to_cart_text}
 						onChange={(value) =>

@@ -38,8 +38,11 @@ class StyleSettings extends Component {
 				</BaseControl>
 
 				{state.wishlist_button_style == "custom" && (
-					<Fragment>
-						<BaseControl id="wishlist-button-color" label="Color">
+					<div className="wishlist-button-custom-style-wrap">
+						<BaseControl
+							id="wishlist-button-color"
+							label="Color"
+							className="custom-color-control">
 							<Color
 								value={state.wishlist_button_color}
 								onChange={(newValue) => {
@@ -50,7 +53,9 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-bg-color" label="Background Color">
+						<BaseControl
+							id="wishlist-button-bg-color"
+							label="Background Color">
 							<Color
 								value={state.wishlist_button_background}
 								onChange={(newValue) => {
@@ -61,7 +66,9 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-color-hover" label="Color(hover)">
+						<BaseControl
+							id="wishlist-button-color-hover"
+							label="Color(hover)">
 							<Color
 								value={state.wishlist_button_hover_color}
 								onChange={(newValue) => {
@@ -74,8 +81,7 @@ class StyleSettings extends Component {
 
 						<BaseControl
 							id="wishlist-button-bg-color-hover"
-							label="Background Color(hover)"
-						>
+							label="Background Color(hover)">
 							<Color
 								value={state.wishlist_button_hover_background}
 								onChange={(newValue) => {
@@ -86,7 +92,9 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-border-style" label="Border">
+						<BaseControl
+							id="wishlist-button-border-style"
+							label="Border">
 							<SelectControl
 								value={state.wishlist_button_border_style}
 								onChange={(newValue) => {
@@ -107,10 +115,11 @@ class StyleSettings extends Component {
 							<Fragment>
 								<BaseControl
 									id="wishlist-button-border-width"
-									label="Border Width"
-								>
+									label="Border Width">
 									<RangeControl
-										value={parseInt(state.wishlist_button_border_width)}
+										value={parseInt(
+											state.wishlist_button_border_width
+										)}
 										min={0}
 										max={10}
 										onChange={(newValue) => {
@@ -123,10 +132,11 @@ class StyleSettings extends Component {
 
 								<BaseControl
 									id="wishlist-button-border-color"
-									label="Border Color"
-								>
+									label="Border Color">
 									<Color
-										value={state.wishlist_button_border_color}
+										value={
+											state.wishlist_button_border_color
+										}
 										onChange={(newValue) => {
 											this.updateValue({
 												wishlist_button_border_color: newValue,
@@ -137,9 +147,13 @@ class StyleSettings extends Component {
 							</Fragment>
 						)}
 
-						<BaseControl id="wishlist-button-padding-top" label="Padding Top">
+						<BaseControl
+							id="wishlist-button-padding-top"
+							label="Padding Top">
 							<RangeControl
-								value={parseInt(state.wishlist_button_padding_top)}
+								value={parseInt(
+									state.wishlist_button_padding_top
+								)}
 								min={0}
 								max={100}
 								onChange={(newValue) => {
@@ -152,10 +166,11 @@ class StyleSettings extends Component {
 
 						<BaseControl
 							id="wishlist-button-padding-right"
-							label="Padding Right"
-						>
+							label="Padding Right">
 							<RangeControl
-								value={parseInt(state.wishlist_button_padding_right)}
+								value={parseInt(
+									state.wishlist_button_padding_right
+								)}
 								min={0}
 								max={100}
 								onChange={(newValue) => {
@@ -168,10 +183,11 @@ class StyleSettings extends Component {
 
 						<BaseControl
 							id="wishlist-button-padding-bottom"
-							label="Padding Bottom"
-						>
+							label="Padding Bottom">
 							<RangeControl
-								value={parseInt(state.wishlist_button_padding_bottom)}
+								value={parseInt(
+									state.wishlist_button_padding_bottom
+								)}
 								min={0}
 								max={100}
 								onChange={(newValue) => {
@@ -182,9 +198,13 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-padding-left" label="Padding Left">
+						<BaseControl
+							id="wishlist-button-padding-left"
+							label="Padding Left">
 							<RangeControl
-								value={parseInt(state.wishlist_button_padding_left)}
+								value={parseInt(
+									state.wishlist_button_padding_left
+								)}
 								min={0}
 								max={100}
 								onChange={(newValue) => {
@@ -194,7 +214,7 @@ class StyleSettings extends Component {
 								}}
 							/>
 						</BaseControl>
-					</Fragment>
+					</div>
 				)}
 
 				<h3>{__("Cart Button")}</h3>
@@ -215,7 +235,7 @@ class StyleSettings extends Component {
 				</BaseControl>
 
 				{state.cart_button_style == "custom" && (
-					<Fragment>
+					<div className="addtocart-button-custom-style-wrap">
 						<BaseControl id="wishlist-button-color" label="Color">
 							<Color
 								value={state.cart_button_color}
@@ -227,7 +247,9 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-bg-color" label="Background Color">
+						<BaseControl
+							id="wishlist-button-bg-color"
+							label="Background Color">
 							<Color
 								value={state.cart_button_background}
 								onChange={(newValue) => {
@@ -238,7 +260,9 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-color-hover" label="Color(hover)">
+						<BaseControl
+							id="wishlist-button-color-hover"
+							label="Color(hover)">
 							<Color
 								value={state.cart_button_hover_color}
 								onChange={(newValue) => {
@@ -251,8 +275,7 @@ class StyleSettings extends Component {
 
 						<BaseControl
 							id="wishlist-button-bg-color-hover"
-							label="Background Color(hover)"
-						>
+							label="Background Color(hover)">
 							<Color
 								value={state.cart_button_hover_background}
 								onChange={(newValue) => {
@@ -263,7 +286,9 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-border-style" label="Border">
+						<BaseControl
+							id="wishlist-button-border-style"
+							label="Border">
 							<SelectControl
 								value={state.cart_button_border_style}
 								onChange={(newValue) => {
@@ -284,10 +309,11 @@ class StyleSettings extends Component {
 							<Fragment>
 								<BaseControl
 									id="wishlist-button-border-width"
-									label="Border Width"
-								>
+									label="Border Width">
 									<RangeControl
-										value={parseInt(state.cart_button_border_width)}
+										value={parseInt(
+											state.cart_button_border_width
+										)}
 										min={0}
 										max={10}
 										onChange={(newValue) => {
@@ -300,8 +326,7 @@ class StyleSettings extends Component {
 
 								<BaseControl
 									id="wishlist-button-border-color"
-									label="Border Color"
-								>
+									label="Border Color">
 									<Color
 										value={state.cart_button_border_color}
 										onChange={(newValue) => {
@@ -314,7 +339,9 @@ class StyleSettings extends Component {
 							</Fragment>
 						)}
 
-						<BaseControl id="wishlist-button-padding-top" label="Padding Top">
+						<BaseControl
+							id="wishlist-button-padding-top"
+							label="Padding Top">
 							<RangeControl
 								value={parseInt(state.cart_button_padding_top)}
 								min={0}
@@ -329,10 +356,11 @@ class StyleSettings extends Component {
 
 						<BaseControl
 							id="wishlist-button-padding-right"
-							label="Padding Right"
-						>
+							label="Padding Right">
 							<RangeControl
-								value={parseInt(state.cart_button_padding_right)}
+								value={parseInt(
+									state.cart_button_padding_right
+								)}
 								min={0}
 								max={100}
 								onChange={(newValue) => {
@@ -345,10 +373,11 @@ class StyleSettings extends Component {
 
 						<BaseControl
 							id="wishlist-button-padding-bottom"
-							label="Padding Bottom"
-						>
+							label="Padding Bottom">
 							<RangeControl
-								value={parseInt(state.cart_button_padding_bottom)}
+								value={parseInt(
+									state.cart_button_padding_bottom
+								)}
 								min={0}
 								max={100}
 								onChange={(newValue) => {
@@ -359,7 +388,9 @@ class StyleSettings extends Component {
 							/>
 						</BaseControl>
 
-						<BaseControl id="wishlist-button-padding-left" label="Padding Left">
+						<BaseControl
+							id="wishlist-button-padding-left"
+							label="Padding Left">
 							<RangeControl
 								value={parseInt(state.cart_button_padding_left)}
 								min={0}
@@ -371,7 +402,7 @@ class StyleSettings extends Component {
 								}}
 							/>
 						</BaseControl>
-					</Fragment>
+					</div>
 				)}
 			</Fragment>
 		);
