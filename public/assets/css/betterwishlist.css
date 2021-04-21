@@ -194,3 +194,7 @@ hr {
 .betterwishlist-page-wrap .product-name {
 	text-decoration: underline;
 }
+
+.woocommerce div.product form.cart a.button.betterwishlist-add-to-wishlist {
+    margin: 10px 0 0;
+}
