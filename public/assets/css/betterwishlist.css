@@ -46,13 +46,24 @@
 	display: table;
 	float: right;
 	clear: both;
-	padding: 8px 20px;
+	padding: 8px 12px;
 	margin: 5px 0;
 	border-radius: 3px;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 	transition: ease opacity 250ms;
 	animation: fadeIn 250ms 100ms both, fadeOut 250ms 3000ms both;
 }
+.betterwishlist-notification > svg {
+    float: left;
+    width: 14px;
+    margin-right: 8px;
+}
+
+.betterwishlist-notification {
+    display: flex;
+    align-items: center;
+}
+
 .betterwishlist-notification.success {
 	background-color: #00a65a;
 	color: #fff;
