@@ -244,6 +244,7 @@
 								createNotification("success", response.data);
 
 								if (
+									"true" ==
 									BETTER_WISHLIST.settings
 										.remove_from_wishlist
 								) {

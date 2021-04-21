@@ -93,7 +93,7 @@ class Frontend
                 'wishlist_page_url' => esc_url(is_user_logged_in() && $this->settings['wishlist_menu'] == 'yes' ? wc_get_account_endpoint_url('betterwishlist') : get_the_permalink($settings['wishlist_page'])),
             ],
             'i18n' => [
-                'no_records_found' => __('No Records Found', 'betterwishlist'),
+                'no_records_found' => __('No Products Added', 'betterwishlist'),
             ],
         ];
 
@@ -432,7 +432,7 @@ class Frontend
         foreach ($_REQUEST['products'] as $product_id) {
             WC()->cart->add_to_cart($product_id, 1);
 
-            if ($this->settings['remove_from_wishlist'] == 'yes') {
+            if ( filter_var( $this->settings['remove_from_wishlist'], FILTER_VALIDATE_BOOLEAN) ) {
                 Plugin::instance()->model->delete_item($product_id);
             }
         }
