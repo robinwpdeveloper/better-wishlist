@@ -216,7 +216,7 @@ class Frontend
             'stock_status' => __('Stock Status', 'betterwishlist'),
             'add_to_cart' => $this->settings['add_to_cart_text'],
             'add_all_to_cart' => $this->settings['add_all_to_cart_text'],
-            'no_records_found' => __('No Records Found', 'betterwishlist'),
+            'no_records_found' => __('No Products Found', 'betterwishlist'),
             'remove_this_product' => __('Remove this product', 'betterwishlist'),
         ];
         $items = Plugin::instance()->model->read_list(Plugin::instance()->model->get_current_user_list());
@@ -226,13 +226,22 @@ class Frontend
             foreach ($items as $item) {
                 $product = wc_get_product($item->product_id);
 
+                switch( $product->get_stock_status() ) {
+                    case "outofstock":
+                        $stock_status = __( "Out Of Stock", "" );
+                        break;
+                    case "instock":
+                        $stock_status = __( "In Stock", "" );
+                        break;
+                }
+
                 if ($product) {
                     $products[] = [
                         'id' => $product->get_id(),
                         'title' => $product->get_title(),
                         'url' => get_permalink($product->get_id()),
                         'thumbnail_url' => get_the_post_thumbnail_url($product->get_id()),
-                        'stock_status' => $product->get_stock_status(),
+                        'stock_status' => $stock_status,
                     ];
                 }
             }
