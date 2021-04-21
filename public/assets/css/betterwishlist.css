@@ -199,6 +199,10 @@ hr {
 	text-align: center;
 }
 
-.woocommerce div.product form.cart a.button.betterwishlist-add-to-wishlist {
+.woocommerce .button.betterwishlist-add-to-wishlist {
     margin: 10px 0 0;
+}
+
+.theme-oceanwp div.product form.cart a.button.betterwishlist-add-to-wishlist {
+	width: 200px;
 }
