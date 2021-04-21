@@ -216,7 +216,7 @@ class Frontend
             'stock_status' => __('Stock Status', 'betterwishlist'),
             'add_to_cart' => $this->settings['add_to_cart_text'],
             'add_all_to_cart' => $this->settings['add_all_to_cart_text'],
-            'no_records_found' => __('No Products Found', 'betterwishlist'),
+            'no_records_found' => __('No Product Added', 'betterwishlist'),
             'remove_this_product' => __('Remove this product', 'betterwishlist'),
         ];
         $items = Plugin::instance()->model->read_list(Plugin::instance()->model->get_current_user_list());
