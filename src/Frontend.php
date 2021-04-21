@@ -289,7 +289,7 @@ class Frontend
      * @param  mixed $args
      * @return string
      */
-    public function archive_add_to_wishlist_button($add_to_cart_html, $product, $args)
+    public function archive_add_to_wishlist_button( $add_to_cart_html )
     {
         if ($this->settings['show_in_loop'] == 'no') {
             return $add_to_cart_html;
