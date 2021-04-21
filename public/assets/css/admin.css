@@ -257,6 +257,10 @@ p#add-all-to-cart-text__help {
   margin-bottom: 0;
   align-items: center; }
 
+.bw-settings-content .components-base-control .components-base-control__field {
+  display: flex;
+  align-items: center; }
+
 .swal2-popup.swal2-toast {
   flex-direction: column;
   align-items: stretch;
