@@ -34,6 +34,7 @@ class Seed
                 'add_to_cart_text' => __('Add to cart', 'betterwishlist'),
                 'add_all_to_cart_text' => __('Add all to cart', 'betterwishlist'),
                 'wishlist_button_style' => 'default',
+                'wishlist_button_width' => 175,
                 'wishlist_button_color' => '#ffffff',
                 'wishlist_button_background' => '#0274be',
                 'wishlist_button_hover_color' => '#ffffff',

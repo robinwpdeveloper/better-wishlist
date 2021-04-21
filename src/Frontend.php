@@ -110,6 +110,7 @@ class Frontend
 
             if ($this->settings['wishlist_button_style'] == 'custom') {
                 $css .= '.betterwishlist-add-to-wishlist {
+                    width: ' . $this->settings['wishlist_button_width'] . 'px;
                     color: ' . $this->settings['wishlist_button_color'] . ' !important;
                     background-color: ' . $this->settings['wishlist_button_background'] . ' !important;
                     border-style: ' . $this->settings['wishlist_button_border_style'] . ' !important;

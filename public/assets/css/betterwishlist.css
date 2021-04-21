@@ -195,6 +195,10 @@ hr {
 	text-decoration: underline;
 }
 
+.betterwishlist-add-to-wishlist {
+	text-align: center;
+}
+
 .woocommerce div.product form.cart a.button.betterwishlist-add-to-wishlist {
     margin: 10px 0 0;
 }

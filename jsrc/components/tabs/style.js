@@ -40,6 +40,20 @@ class StyleSettings extends Component {
 				{state.wishlist_button_style == "custom" && (
 					<div className="wishlist-button-custom-style-wrap">
 						<BaseControl
+							id="wishlist-button-width"
+							label="Button Width">
+							<RangeControl
+								value={parseInt(state.wishlist_button_width)}
+								min={0}
+								max={300}
+								onChange={(newValue) => {
+									this.updateValue({
+										wishlist_button_width: newValue,
+									});
+								}}
+							/>
+						</BaseControl>
+						<BaseControl
 							id="wishlist-button-color"
 							label="Color"
 							className="custom-color-control">
