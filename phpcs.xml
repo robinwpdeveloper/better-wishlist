@@ -75,6 +75,7 @@
     </rule>
 
     <rule ref="WordPress-Core">
+        <exclude name="WordPress.DB.PreparedSQL.InterpolatedNotPrepared"/>
         <exclude name="WordPress.Security.EscapeOutput.DeprecatedWhitelistCommentFound" /><!-- TODO: Change these to phpcs:ignore -->
     </rule>
 </ruleset>
