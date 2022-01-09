@@ -201,7 +201,9 @@ class Model {
 		$query_columns = implode( ', ', array_map( 'esc_sql', array_keys( $columns ) ) );
 		$query_values  = implode( ', ', array_values( $columns ) );
 		$query         = "INSERT INTO {$this->better_wishlist_lists} ({$query_columns}) VALUES ({$query_values})";
-		$res           = $wpdb->query( $wpdb->prepare( $query, $values ) );
+		// phpcs:disable
+		$res = $wpdb->query( $wpdb->prepare( $query, $values ) );
+		// phpcs:enable
 
 		if ( $res ) {
 			return $wpdb->insert_id;
@@ -319,7 +321,9 @@ class Model {
 		$query_columns         = implode( ', ', array_map( 'esc_sql', array_keys( $columns ) ) );
 		$query_values          = implode( ', ', array_values( $columns ) );
 		$query                 = "INSERT INTO {$this->better_wishlist_items} ( {$query_columns} ) VALUES ( {$query_values} ) ";
-		$res                   = $wpdb->query( $wpdb->prepare( $query, $values ) );
+		// phpcs:disable
+		$res = $wpdb->query( $wpdb->prepare( $query, $values ) );
+		// phpcs:enable
 
 		if ( $res ) {
 			return $wpdb->insert_id;
