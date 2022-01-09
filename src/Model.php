@@ -67,8 +67,8 @@ class Model {
 	 * generate_session_id
 	 * Generate dynamic session id if user are not login
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
 	public function generate_session_id() {
 		if ( get_current_user_id() ) {
@@ -79,18 +79,18 @@ class Model {
 			return $_COOKIE['better_wishlist_session_id'];
 		}
 
-		return md5( wp_rand() );
+		return md5( rand() ); // phpcs:ignore WordPress.WP.AlternativeFunctions.rand_rand
 	}
 
 	/**
 	 * update_db_and_cookie_on_login
 	 * Update db when user login with wishlist items
 	 *
-	 * @since 1.0.0
 	 * @param string $user_login logged-in username
 	 * @param mixed $user login user object
 	 *
 	 * @return void
+	 * @since 1.0.0
 	 */
 	public function update_db_and_cookie_on_login( $user_login, $user ) {
 		global $wpdb;
@@ -120,8 +120,8 @@ class Model {
 	 * create_list
 	 * Added product in wishlist table
 	 *
-	 * @since 1.0.0
 	 * @return mixed
+	 * @since 1.0.0
 	 */
 	public function create_list() {
 		global $wpdb;
@@ -153,11 +153,11 @@ class Model {
 		}
 
 		$columns['created_at'] = 'FROM_UNIXTIME( %d )';
-		$values[]              = current_time( 'timestamp' );
+		$values[]              = time();
 
 		if ( ! is_user_logged_in() ) {
 			$columns['expire_on'] = 'FROM_UNIXTIME( %d )';
-			$timestamp            = strtotime( '+1 day', current_time( 'timestamp' ) );
+			$timestamp            = strtotime( '+1 day', time() );
 			$values[]             = $timestamp;
 		}
 
@@ -177,9 +177,10 @@ class Model {
 	 * read_list
 	 * Fetch product list from wishlist table
 	 *
-	 * @since 1.0.0
-	 * @param mixed $wishlist_id  wishlist id
+	 * @param mixed $wishlist_id wishlist id
+	 *
 	 * @return array
+	 * @since 1.0.0
 	 */
 	public function read_list( $wishlist_id ) {
 		if ( empty( $wishlist_id ) ) {
@@ -198,8 +199,8 @@ class Model {
 	 * get_current_user_list
 	 * Show wishlist data only for login user
 	 *
-	 * @since 1.0.0
 	 * @return false|string
+	 * @since 1.0.0
 	 */
 	public function get_current_user_list() {
 		global $wpdb;
@@ -225,8 +226,10 @@ class Model {
 	 * Fetch wishlist data from wishlist table
 	 *
 	 * @sincde 1.0.0
+	 *
 	 * @param mixed $product_id woocommerce product id
 	 * @param mixed $wishlist_id dynamic wishlist id
+	 *
 	 * @return bool
 	 */
 	public function item_in_list( $product_id, $wishlist_id ) {
@@ -251,10 +254,11 @@ class Model {
 	 * insert_item
 	 * insert product info in wishlist table
 	 *
-	 * @since 1.0.0
 	 * @param mixed $product_id woocommerce product id
 	 * @param mixed $wishlist_id dynamic wishlist id
+	 *
 	 * @return false|int
+	 * @since 1.0.0
 	 */
 	public function insert_item( $product_id, $wishlist_id ) {
 		global $wpdb;
@@ -263,19 +267,20 @@ class Model {
 			return false;
 		}
 
-		$columns               = [
+		$columns = [
 			'product_id'  => '%d',
 			'wishlist_id' => '%d',
 			'user_id'     => '%d',
 		];
-		$product               = wc_get_product( $product_id );
-		$values                = [
+
+		$values = [
 			$product_id,
 			$wishlist_id,
 			get_current_user_id(),
 		];
+
 		$columns['created_at'] = 'FROM_UNIXTIME( %d )';
-		$values[]              = current_time( 'timestamp' );
+		$values[]              = time();
 		$query_columns         = implode( ', ', array_map( 'esc_sql', array_keys( $columns ) ) );
 		$query_values          = implode( ', ', array_values( $columns ) );
 		$query                 = "INSERT INTO {$this->better_wishlist_items} ( {$query_columns} ) VALUES ( {$query_values} ) ";
@@ -292,9 +297,10 @@ class Model {
 	 * delete_item
 	 * Delete wishlist item from database after expired or added to cart
 	 *
-	 * @since 1.0.0
 	 * @param mixed $product_id woocommerce product id
+	 *
 	 * @return bool
+	 * @since 1.0.0
 	 */
 	public function delete_item( $product_id ) {
 		if ( empty( $product_id ) ) {
