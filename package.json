@@ -1,0 +1,45 @@
+{
+	"name": "betterwishlist",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
+		"dev": "cross-env BABEL_ENV=default NODE_ENV=development webpack --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/WPDevelopers/betterwishlist.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/WPDevelopers/betterwishlist/issues"
+	},
+	"homepage": "https://github.com/WPDevelopers/betterwishlist#readme",
+	"devDependencies": {
+		"@babel/core": "^7.1.6",
+		"@babel/plugin-proposal-class-properties": "^7.12.1",
+		"@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+		"@babel/plugin-transform-async-to-generator": "^7.1.0",
+		"@babel/plugin-transform-react-jsx": "^7.1.6",
+		"@babel/preset-env": "^7.1.6",
+		"autoprefixer": "^9.7.4",
+		"babel-loader": "^8.0.4",
+		"cross-env": "6.0.3",
+		"css-loader": "^3.4.2",
+		"eslint": "^5.7.0",
+		"eslint-config-wordpress": "^2.0.0",
+		"eslint-loader": "^2.1.1",
+		"eslint-plugin-react": "^7.22.0",
+		"mini-css-extract-plugin": "^0.9.0",
+		"node-sass": "^4.13.1",
+		"postcss-loader": "^3.0.0",
+		"sass-loader": "^8.0.2",
+		"svg-url-loader": "^7.1.1",
+		"webpack": "^4.25.1",
+		"webpack-cli": "^3.1.2"
+	},
+	"dependencies": {
+		"sweetalert2": "^10.16.3"
+	}
+}
