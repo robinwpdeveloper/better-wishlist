@@ -6,6 +6,7 @@
  */
 
 use BetterWishlist\Admin;
+use BetterWishlist\Frontend;
 
 /**
  * AdminTest test case.
@@ -13,10 +14,12 @@ use BetterWishlist\Admin;
 class AjaxTest extends WP_Ajax_UnitTestCase {
 
 	private $admin;
+	private $front_end;
 
 	public function setUp(): void {
 		parent::setUp();
-		$this->admin = new Admin();
+		$this->admin     = new Admin();
+		$this->front_end = new Frontend();
 	}
 
 	/**
@@ -57,6 +60,26 @@ class AjaxTest extends WP_Ajax_UnitTestCase {
 		}
 		$response = json_decode( $this->_last_response );
 		$this->assertNull( $response );
+	}
+
+	/**
+	 * test_save_setting
+	 */
+	public function test_ajax_add_to_wishlist() {
+		$_POST[ 'security' ] = wp_create_nonce( 'better_wishlist_nonce' );
+
+		try {
+			$this->_handleAjax( 'add_to_wishlist' );
+		} catch ( Exception $e ) {
+
+		}
+		$response = json_decode( $this->_last_response );
+
+		$this->assertIsObject( $response );
+		$this->assertObjectHasAttribute( 'success', $response );
+		$this->assertSame(false, $response->success);
+		$this->assertSame('Product ID is should not be empty.', $response->data->message);
+
 	}
 
 }
