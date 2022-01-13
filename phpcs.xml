@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<ruleset name="PHP Code Check">
+    <description>Better Wishlist PHP Code Sniffer </description>
+    <arg name="extensions" value="php" />
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <arg name="basepath" value="./" />
+
+    <!-- Check up to 8 files simultaneously. -->
+    <arg name="parallel" value="8" />
+
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <exclude-pattern>*/public/*</exclude-pattern>
+    <exclude-pattern>*/jsrc/*</exclude-pattern>
+    <exclude-pattern>*/bin/*</exclude-pattern>
+
+    <rule ref="VariableAnalysis"/>
+    <rule ref="Generic.Commenting">
+        <exclude-pattern>tests/</exclude-pattern>
+    </rule>
+
+    <!-- Test for PHP compatability for 5.6 and above. -->
+    <config name="testVersion" value="5.6-"/>
+
+    <!-- For CI, don't fail on warnings -->
+    <config name="ignore_warnings_on_exit" value="1"/>
+
+    <rule ref="WordPress-Docs">
+        <!-- Don't worry about capitalizing long lines -->
+        <exclude name="Generic.Commenting.DocComment.LongNotCapital"/>
+
+        <!-- Dont need to capitalize first letter -->
+        <exclude name="Generic.Commenting.DocComment.ShortNotCapital"/>
+    </rule>
+
+    <rule ref="WordPress-Extra">
+        <!-- Forget about file names -->
+        <exclude name="WordPress.Files.FileName"/>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase"/>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase"/>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase"/>
+        <exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"/>
+
+        <!-- Allow same line control structures e.g. if ( true ) { echo 1; } -->
+        <exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace"/>
+
+        <!-- Don't require punctuation after inline comments -->
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+
+        <!-- Don't require punctuation after inline comments -->
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+
+        <!-- Allow empty catch statements -->
+        <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCatch"/>
+
+        <!-- Comment punctuation doesn't matter -->
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+        <exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
+
+        <!-- Allow shorthand array syntax -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+
+        <!-- Allow WP global modification -->
+        <exclude name="WordPress.WP.GlobalVariablesOverride.Prohibited"/>
+
+        <!-- This nonce sniff almost never works right -->
+        <exclude name="WordPress.Security.NonceVerification.Missing"/>
+    </rule>
+
+    <rule ref="Squiz.Commenting">
+
+    </rule>
+
+    <rule ref="WordPress-Core">
+        <exclude name="WordPress.DB.PreparedSQL.InterpolatedNotPrepared"/>
+        <exclude name="WordPress.Security.EscapeOutput.DeprecatedWhitelistCommentFound" /><!-- TODO: Change these to phpcs:ignore -->
+    </rule>
+</ruleset>

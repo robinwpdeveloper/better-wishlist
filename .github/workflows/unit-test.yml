@@ -1,0 +1,53 @@
+name: Plugin Unit Test
+
+env:
+  COMPOSER_VERSION: "1"
+  COMPOSER_CACHE: "${{ github.workspace }}/.composer-cache"
+
+on:
+  pull_request:
+    branches: [ test ]
+
+jobs:
+  PHPUnit:
+    name: PHP Unit Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Start Mysql
+        run : sudo systemctl start mysql.service
+
+      - name : Configure sysctl limits
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+      - name: Set Standard Cache directories
+        run: |
+          composer config -g cache-dir "${{ env.COMPOSER_CACHE }}"
+      - name: Prepare composer cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE }}
+          key: composer-${{ env.COMPOSER_VERSION }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            composer-${{ env.COMPOSER_VERSION }}-
+      - name: Set PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer:v1
+      - name: Install dependencies
+        run: composer install
+
+      - name: Setup WP Tests
+        run: |
+          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1
+          sleep 10
+      - name: PHPUnit
+        run: |
+          composer phpunit
+
