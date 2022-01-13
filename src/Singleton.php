@@ -1,22 +1,43 @@
 <?php
+/**
+ * Better Wishlist Singleton
+ *
+ * @since 1.0.0
+ * @package better-wishlist
+ */
 
 namespace BetterWishlist;
 
 // If this file is called directly, abort.
-if (!defined('ABSPATH')) {
-    die;
+if ( ! defined( 'ABSPATH' ) ) {
+	die;
 }
 
-class Singleton
-{
-    private static $instance = null;
+/**
+ * Class Singleton
+ */
+class Singleton {
 
-    public static function instance()
-    {
-        if (self::$instance === null) {
-            self::$instance = new static();
-        }
+	/**
+	 * Hold object
+	 *
+	 * @var null $instance
+	 */
+	private static $instance = null;
 
-        return self::$instance;
-    }
+
+	/**
+	 * instance
+	 * Create instance only once when plugin bootstrap
+	 *
+	 * @since 1.0.0
+	 * @return static|null
+	 */
+	public static function instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new static();
+		}
+
+		return self::$instance;
+	}
 }
