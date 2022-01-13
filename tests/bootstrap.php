@@ -34,4 +34,8 @@ function _manually_load_plugin() {
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
 // Start up the WP testing environment.
+$GLOBALS['wp_tests_options'] = array(
+	'active_plugins' => array( 'woocommerce/woocommerce.php' )
+);
 require "{$_tests_dir}/includes/bootstrap.php";
+
