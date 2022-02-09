@@ -40,8 +40,8 @@ class Admin {
 
 		$page_hook_suffix = add_submenu_page(
 			'woocommerce',
-			__( 'BetterWishlist', 'betterwishlist' ),
-			__( 'BetterWishlist', 'betterwishlist' ),
+			__( 'Better Wishlist', 'betterwishlist' ),
+			__( 'Better Wishlist', 'betterwishlist' ),
 			'manage_options',
 			'betterwishlist',
 			[
